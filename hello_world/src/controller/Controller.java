@@ -19,17 +19,11 @@ public class Controller {
     public void start() {
         view.printMessage(view.INPUT_INVITATION_HELLO);
         input.writeUserInput();
-        while (!validate(input.getUserInput())) {
-            view.printError(view.HELLO_ERROR);
-            input.writeUserInput();
-        }
+        retypeInput(view.HELLO_ERROR);
         builder.setSentence(input.getUserInput());
         view.printMessage(view.INPUT_INVITATION_WORLD);
         input.writeUserInput();
-        while (!validate(input.getUserInput())) {
-            view.printError(view.WORLD_ERROR);
-            input.writeUserInput();
-        }
+        retypeInput(view.WORLD_ERROR);
         builder.setSentence(input.getUserInput());
         view.printMessage(view.RESULT_STRING);
         view.print(builder.generateSentence());
@@ -40,6 +34,13 @@ public class Controller {
             return input.equals("Hello");
         } else {
             return input.equals("world!");
+        }
+    }
+
+    private void retypeInput(String errMessage) {
+        while (!validate(input.getUserInput())) {
+            view.printError(errMessage);
+            input.writeUserInput();
         }
     }
 }
