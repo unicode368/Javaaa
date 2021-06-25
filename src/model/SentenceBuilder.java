@@ -8,6 +8,7 @@ public class SentenceBuilder {
         this.sentence = sentence;
     }
 
-
-
+    public Sentence getSentence() {
+        return sentence;
+    }
 }

@@ -19,10 +19,17 @@ public class Controller {
     public void start() {
         view.print_message(view.INPUT_INVITATION_HELLO);
         input.writeUserInput();
-        validate(input.getUserInput());
+        while (!validate(input.getUserInput())) {
+            view.print_error(view.HELLO_ERROR);
+            input.writeUserInput();
+        }
     }
 
-    public boolean validate(String input) {
-
+    private boolean validate(String input) {
+        if (builder.getSentence().getWords() == null) {
+            return input.equals("Hello");
+        } else {
+            return input.equals("world!");
+        }
     }
 }
