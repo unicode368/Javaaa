@@ -20,7 +20,7 @@ public class Input {
         return userInput;
     }
 
-    public void setUserInput(String userInput) {
+    private void setUserInput(String userInput) {
         this.userInput = userInput;
     }
 }

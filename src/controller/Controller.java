@@ -23,10 +23,18 @@ public class Controller {
             view.print_error(view.HELLO_ERROR);
             input.writeUserInput();
         }
+        builder.setSentence(input.getUserInput());
+        view.print_message(view.INPUT_INVITATION_WORLD);
+        input.writeUserInput();
+        while (!validate(input.getUserInput())) {
+            view.print_error(view.WORLD_ERROR);
+            input.writeUserInput();
+        }
+        builder.setSentence(input.getUserInput());
     }
 
     private boolean validate(String input) {
-        if (builder.getSentence().getWords() == null) {
+        if (builder.getSentence() == null) {
             return input.equals("Hello");
         } else {
             return input.equals("world!");

@@ -11,4 +11,12 @@ public class SentenceBuilder {
     public Sentence getSentence() {
         return sentence;
     }
+
+    public void setSentence(String text) {
+        if (this.sentence == null) {
+            this.sentence = new Sentence(new Word[] {new Word(text)});
+        } else {
+            this.sentence.appendNewWord(new Word(text));
+        }
+    }
 }
