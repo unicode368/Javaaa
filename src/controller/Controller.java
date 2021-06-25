@@ -17,7 +17,7 @@ public class Controller {
     }
 
     public void start() {
-        view.print_message(view.INPUT_INVITATION);
+        view.print_message(view.INPUT_INVITATION_HELLO);
         input.writeUserInput();
         validate(input.getUserInput());
     }
