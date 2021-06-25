@@ -8,11 +8,15 @@ public class ProgramView {
     public final String WORLD_ERROR = "Будь ласка, введіть \'world!\'.";
     public final String RESULT_STRING = "Утворене речення:";
 
-    public void print_message(String message) {
+    public void printMessage(String message) {
         System.out.println(message);
     }
 
-    public void print_error(String message) {
+    public void printError(String message) {
         System.err.println(message);
+    }
+
+    public void print(String text) {
+        System.out.println(text);
     }
 }

@@ -17,20 +17,22 @@ public class Controller {
     }
 
     public void start() {
-        view.print_message(view.INPUT_INVITATION_HELLO);
+        view.printMessage(view.INPUT_INVITATION_HELLO);
         input.writeUserInput();
         while (!validate(input.getUserInput())) {
-            view.print_error(view.HELLO_ERROR);
+            view.printError(view.HELLO_ERROR);
             input.writeUserInput();
         }
         builder.setSentence(input.getUserInput());
-        view.print_message(view.INPUT_INVITATION_WORLD);
+        view.printMessage(view.INPUT_INVITATION_WORLD);
         input.writeUserInput();
         while (!validate(input.getUserInput())) {
-            view.print_error(view.WORLD_ERROR);
+            view.printError(view.WORLD_ERROR);
             input.writeUserInput();
         }
         builder.setSentence(input.getUserInput());
+        view.printMessage(view.RESULT_STRING);
+        view.printMessage();
     }
 
     private boolean validate(String input) {
