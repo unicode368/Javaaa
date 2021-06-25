@@ -11,16 +11,18 @@ public class Controller {
     private Input input;
 
     public Controller() {
-        this.view = new ProgramView();
-        this.builder = new SentenceBuilder();
-        this.input = new Input();
+        view = new ProgramView();
+        builder = new SentenceBuilder(null);
+        input = new Input();
     }
 
     public void start() {
         view.print_message(view.INPUT_INVITATION);
+        input.writeUserInput();
+        validate(input.getUserInput());
     }
 
-    public boolean validate() {
+    public boolean validate(String input) {
 
     }
 }

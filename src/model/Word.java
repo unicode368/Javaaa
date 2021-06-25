@@ -2,10 +2,10 @@ package model;
 
 public class Word {
 
-    String text_instance;
+    String textInstance;
 
     public Word(String text_instance) {
-        this.text_instance = text_instance;
+        this.textInstance = text_instance;
     }
 
 }
