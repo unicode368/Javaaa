@@ -19,4 +19,14 @@ public class SentenceBuilder {
             this.sentence.appendNewWord(new Word(text));
         }
     }
+
+    public String generateSentence() {
+        String result = "";
+        Word[] words = sentence.getWords();
+        for (int i = 0; i < words.length; i++) {
+            result += words[i].getTextInstance();
+            result += i == words.length - 1 ? "" : " ";
+        }
+        return result;
+    }
 }

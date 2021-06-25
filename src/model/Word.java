@@ -8,4 +8,8 @@ public class Word {
         this.textInstance = text_instance;
     }
 
+    public String getTextInstance() {
+        return textInstance;
+    }
+
 }

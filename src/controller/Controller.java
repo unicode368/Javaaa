@@ -32,7 +32,7 @@ public class Controller {
         }
         builder.setSentence(input.getUserInput());
         view.printMessage(view.RESULT_STRING);
-        view.printMessage();
+        view.print(builder.generateSentence());
     }
 
     private boolean validate(String input) {
