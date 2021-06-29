@@ -21,6 +21,12 @@ public class Vector {
                 this.y - vector.y,
                 this.z - vector.z);
     }
-    
+
+    public Vector multiply(int n) {
+        return new Vector(this.x * n,
+                this.y * n, this.z * n);
+    }
+
+    public
 
 }
