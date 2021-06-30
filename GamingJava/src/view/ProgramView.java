@@ -25,5 +25,5 @@ public class ProgramView {
     public void printError(String message, String min, String max) {
         System.err.format(message, min, max);
     }
-    
+
 }
