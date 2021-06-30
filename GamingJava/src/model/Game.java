@@ -22,11 +22,11 @@ public class Game {
         } else if (number < randomNumber) {
             setMinValue(number);
             appendToStatistics(number);
-            return "less";
+            return "more";
         } else {
             setMaxValue(number);
             appendToStatistics(number);
-            return "more";
+            return "less";
         }
     }
 

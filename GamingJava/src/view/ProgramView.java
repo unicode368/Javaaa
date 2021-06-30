@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class ProgramView {
 
     public final String OPTION_INPUT = "Будь ласка, введіть число від %s до %s:\n";
-    public final String STRING_INPUT = "Введене значення має бути числом.\n";
+    public final String STRING_INPUT = "Введене значення має бути числом.";
     public final String INPUT_OUT_OF_RANGE = "Число має бути в діапазоні від %s до %s.\n";
     public final String NUMBER_LESS = "Шукане число менше за %s\n";
     public final String NUMBER_BIGGER = "Шукане число більше за %s\n";

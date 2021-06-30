@@ -19,10 +19,17 @@ public class GameEngine {
 
     public void start() {
         typeNumber();
-        while (!game.checkNumber(Integer
-                .parseInt(input.getUserInput()))
-                .equals("equal")) {
+        String checkedNumber = game.checkNumber(Integer.parseInt(input.getUserInput()));
+        while (!checkedNumber.equals("equal")) {
+            if (checkedNumber.equals("less")) {
+                view.printMessage(view.NUMBER_LESS,
+                        input.getUserInput());
+            } else {
+                view.printMessage(view.NUMBER_BIGGER,
+                        input.getUserInput());
+            }
             typeNumber();
+            checkedNumber = game.checkNumber(Integer.parseInt(input.getUserInput()));
         }
         view.printMessage(view.NUMBER_FOUND, input.getUserInput());
         view.toString(game.getStatistics());
@@ -54,8 +61,9 @@ public class GameEngine {
     }
 
     private void retypeInput() {
-        String validatorVal = validate(input.getUserInput());
+        String validatorVal;
         while (true) {
+            validatorVal = validate(input.getUserInput());
             if (validatorVal.equals("")) {
                 break;
             } else {
