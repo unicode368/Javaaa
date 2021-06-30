@@ -45,7 +45,13 @@ public class GameEngine {
             if (validatorVal.equals("")) {
                 break;
             } else {
-                view.printError(validatorVal);
+                if (validatorVal.equals(view.INPUT_OUT_OF_RANGE)) {
+                    view.printError(validatorVal,
+                            String.valueOf(game.getMinValue()),
+                            String.valueOf(game.getMaxValue()));
+                } else {
+                    view.printError(validatorVal);
+                }
                 input.writeUserInput();
             }
         }
