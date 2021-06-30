@@ -4,7 +4,7 @@ import model.Game;
 
 public class GameEngine {
 
-    GameEngine() {
+    public GameEngine() {
         Game game = new Game();
     }
 
