@@ -25,7 +25,7 @@ public class GameEngine {
             typeNumber();
         }
         view.printMessage(view.NUMBER_FOUND, input.getUserInput());
-
+        view.toString(game.getStatistics());
     }
 
     private void typeNumber() {

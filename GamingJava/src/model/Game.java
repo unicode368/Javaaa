@@ -21,9 +21,11 @@ public class Game {
             return "equal";
         } else if (number < randomNumber) {
             setMinValue(number);
+            appendToStatistics(number);
             return "less";
         } else {
             setMaxValue(number);
+            appendToStatistics(number);
             return "more";
         }
     }
@@ -32,7 +34,7 @@ public class Game {
         return maxValue;
     }
 
-    public void setMaxValue(int maxValue) {
+    private void setMaxValue(int maxValue) {
         this.maxValue = maxValue;
     }
 
@@ -40,15 +42,15 @@ public class Game {
         return minValue;
     }
 
-    public void setMinValue(int minValue) {
+    private void setMinValue(int minValue) {
         this.minValue = minValue;
     }
 
-    public int getRandomNumber() {
-        return randomNumber;
+    public int[] getStatistics() {
+        return statistics;
     }
 
-    public void appendToStatistics(int stat) {
+    private void appendToStatistics(int stat) {
         int[] newStat = new int[statistics.length + 1];
         for (int i = 0; i < statistics.length; i++) {
             newStat[i] = statistics[i];
@@ -56,5 +58,6 @@ public class Game {
         newStat[statistics.length] = stat;
         this.statistics = newStat;
     }
+
 
 }

@@ -1,12 +1,14 @@
 package view;
 
+import java.util.Arrays;
+
 public class ProgramView {
 
-    public final String OPTION_INPUT = "Будь ласка, введіть число від %s до %s:";
-    public final String STRING_INPUT = "Введене значення має бути числом.";
-    public final String INPUT_OUT_OF_RANGE = "Число має бути в діапазоні від %s до %s.";
-    public final String NUMBER_LESS = "Шукане число менше за %s";
-    public final String NUMBER_BIGGER = "Шукане число більше за %s";
+    public final String OPTION_INPUT = "Будь ласка, введіть число від %s до %s:\n";
+    public final String STRING_INPUT = "Введене значення має бути числом.\n";
+    public final String INPUT_OUT_OF_RANGE = "Число має бути в діапазоні від %s до %s.\n";
+    public final String NUMBER_LESS = "Шукане число менше за %s\n";
+    public final String NUMBER_BIGGER = "Шукане число більше за %s\n";
     public final String NUMBER_FOUND = "Знайдено шукане число - %s!" + "\nСтатистика по грі:\n";
 
     public void printMessage(String message,
@@ -26,4 +28,7 @@ public class ProgramView {
         System.err.format(message, min, max);
     }
 
+    public void toString(int[] array) {
+        System.out.println(Arrays.toString(array));
+    }
 }
