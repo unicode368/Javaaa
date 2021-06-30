@@ -1,5 +1,6 @@
 package controller;
 
+import model.Boundaries;
 import model.Game;
 import view.Input;
 import view.ProgramView;
@@ -17,6 +18,17 @@ public class GameEngine {
     }
 
     public void start() {
+        typeNumber();
+        while (!game.checkNumber(Integer
+                .parseInt(input.getUserInput()))
+                .equals("equal")) {
+            typeNumber();
+        }
+        view.printMessage(view.NUMBER_FOUND, input.getUserInput());
+
+    }
+
+    private void typeNumber() {
         view.printMessage(view.OPTION_INPUT,
                 String.valueOf(game.getMinValue()),
                 String.valueOf(game.getMaxValue()));
@@ -27,8 +39,10 @@ public class GameEngine {
     private String validate(String input) {
         if (!isNumeric(input)) {
             return view.STRING_INPUT;
-        } else if (Integer.parseInt(input) < game.getMinValue()
-                || Integer.parseInt(input) > game.getMaxValue()){
+        } else if (Integer.parseInt(input) == Boundaries.MIN_VALUE ||
+                    Integer.parseInt(input) == Boundaries.MAX_VALUE ||
+                    Integer.parseInt(input) < game.getMinValue() ||
+                    Integer.parseInt(input) > game.getMaxValue()){
             return view.INPUT_OUT_OF_RANGE;
         } else {
             return "";

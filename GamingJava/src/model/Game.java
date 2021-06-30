@@ -10,10 +10,22 @@ public class Game {
     private int[] statistics;
 
     public Game() {
-        randomNumber = new Random().nextInt(101);
+        randomNumber = 1 + new Random().nextInt(100);
         statistics = new int[0];
         minValue = Boundaries.MIN_VALUE;
         maxValue = Boundaries.MAX_VALUE;
+    }
+
+    public String checkNumber(int number) {
+        if (number == randomNumber) {
+            return "equal";
+        } else if (number < randomNumber) {
+            setMinValue(number);
+            return "less";
+        } else {
+            setMaxValue(number);
+            return "more";
+        }
     }
 
     public int getMaxValue() {
