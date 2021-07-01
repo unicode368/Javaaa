@@ -50,6 +50,10 @@ public class Game {
         return statistics;
     }
 
+    public int getRandomNumber() {
+        return randomNumber;
+    }
+
     private void appendToStatistics(int stat) {
         int[] newStat = new int[statistics.length + 1];
         for (int i = 0; i < statistics.length; i++) {
