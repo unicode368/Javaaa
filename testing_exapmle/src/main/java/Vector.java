@@ -27,6 +27,16 @@ public class Vector {
                 this.y * n, this.z * n);
     }
 
-    public
+    public int dotProduct(Vector vector1) {
+        return vector1.x * this.x +
+                vector1.y * this.y + vector1.z * this.z;
+    }
+
+    public Vector crossProduct(Vector vector1) {
+        return new Vector(
+                this.y * vector1.z - this.z * vector1.y,
+                this.z * vector1.x - this.x * vector1.z,
+                this.x * vector1.y - this.y * vector1.x);
+    }
 
 }
