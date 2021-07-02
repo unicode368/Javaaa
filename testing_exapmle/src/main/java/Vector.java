@@ -39,4 +39,13 @@ public class Vector {
                 this.x * vector1.y - this.y * vector1.x);
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        Vector v = (Vector) obj;
+        if (this.x == v.x &&
+                this.y == v.y && this.z == v.z) {
+            return true;
+        }
+        return false;
+    }
 }
