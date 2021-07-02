@@ -10,7 +10,7 @@ public class Game {
     private int[] statistics;
 
     public Game() {
-        randomNumber = 1 + new Random().nextInt(100);
+        randomNumber = 1 + new Random().nextInt(99);
         statistics = new int[0];
         minValue = Boundaries.MIN_VALUE;
         maxValue = Boundaries.MAX_VALUE;
