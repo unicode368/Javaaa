@@ -2,24 +2,18 @@ package model;
 
 public class Contact {
 
-    private String name;
-    private String surname;
-    private String patronimic;
+    private FullName fullName;
     private String initials;
     private String nickname;
     private String comment;
     private Group group;
-    private String homePhone;
-    private String mobilePhone;
-    private String mobilePhone2;
-    private String email;
-    private String skype;
-    private String index;
-    private String city;
-    private String street;
-    private String houseNumber;
-    private String flatNumber;
-    private String address;
+    private Contacts contacts;
+    private Address address;
     private String dateCreated;
     private String dateModified;
+
+    public Contact(FullName fullName, String nickname, String comment,
+                   Group group, Contacts contacts, Address address) {
+        
+    }
 }
