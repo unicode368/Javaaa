@@ -7,7 +7,7 @@ public class Contacts {
     private String email;
     private String skype;
 
-    public Contacts(String homePhone, String mobilePhone,
+    Contacts(String homePhone, String mobilePhone,
                     String mobilePhone2, String email, String skype) {
         this.homePhone = homePhone;
         this.mobilePhone = mobilePhone;
