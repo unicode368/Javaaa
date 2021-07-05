@@ -1,6 +1,7 @@
 package controller;
 
 import model.Contact;
+import model.RegexPatterns;
 import view.Input;
 import view.ProgramView;
 
@@ -9,10 +10,12 @@ public class Controller {
     private Input input;
     private ProgramView view;
     private Contact model;
+    private RegexPatterns patterns;
 
     public Controller() {
         input = new Input();
         view = new ProgramView();
+        patterns = new RegexPatterns();
     }
 
     public void start() {
@@ -47,7 +50,7 @@ public class Controller {
     public String takeInput(String message, String type) {
         printMessageByType(message, type);
         input.writeUserInput();
-        while (!validate(input.getUserInput())) {
+        while (!validate(input.getUserInput(), type)) {
             printErrorByType(type);
             input.writeUserInput();
         }
@@ -70,8 +73,15 @@ public class Controller {
         }
     }
 
-    private boolean validate(String input) {
-        return false;
+    private boolean validate(String input, String type) {
+        switch (type) {
+            case "ім'я":
+            case "прізвище":
+            case "по-батькові": {
+                return input.matches(patterns.NAME_REGEX);
+            }
+            default: return true;
+        }
     }
 
 }
