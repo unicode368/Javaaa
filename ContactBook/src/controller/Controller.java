@@ -10,4 +10,12 @@ public class Controller {
 
     }
 
+    public void takeInput() {
+
+    }
+
+    public void validate() {
+
+    }
+
 }
