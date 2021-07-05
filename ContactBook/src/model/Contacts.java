@@ -15,4 +15,13 @@ public class Contacts {
         this.email = email;
         this.skype = skype;
     }
+
+    @Override
+    public String toString() {
+        return "Домашній телефон: " + this.homePhone + "\n" +
+                "Мобільний телефон: " + this.mobilePhone + "\n" +
+                "Додатковий мобільний телефон: " + this.mobilePhone2 + "\n" +
+                "Електронна пошта: " + this.email + "\n" +
+                "Skype: " + this.skype + "\n";
+    }
 }
