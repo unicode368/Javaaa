@@ -23,9 +23,9 @@ public class ProgramView {
     public final String FLAT_INPUT = "Введіть номер квартири:";
 
     public final String WRONG_INPUT = "Некорректне введення %s. Будь ласка, спробуйте ще.\n";
-    public final String WRONG_GROUP = "Будь ласка, оберіть группу зі списку наявних.";
+    public final String WRONG_GROUP = "Будь ласка, оберіть групу зі списку наявних.";
 
-    public void printMassage(String message) {
+    public void printMessage(String message) {
         System.out.println(message);
     }
 
