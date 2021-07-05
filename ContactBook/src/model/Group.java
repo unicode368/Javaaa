@@ -1,7 +1,22 @@
 package model;
 
 public enum Group {
-    FAMILY,
-    WORK,
-    FRIENDS
+    WORK {
+        @Override
+        public String toString() {
+            return "робота";
+        }
+    },
+    FAMILY {
+        @Override
+        public String toString() {
+            return "сім'я";
+        }
+    },
+    FRIENDS {
+        @Override
+        public String toString() {
+            return "друзі";
+        }
+    }
 }
