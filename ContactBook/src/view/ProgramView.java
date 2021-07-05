@@ -22,10 +22,10 @@ public class ProgramView {
     }
 
     public void printError(String message, String option) {
-        System.out.format(message, option);
+        System.err.format(message, option);
     }
 
     public void printError(String message) {
-        System.out.println(message);
+        System.err.println(message);
     }
 }
