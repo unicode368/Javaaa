@@ -31,6 +31,13 @@ public class Controller {
     }
 
     public void printByType(String type) {
+    private void printMessageByType(String message, String type) {
+        if (type.equals("коментар") || type.equals("група")) {
+            view.printMessage(message);
+        } else {
+            view.printMessage(message, type);
+        }
+    }
         if (type.equals("група")) {
             view.printError(view.WRONG_GROUP);
         } else {
