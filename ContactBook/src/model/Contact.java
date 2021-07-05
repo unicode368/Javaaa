@@ -17,12 +17,12 @@ public class Contact {
     private final LocalDateTime NOW = LocalDateTime.now();
 
     public Contact(String nickname, String comment,
-                   Group group, Contacts contacts) {
+                   Group group) {
         this.fullName = new FullName("", "", "");
         this.nickname = nickname;
         this.comment = comment;
         this.group = group;
-        this.contacts = contacts;
+        this.contacts = new Contacts("", "", "", "", "");
         this.address = new Address(0, "", "", 0, 0);
         this.dateCreated = DTF.format(NOW);
         this.dateModified = dateCreated;
