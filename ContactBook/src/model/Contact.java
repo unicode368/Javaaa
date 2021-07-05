@@ -13,6 +13,8 @@ public class Contact {
     private Address address;
     private String dateCreated;
     private String dateModified;
+    private final DateTimeFormatter DTF = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+    private final LocalDateTime NOW = LocalDateTime.now();
 
     public Contact(FullName fullName, String nickname, String comment,
                    Group group, Contacts contacts, Address address) {
@@ -22,9 +24,7 @@ public class Contact {
         this.group = group;
         this.contacts = contacts;
         this.address = address;
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        LocalDateTime now = LocalDateTime.now();
-        this.dateCreated = dtf.format(now);
+        this.dateCreated = DTF.format(NOW);
         this.dateModified = dateCreated;
     }
 }
