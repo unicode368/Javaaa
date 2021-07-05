@@ -2,15 +2,15 @@ package model;
 
 public class Address {
 
-    private String index;
+    private int index;
     private String city;
     private String street;
-    private String houseNumber;
-    private String flatNumber;
+    private int houseNumber;
+    private int flatNumber;
 
 
-    Address(String index, String city, String street,
-            String houseNumber, String flatNumber) {
+    Address(int index, String city, String street,
+            int houseNumber, int flatNumber) {
 
     }
 }
