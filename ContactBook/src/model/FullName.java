@@ -20,4 +20,20 @@ public class FullName {
         }
         return surname + " " + name.toCharArray()[0] + ".";
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public String getPatronimic() {
+        return patronimic;
+    }
+
+    public String getInitials() {
+        return initials;
+    }
 }
