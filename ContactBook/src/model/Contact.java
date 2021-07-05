@@ -81,4 +81,16 @@ public class Contact {
     private void setAddress(Address address) {
         this.address = address;
     }
+
+    public String toString() {
+        return this.fullName.toString() +
+                "Нікнейм: " + this.nickname + "\n" +
+                "Коментар: " + this.comment + "\n" +
+                "Група: " + this.group.toString() + "\n" +
+                this.contacts.toString() +
+                this.address.toString() +
+                "Дата створення: " + this.dateCreated + "\n" +
+                "Дата зміни: " + this.dateModified + "\n";
+
+    }
 }

@@ -17,4 +17,12 @@ public class Address {
         this.houseNumber = houseNumber;
         this.flatNumber = flatNumber;
     }
+
+    @Override
+    public String toString() {
+        return "Індекс: " + this.index + "\n" +
+                "Місто: " + this.city + "\n" +
+                "Адреса: " + this.street + ", " +
+                this.houseNumber + ", " + this.flatNumber + "\n";
+    }
 }

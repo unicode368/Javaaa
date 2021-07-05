@@ -38,13 +38,14 @@ public class Controller {
         model.defineContacts(contacts[0], contacts[1], contacts[2],
                 contacts[3], contacts[4]);
         String[] address = new String[5];
-        address[0] = takeInput(view.NECESSARY_INPUT, "домашній телефон");
-        address[1] = takeInput(view.NECESSARY_INPUT, "мобільний телефон");
-        address[2] = takeInput(view.NECESSARY_INPUT, "додатковий мобільний телефон");
-        address[3] = takeInput(view.NECESSARY_INPUT, "e-mail");
-        address[4] = takeInput(view.NECESSARY_INPUT, "skype");
+        address[0] = takeInput(view.NECESSARY_INPUT, "індекс");
+        address[1] = takeInput(view.NECESSARY_INPUT, "місто");
+        address[2] = takeInput(view.NECESSARY_INPUT, "вулиця");
+        address[3] = takeInput(view.NECESSARY_INPUT, "номер будинку");
+        address[4] = takeInput(view.NECESSARY_INPUT, "номер квартири");
         model.defineAddress(Integer.parseInt(address[0]), address[1] , address[2],
                 Integer.parseInt(address[3]), Integer.parseInt(address[4]));
+        view.printMessage(model.toString());
     }
 
     public String takeInput(String message, String type) {
@@ -79,6 +80,10 @@ public class Controller {
             case "прізвище":
             case "по-батькові": {
                 return input.matches(patterns.NAME_REGEX);
+            }
+            case "нікнейм":
+            case "skype": {
+                return input.matches(patterns.NICKNAME_REGEX);
             }
             default: return true;
         }
