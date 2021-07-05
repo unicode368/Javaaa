@@ -15,6 +15,9 @@ public class FullName {
     }
 
     private String createInitials() {
+        if (surname.equals("") || name.equals("")) {
+            return "";
+        }
         return surname + " " + name.toCharArray()[0] + ".";
     }
 }
