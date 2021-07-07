@@ -1,6 +1,15 @@
 package view;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 public class ProgramView {
+
+    private static String MESSAGE_BUNDLE_NAME = "properties";
+    public static final ResourceBundle bundle =
+            ResourceBundle.getBundle(
+                    MESSAGE_BUNDLE_NAME,
+                    new Locale("ua", "UA"));
 
     public final String NECESSARY_INPUT = "Введіть %s:\n";
     public final String COMMENT_INPUT = "Залиште коментар щодо контакту:";
@@ -14,7 +23,7 @@ public class ProgramView {
     public final String WRONG_GROUP = "Будь ласка, оберіть групу зі списку наявних.";
 
     public void printMessage(String message) {
-        System.out.println(message);
+        System.out.println(bundle.getString(message));
     }
 
     public void printMessage(String message, String type) {

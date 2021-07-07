@@ -20,10 +20,9 @@ public class Controller {
 
     public void start() {
         String[] fullName = new String[3];
-        fullName[0] = takeInput(view.NECESSARY_INPUT, "ім'я");
-        fullName[1] = takeInput(view.NECESSARY_INPUT, "прізвище");
-        fullName[2] = takeInput(view.NECESSARY_INPUT, "по-батькові");
-        String nickname = takeInput(view.NECESSARY_INPUT, "нікнейм");
+        fullName[0] = takeInput(view.NECESSARY_INPUT, "input.name");
+        fullName[1] = takeInput(view.NECESSARY_INPUT, "input.surname");
+        String nickname = takeInput(view.NECESSARY_INPUT, "input.patronimic");
         String comment = takeInput(view.COMMENT_INPUT, "коментар");
         int group = Integer.parseInt(takeInput(view.GROUP_INPUT, "група"));
         model = new Contact(nickname, comment);
@@ -76,12 +75,12 @@ public class Controller {
 
     private boolean validate(String input, String type) {
         switch (type) {
-            case "ім'я":
-            case "прізвище":
-            case "по-батькові": {
+            case "input.name":
+            case "input.surname":
+            case "input.patronimic": {
                 return input.matches(patterns.NAME_REGEX);
             }
-            case "нікнейм":
+            case "input.nickname":
             case "skype": {
                 return input.matches(patterns.NICKNAME_REGEX);
             }
