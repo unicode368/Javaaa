@@ -20,58 +20,44 @@ public class Controller {
 
     public void start() {
         String[] fullName = new String[3];
-        fullName[0] = takeInput(view.NECESSARY_INPUT, "input.name");
-        fullName[1] = takeInput(view.NECESSARY_INPUT, "input.surname");
-        String nickname = takeInput(view.NECESSARY_INPUT, "input.patronimic");
-        String comment = takeInput(view.COMMENT_INPUT, "коментар");
-        int group = Integer.parseInt(takeInput(view.GROUP_INPUT, "група"));
+        fullName[0] = takeInput("input.name");
+        fullName[1] = takeInput("input.surname");
+        fullName[2] = takeInput("input.patronimic");
+        String nickname = takeInput("input.nickname");
+        String comment = takeInput("input.comment");
+        int group = Integer.parseInt(takeInput("input.group"));
         model = new Contact(nickname, comment);
         model.defineFullName(fullName[0], fullName[1], fullName[2]);
         model.defineGroup(group);
         String[] contacts = new String[5];
-        contacts[0] = takeInput(view.NECESSARY_INPUT, "домашній телефон");
-        contacts[1] = takeInput(view.NECESSARY_INPUT, "мобільний телефон");
-        contacts[2] = takeInput(view.UNNECESSARY_INPUT, "додатковий мобільний телефон");
-        contacts[3] = takeInput(view.NECESSARY_INPUT, "e-mail");
-        contacts[4] = takeInput(view.UNNECESSARY_INPUT, "skype");
+        contacts[0] = takeInput("input.home.phone");
+        contacts[1] = takeInput("input.mobile.phone");
+        contacts[2] = takeInput("input.mobile.phone.2");
+        contacts[3] = takeInput("input.email");
+        contacts[4] = takeInput("input.skype");
         model.defineContacts(contacts[0], contacts[1], contacts[2],
                 contacts[3], contacts[4]);
         String[] address = new String[5];
-        address[0] = takeInput(view.NECESSARY_INPUT, "індекс");
-        address[1] = takeInput(view.NECESSARY_INPUT, "місто");
-        address[2] = takeInput(view.NECESSARY_INPUT, "вулиця");
-        address[3] = takeInput(view.NECESSARY_INPUT, "номер будинку");
-        address[4] = takeInput(view.NECESSARY_INPUT, "номер квартири");
+        address[0] = takeInput("input.index");
+        address[1] = takeInput("input.city");
+        address[2] = takeInput("input.street");
+        address[3] = takeInput("input.house.number");
+        address[4] = takeInput("input.flat.number");
         model.defineAddress(Integer.parseInt(address[0]), address[1] , address[2],
                 Integer.parseInt(address[3]), Integer.parseInt(address[4]));
         view.printMessage(model.toString());
     }
 
-    public String takeInput(String message, String type) {
-        printMessageByType(message, type);
+    public String takeInput(String message) {
+        view.printMessage(message);
         input.writeUserInput();
-        while (!validate(input.getUserInput(), type)) {
-            printErrorByType(type);
+        while (!validate(input.getUserInput(), message)) {
+            view.printError(message + ".error");
             input.writeUserInput();
         }
         return input.getUserInput();
     }
 
-    private void printMessageByType(String message, String type) {
-        if (type.equals("коментар") || type.equals("група")) {
-            view.printMessage(message);
-        } else {
-            view.printMessage(message, type);
-        }
-    }
-
-    private void printErrorByType(String type) {
-        if (type.equals("група")) {
-            view.printError(view.WRONG_GROUP);
-        } else {
-            view.printError(view.WRONG_INPUT, type);
-        }
-    }
 
     private boolean validate(String input, String type) {
         switch (type) {
@@ -81,7 +67,7 @@ public class Controller {
                 return input.matches(patterns.NAME_REGEX);
             }
             case "input.nickname":
-            case "skype": {
+            case "input.skype": {
                 return input.matches(patterns.NICKNAME_REGEX);
             }
             default: return true;
