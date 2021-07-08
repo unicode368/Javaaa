@@ -7,7 +7,7 @@ import java.util.ResourceBundle;
 public class ProgramView {
 
     private static String MESSAGE_BUNDLE_NAME = "messages";
-    public static final ResourceBundle bundle =
+    public static ResourceBundle bundle =
             ResourceBundle.getBundle(
                     MESSAGE_BUNDLE_NAME,
                     new Locale("ua", "UA"));
@@ -22,5 +22,11 @@ public class ProgramView {
 
     public void printError(String message) {
         System.err.println(bundle.getString(message));
+    }
+
+    public void changeDefaultLanguage(String lang, String country) {
+        bundle = ResourceBundle.getBundle(
+                MESSAGE_BUNDLE_NAME,
+                new Locale(lang, country));
     }
 }

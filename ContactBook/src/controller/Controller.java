@@ -17,6 +17,7 @@ public class Controller {
     }
 
     public void start() {
+        chooseLanguage("input.language");
         String[] fullName = new String[3];
         fullName[0] = takeInput("input.name.data");
         fullName[1] = takeInput("input.surname.data");
@@ -46,6 +47,13 @@ public class Controller {
         view.printResult("output.result.data", model.getAllInfo());
     }
 
+    private void chooseLanguage(String lang) {
+        String option = takeInput(lang);
+        if (option.equals("2")) {
+            view.changeDefaultLanguage("en", "EN");
+        }
+    }
+
     public String takeInput(String message) {
         view.printMessage(message);
         input.writeUserInput();
@@ -62,7 +70,9 @@ public class Controller {
             case "input.name.data":
             case "input.surname.data":
             case "input.patronimic.data": {
-                return input.matches(RegexPatterns.NAME_REGEX);
+                return input.matches(String.valueOf(ProgramView
+                        .bundle.getLocale()).equals("ua") ? RegexPatterns.NAME_REGEX_UA
+                        : RegexPatterns.NAME_REGEX);
             }
             case "input.nickname.data":
             case "input.skype.data": {
