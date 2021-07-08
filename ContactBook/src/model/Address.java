@@ -18,11 +18,10 @@ public class Address {
         this.flatNumber = flatNumber;
     }
 
-    @Override
-    public String toString() {
-        return "Індекс: " + this.index + "\n" +
-                "Місто: " + this.city + "\n" +
-                "Адреса: " + this.street + ", " +
-                this.houseNumber + ", " + this.flatNumber + "\n";
+    public String[] getAddress() {
+        return new String[]{String.valueOf(index),
+                city,
+                street + ", " + String.valueOf(houseNumber)
+                        + ", " + String.valueOf(flatNumber)};
     }
 }

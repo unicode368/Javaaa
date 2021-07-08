@@ -10,12 +10,10 @@ public class Controller {
     private Input input;
     private ProgramView view;
     private Contact model;
-    private RegexPatterns patterns;
 
     public Controller() {
         input = new Input();
         view = new ProgramView();
-        patterns = new RegexPatterns();
     }
 
     public void start() {
@@ -45,7 +43,7 @@ public class Controller {
         address[4] = takeInput("input.flat.number");
         model.defineAddress(Integer.parseInt(address[0]), address[1] , address[2],
                 Integer.parseInt(address[3]), Integer.parseInt(address[4]));
-        view.printMessage(model.toString());
+        view.printResult("output.result", model.getAllInfo());
     }
 
     public String takeInput(String message) {
@@ -64,11 +62,11 @@ public class Controller {
             case "input.name":
             case "input.surname":
             case "input.patronimic": {
-                return input.matches(patterns.NAME_REGEX);
+                return input.matches(RegexPatterns.NAME_REGEX);
             }
             case "input.nickname":
             case "input.skype": {
-                return input.matches(patterns.NICKNAME_REGEX);
+                return input.matches(RegexPatterns.NICKNAME_REGEX);
             }
             default: return true;
         }

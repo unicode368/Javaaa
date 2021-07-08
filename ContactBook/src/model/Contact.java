@@ -82,15 +82,26 @@ public class Contact {
         this.address = address;
     }
 
-    public String toString() {
-        return this.fullName.toString() +
-                "Нікнейм: " + this.nickname + "\n" +
-                "Коментар: " + this.comment + "\n" +
-                "Група: " + this.group.toString() + "\n" +
-                this.contacts.toString() +
-                this.address.toString() +
-                "Дата створення: " + this.dateCreated + "\n" +
-                "Дата зміни: " + this.dateModified + "\n";
-
+    public String[] getAllInfo() {
+        String[] info = new String[17];
+        String[] fllName = fullName.getFullName();
+        int i = 0;
+        for (int j = 0; j < fllName.length; i++, j++) {
+            info[i] = fllName[j];
+        }
+        info[i++] = nickname;
+        info[i++] = comment;
+        info[i++] = group.toString();
+        String[] cntacts = contacts.getContacts();
+        for (int j = 0; j < cntacts.length; i++, j++) {
+            info[i] = cntacts[j];
+        }
+        String[] addr = address.getAddress();
+        for (int j = 0; j < addr.length; i++, j++) {
+            info[i] = addr[j];
+        }
+        info[i++] = dateCreated;
+        info[i++] = dateModified;
+        return info;
     }
 }

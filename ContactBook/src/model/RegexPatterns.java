@@ -1,8 +1,8 @@
 package model;
 
-public class RegexPatterns {
+public interface RegexPatterns {
 
-    public final String NAME_REGEX = "^[A-Z][a-z]{1,}$";
-    public final String NICKNAME_REGEX = "^.{2,}$";
+    String NAME_REGEX = "^[A-Z][a-z]{2,20}$";
+    String NICKNAME_REGEX = "^.{3,20}$";
 
 }

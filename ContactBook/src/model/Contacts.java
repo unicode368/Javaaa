@@ -16,12 +16,11 @@ public class Contacts {
         this.skype = skype;
     }
 
-    @Override
-    public String toString() {
-        return "Домашній телефон: " + this.homePhone + "\n" +
-                "Мобільний телефон: " + this.mobilePhone + "\n" +
-                "Додатковий мобільний телефон: " + this.mobilePhone2 + "\n" +
-                "Електронна пошта: " + this.email + "\n" +
-                "Skype: " + this.skype + "\n";
+    public String[] getContacts() {
+        return new String[]{homePhone,
+                mobilePhone,
+                mobilePhone2,
+                email,
+                skype};
     }
 }

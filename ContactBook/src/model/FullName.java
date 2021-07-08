@@ -37,10 +37,10 @@ public class FullName {
         return initials;
     }
 
-    public String toString() {
-        return "Прізвище: " + this.surname + "\n" +
-                "Ім'я: " + this.name  + "\n" +
-                "По-батькові: " + this.patronimic  + "\n" +
-                this.initials + "\n";
+    public String[] getFullName() {
+        return new String[]{name,
+                surname,
+                patronimic,
+                initials};
     }
 }
