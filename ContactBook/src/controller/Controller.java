@@ -69,15 +69,33 @@ public class Controller {
         switch (type) {
             case "input.name.data":
             case "input.surname.data":
-            case "input.patronimic.data": {
+            case "input.patronimic.data":
+            case "input.city.data":
+            case "input.street.data":    {
                 return input.matches(String.valueOf(ProgramView
                         .bundle.getLocale()).equals("ua") ? RegexPatterns.NAME_REGEX_UA
                         : RegexPatterns.NAME_REGEX);
             }
+            case "input.group.data":
+                return input.matches(RegexPatterns.GROUP_REGEX);
+            case "input.home.phone.data":
+                return input.matches(RegexPatterns.HOME_PHONE_REGEX);
+            case "input.mobile.phone.data":
+            case "input.mobile.phone.2.data": {
+                return input.matches(RegexPatterns.MOBILE_PHONE_REGEX);
+            }
+            case "input.email.data":
+                return input.matches(RegexPatterns.EMAIL_REGEX);
             case "input.nickname.data":
             case "input.skype.data": {
                 return input.matches(RegexPatterns.NICKNAME_REGEX);
             }
+            case "input.index.data":
+                return input.matches(RegexPatterns.INDEX_REGEX);
+            case "input.house.number.data":
+                return input.matches(RegexPatterns.HOUSE_NUMBER_REGEX);
+            case "input.language":
+                return input.matches(RegexPatterns.LANG_REGEX);
             default: return true;
         }
     }
