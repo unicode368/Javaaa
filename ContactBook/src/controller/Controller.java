@@ -43,7 +43,7 @@ public class Controller {
         address[3] = takeInput("input.house.number.data");
         address[4] = takeInput("input.flat.number.data");
         model.defineAddress(Integer.parseInt(address[0]), address[1] , address[2],
-                Integer.parseInt(address[3]), Integer.parseInt(address[4]));
+                address[3], Integer.parseInt(address[4]));
         view.printResult("output.result.data", model.getAllInfo());
     }
 
@@ -95,7 +95,9 @@ public class Controller {
             case "input.index.data":
                 return input.matches(RegexPatterns.INDEX_REGEX);
             case "input.house.number.data":
-                return input.matches(RegexPatterns.HOUSE_NUMBER_REGEX);
+                return input.matches(String.valueOf(ProgramView
+                        .bundle.getLocale()).equals("ua") ? RegexPatterns.HOUSE_NUMBER_REGEX_UA
+                        : RegexPatterns.HOUSE_NUMBER_REGEX);
             case "input.flat.number.data":
                 return input.matches(RegexPatterns.FLAT_NUMBER_REGEX);
             case "input.language":
