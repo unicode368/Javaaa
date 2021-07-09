@@ -22,7 +22,7 @@ public class Contact {
         this.comment = comment;
         this.group = null;
         this.contacts = new Contacts("", "", "", "", "");
-        this.address = new Address(0, "", "", 0, 0);
+        this.address = new Address(0, "", "", "", 0);
         this.dateCreated = DTF.format(NOW);
         this.dateModified = dateCreated;
     }
@@ -45,7 +45,7 @@ public class Contact {
     }
 
     public void defineAddress(int index, String city, String street,
-                                   int houseNumber, int flatNumber) {
+                                   String houseNumber, int flatNumber) {
         setAddress(new Address(index, city, street, houseNumber, flatNumber));
     }
 
