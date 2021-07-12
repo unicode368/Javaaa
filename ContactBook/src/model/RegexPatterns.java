@@ -1,7 +1,6 @@
 package model;
 
 public interface RegexPatterns {
-
     String NAME_REGEX_UA = "^[А-ЩЮЯҐІЇЄ][а-щьюяґіїє']{1,20}$";
     String NAME_REGEX = "^[A-Z][a-z]{1,20}$";
     String GROUP_REGEX = "^1|2|3$";

@@ -1,6 +1,7 @@
 package view;
 
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -14,6 +15,13 @@ public class ProgramView {
 
     public void printMessage(String message) {
         System.out.println(bundle.getString(message));
+    }
+
+    public void printAllResults(String message,
+                                ArrayList<String[]> resultsData) {
+        for (String[] resultData : resultsData) {
+            printResult(message,resultData);
+        }
     }
 
     public void printResult(String message, String... args) {

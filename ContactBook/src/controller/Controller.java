@@ -1,54 +1,89 @@
 package controller;
 
-import model.Contact;
+import model.ContactBook;
+import model.contact.Contact;
 import model.RegexPatterns;
+import model.exceptions.InvalidLoginException;
 import view.Input;
 import view.ProgramView;
 
-public class Controller {
+import java.util.ArrayList;
 
+public class Controller {
     private Input input;
     private ProgramView view;
-    private Contact model;
+    private ContactBook model;
 
     public Controller() {
         input = new Input();
         view = new ProgramView();
+        model = new ContactBook();
     }
 
     public void start() {
-        chooseLanguage("input.language");
+        String[][] allContactFields;
+        int nicknamePosition = 0;
+        int commentPosition = 1;
+        int groupPosition = 2;
+        int i = 0;
+
+        chooseLanguage();
+        while (i != 2) {
+            allContactFields = getAllContactFields();
+            while (true) {
+                try {
+                    model.addNewContact(allContactFields[3][nicknamePosition],
+                            allContactFields[3][commentPosition],
+                            allContactFields[0],
+                            allContactFields[1],
+                            allContactFields[2],
+                            allContactFields[3][groupPosition]);
+                } catch (InvalidLoginException nicknameInvalid) {
+                    view.printError(nicknameInvalid.getMessage());
+                    allContactFields[3][nicknamePosition] =
+                            takeInput("input.nickname.data");
+                    continue;
+                }
+                break;
+            }
+            view.printAllResults("output.result.data",
+                    model.getAllContacts());
+            i++;
+        }
+    }
+
+    private String[][] getAllContactFields() {
         String[] fullName = new String[3];
+        String[] contacts = new String[5];
+        String[] address = new String[5];
+        String nickname;
+        String comment;
+        String group;
+
         fullName[0] = takeInput("input.name.data");
         fullName[1] = takeInput("input.surname.data");
         fullName[2] = takeInput("input.patronimic.data");
-        String nickname = takeInput("input.nickname.data");
-        String comment = takeInput("input.comment.data");
-        int group = Integer.parseInt(takeInput("input.group.data"));
-        model = new Contact(nickname, comment);
-        model.defineFullName(fullName[0], fullName[1], fullName[2]);
-        model.defineGroup(group);
-        String[] contacts = new String[5];
+        nickname = takeInput("input.nickname.data");
+        comment = takeInput("input.comment.data");
+        group = takeInput("input.group.data");
         contacts[0] = takeInput("input.home.phone.data");
         contacts[1] = takeInput("input.mobile.phone.data");
         contacts[2] = takeInput("input.mobile.phone.2.data");
         contacts[3] = takeInput("input.email.data");
         contacts[4] = takeInput("input.skype.data");
-        model.defineContacts(contacts[0], contacts[1], contacts[2],
-                contacts[3], contacts[4]);
-        String[] address = new String[5];
         address[0] = takeInput("input.index.data");
         address[1] = takeInput("input.city.data");
         address[2] = takeInput("input.street.data");
         address[3] = takeInput("input.house.number.data");
         address[4] = takeInput("input.flat.number.data");
-        model.defineAddress(Integer.parseInt(address[0]), address[1] , address[2],
-                address[3], Integer.parseInt(address[4]));
-        view.printResult("output.result.data", model.getAllInfo());
+
+        return new String[][]{fullName, contacts, address,
+                    new String[]{nickname, comment, group}};
     }
 
-    private void chooseLanguage(String lang) {
-        String option = takeInput(lang);
+    private void chooseLanguage() {
+        String option = takeInput("input.language");
+
         if (option.equals("2")) {
             view.changeDefaultLanguage("en", "EN");
         }
@@ -73,7 +108,8 @@ public class Controller {
             case "input.city.data":
             case "input.street.data": {
                 return input.matches(String.valueOf(ProgramView
-                        .bundle.getLocale()).equals("ua") ? RegexPatterns.NAME_REGEX_UA
+                        .bundle.getLocale()).equals("ua") ?
+                        RegexPatterns.NAME_REGEX_UA
                         : RegexPatterns.NAME_REGEX);
             }
             case "input.group.data":
@@ -96,7 +132,8 @@ public class Controller {
                 return input.matches(RegexPatterns.INDEX_REGEX);
             case "input.house.number.data":
                 return input.matches(String.valueOf(ProgramView
-                        .bundle.getLocale()).equals("ua") ? RegexPatterns.HOUSE_NUMBER_REGEX_UA
+                        .bundle.getLocale()).equals("ua") ?
+                        RegexPatterns.HOUSE_NUMBER_REGEX_UA
                         : RegexPatterns.HOUSE_NUMBER_REGEX);
             case "input.flat.number.data":
                 return input.matches(RegexPatterns.FLAT_NUMBER_REGEX);

@@ -1,10 +1,9 @@
-package model;
+package model.contact;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Contact {
-
     private FullName fullName;
     private String nickname;
     private String comment;
@@ -13,7 +12,7 @@ public class Contact {
     private Address address;
     private String dateCreated;
     private String dateModified;
-    private final DateTimeFormatter DTF = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+    private final DateTimeFormatter DATA_FORMAT_STRING = DateTimeFormatter.ofPattern("dd.MM.yyyy");
     private final LocalDateTime NOW = LocalDateTime.now();
 
     public Contact(String nickname, String comment) {
@@ -23,7 +22,7 @@ public class Contact {
         this.group = null;
         this.contacts = new Contacts("", "", "", "", "");
         this.address = new Address(0, "", "", "", 0);
-        this.dateCreated = DTF.format(NOW);
+        this.dateCreated = DATA_FORMAT_STRING.format(NOW);
         this.dateModified = dateCreated;
     }
 
@@ -35,7 +34,7 @@ public class Contact {
         this.group = group;
         this.contacts = contacts;
         this.address = address;
-        this.dateCreated = DTF.format(NOW);
+        this.dateCreated = DATA_FORMAT_STRING.format(NOW);
         this.dateModified = dateCreated;
     }
 
@@ -55,13 +54,13 @@ public class Contact {
         setFullName(fullName);
     }
 
-    public void defineGroup(int i) {
-        switch (i) {
-            case 1: setGroup(Group.FAMILY);
+    public void defineGroup(String groupNumber) {
+        switch (groupNumber) {
+            case "1": setGroup(Group.FAMILY);
                 break;
-            case 2: setGroup(Group.WORK);
+            case "2": setGroup(Group.WORK);
                 break;
-            case 3: setGroup(Group.FRIENDS);
+            case "3": setGroup(Group.FRIENDS);
                 break;
         }
     }
@@ -103,5 +102,9 @@ public class Contact {
         info[i++] = dateCreated;
         info[i++] = dateModified;
         return info;
+    }
+
+    public String getNickname() {
+        return nickname;
     }
 }

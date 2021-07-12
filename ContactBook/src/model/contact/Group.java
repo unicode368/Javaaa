@@ -1,4 +1,4 @@
-package model;
+package model.contact;
 
 public enum Group {
     WORK {

@@ -1,4 +1,4 @@
-package model;
+package model.contact;
 
 public class Contacts {
     private String homePhone;

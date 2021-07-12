@@ -1,7 +1,6 @@
-package model;
+package model.contact;
 
 public class Address {
-
     private int index;
     private String city;
     private String street;
