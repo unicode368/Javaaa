@@ -1,13 +1,11 @@
 package controller;
 
 import model.ContactBook;
-import model.contact.Contact;
 import model.RegexPatterns;
 import model.exceptions.InvalidLoginException;
 import view.Input;
 import view.ProgramView;
 
-import java.util.ArrayList;
 
 public class Controller {
     private Input input;
