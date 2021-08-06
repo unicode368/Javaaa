@@ -1,16 +1,16 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <link rel="stylesheet" type="text/css" href="styles/login.css" />
 </head>
 <div class="wrapper">
-    <form class="login" action="login" method="post">
-        <p class="title">Log in</p>
+    <form class="login" th:action="@{login}" method="post">
+        <h1 th:text="#{login.form.title}">Log in</h1>
         <input type="text" name="Username" placeholder="Username" autofocus/>
         <i class="fa fa-user"></i>
         <input type="password" name="Password" placeholder="Password" />
         <i class="fa fa-key"></i>
-<!--        <a href="#">Forgot your password?</a> -->
+        <!--        <a href="#">Forgot your password?</a> -->
         <button>
             <i class="spinner"></i>
             <span class="state">Log in</span>

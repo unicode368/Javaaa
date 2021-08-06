@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" type="text/css" href="../public/styles/login.css" />
+</head>
+<div class="wrapper">
+    <form class="login" th:action="login" method="post">
+        <h1 th:text="#{label.form.title}"></h1>
+        <input type="text" name="Username" placeholder="Username" autofocus/>
+        <i class="fa fa-user"></i>
+        <input type="password" name="Password" placeholder="Password" />
+        <i class="fa fa-key"></i>
+<!--        <a href="#">Forgot your password?</a> -->
+        <button>
+            <i class="spinner"></i>
+            <span class="state">Log in</span>
+        </button>
+    </form>
+</div>
+</html>
