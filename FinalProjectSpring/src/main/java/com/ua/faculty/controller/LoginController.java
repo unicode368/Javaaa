@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Slf4j
 @RestController
-@RequestMapping(value = "/", method = RequestMethod.GET)
+@RequestMapping(value = "login", method = RequestMethod.GET)
 public class LoginController {
 
     private final LoginService loginService;
@@ -19,11 +19,6 @@ public class LoginController {
     @Autowired
     public LoginController(LoginService loginService) {
         this.loginService = loginService;
-    }
-
-    @RequestMapping("/login")
-    public String login() {
-        return "login";
     }
 
     @ResponseStatus(HttpStatus.CREATED)
