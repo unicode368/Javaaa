@@ -1,20 +1,34 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <link rel="stylesheet" type="text/css" href="../public/styles/login.css" />
+    <link rel="stylesheet" type="text/css" href="/styles/login.css" />
 </head>
 <div class="wrapper">
     <form class="login" th:action="login" method="post">
-        <h1 th:text="#{label.form.title}"></h1>
-        <input type="text" name="Username" placeholder="Username" autofocus/>
+        <h1 th:utext="#{login.form.title}"></h1>
+        <input type="text" name="Username" th:placeholder="#{login.form.username}" autofocus/>
         <i class="fa fa-user"></i>
-        <input type="password" name="Password" placeholder="Password" />
+        <input type="password" name="Password" th:placeholder="#{login.form.password}" />
         <i class="fa fa-key"></i>
 <!--        <a href="#">Forgot your password?</a> -->
         <button>
             <i class="spinner"></i>
-            <span class="state">Log in</span>
+            <span th:utext="#{login.form.title}" class="state"></span>
         </button>
     </form>
+    <div class="languages">
+        <button id="button1" th:utext="#{login.language.ua}"></button>
+        <button id="button2" th:utext="#{login.language.en}"></button>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
+    </script>
+    <script type="text/javascript">
+        $("#button1").click(function() {
+            window.location.replace('login?lang=ua');
+        });
+        $("#button2").click(function() {
+            window.location.replace('login?lang=en');
+        });
+    </script>
 </div>
 </html>
