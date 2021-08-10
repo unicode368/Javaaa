@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <link rel="stylesheet" type="text/css" href="/styles/login.css" />
+    <link rel="stylesheet" type="text/css" href="/css/login.css" />
 </head>
 <div class="wrapper">
-    <form class="login" th:action="login" method="post">
+    <form class="login" action="login" method="post">
         <h1 th:utext="#{login.form.title}"></h1>
         <input type="text" name="Username" th:placeholder="#{login.form.username}" autofocus/>
         <i class="fa fa-user"></i>
