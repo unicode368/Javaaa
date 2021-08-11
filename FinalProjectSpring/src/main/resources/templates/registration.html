@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- Created By CodingLab - www.codinglabweb.com -->
-<html lang="en" dir="ltr">
+<html lang="en" dir="ltr" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <!---<title> Responsive Registration Form | CodingLab </title>--->
@@ -8,6 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+<div class="languages">
+    <button id="button1" th:utext="#{login.language.ua}"></button>
+    <button id="button2" th:utext="#{login.language.en}"></button>
+</div>
 <div class="container">
     <div class="title">Registration</div>
     <div class="content">
