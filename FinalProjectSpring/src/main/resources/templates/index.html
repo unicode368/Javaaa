@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/home.css" />
+</head>
+<body>
+<div class="header">
+    <div class="header__bg"></div>
+    <h1 class="header__title" th:text="#{home.greeting}"></h1>
+    <div class="header__log" >
+        <div class="languages">
+            <button id="button1" th:utext="#{login.language.ua}"></button>
+            <button id="button2" th:utext="#{login.language.en}"></button>
+        </div>
+        <svg class="header__log--icon" width="24" height="24" viewBox="0 0 24 24">
+            <path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"></path>
+        </svg>
+    </div>
+</div>
+
+<div class="about">
+    <div class="about__title">
+        <h2 class="about__title--text" th:utext="#{home.options}"></h2>
+    </div>
+    <div class="about__text">
+        <form action="/login">
+            <button th:utext="#{home.option1}"></button>
+        </form>
+        <form action="/registration">
+            <button th:utext="#{home.option2}"></button>
+        </form>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
+</script>
+<script type="text/javascript">
+    $("#button1").click(function() {
+        window.location.replace('?lang=ua');
+    });
+    $("#button2").click(function() {
+        window.location.replace('?lang=en');
+    });
+</script>
+</body>
+</html>

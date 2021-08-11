@@ -79,9 +79,24 @@ br {
     color: #232323;
 }
 .about__text {
-    width: 80%;
-    margin: 5% auto;
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+    text-align: center;
 }
 .about__text--content {
     text-align: justify;
 }
+
+a {
+    width: 180px;
+    height: 60px;
+    margin: 20px;
+    line-height: 60px;
+    letter-spacing: 2px;
+    text-decoration: none;
+    text-transform: uppercase;
+    text-align: center;
+    border: 1px solid;
+}
+
