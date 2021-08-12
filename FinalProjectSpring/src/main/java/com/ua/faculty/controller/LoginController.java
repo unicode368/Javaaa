@@ -14,23 +14,18 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class LoginController {
 
-    @GetMapping("/login")
-    public String login(Model model) {
-        model.addAttribute("title", "Головна");
-        return "login";
-    }
-
     //private final LoginService loginService;
 
     /*@Autowired
     public LoginController(LoginService loginService) {
         this.loginService = loginService;
     }*/
-
-    /*@ResponseStatus(HttpStatus.CREATED)
+/*
+    @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public void loginFormController(UserDTO user){
-        log.info("{}", user);
+        //TODO: parse request body
+        //log.info("{}", user);
     }*/
 
 }
