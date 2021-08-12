@@ -8,42 +8,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-<div class="languages">
-    <button id="button1" th:utext="#{login.language.ua}"></button>
-    <button id="button2" th:utext="#{login.language.en}"></button>
-</div>
+<languages th:insert="fragments/language_buttons.html :: languages"></languages>
+<th:block th:include="fragments/assets :: assets"></th:block>
 <div class="container">
-    <div class="title">Registration</div>
+    <div class="title" th:text="#{registration.title}"></div>
     <div class="content">
         <form action="#">
             <div class="user-details">
                 <div class="input-box">
-                    <span class="details">Full Name</span>
-                    <input type="text" placeholder="Enter your name" required>
+                    <span class="details" th:text="#{registration.full.name}"></span>
+                    <input type="text" th:placeholder="#{registration.full.name.data}" required>
                 </div>
                 <div class="input-box">
-                    <span class="details">Username</span>
-                    <input type="text" placeholder="Enter your username" required>
+                    <span class="details" th:text="#{registration.username}"></span>
+                    <input type="text" th:placeholder="#{registration.username.data}" required>
                 </div>
                 <div class="input-box">
-                    <span class="details">Email</span>
-                    <input type="text" placeholder="Enter your email" required>
+                    <span class="details" th:text="#{registration.email}"></span>
+                    <input type="text" th:placeholder="#{registration.email.data}" required>
                 </div>
                 <div class="input-box">
-                    <span class="details">Phone Number</span>
-                    <input type="text" placeholder="Enter your number" required>
+                    <span class="details" th:text="#{registration.phone.number}"></span>
+                    <input type="text" th:placeholder="#{registration.phone.number.data}" required>
                 </div>
                 <div class="input-box">
-                    <span class="details">Password</span>
-                    <input type="text" placeholder="Enter your password" required>
+                    <span class="details" th:text="#{registration.password}"></span>
+                    <input type="text" th:placeholder="#{registration.password.data}" required>
                 </div>
                 <div class="input-box">
-                    <span class="details">Confirm Password</span>
-                    <input type="text" placeholder="Confirm your password" required>
+                    <span class="details" th:text="#{registration.confirm.password}"></span>
+                    <input type="text" th:placeholder="#{registration.confirm.password.data}"required>
                 </div>
             </div>
             <div class="button">
-                <input type="submit" value="Register">
+                <input type="submit" th:value="#{registration.submit}">
             </div>
         </form>
     </div>

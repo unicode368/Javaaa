@@ -16,19 +16,7 @@
             <span th:utext="#{login.form.title}" class="state"></span>
         </button>
     </form>
-    <div class="languages">
-        <button id="button1" th:utext="#{login.language.ua}"></button>
-        <button id="button2" th:utext="#{login.language.en}"></button>
-    </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
-    </script>
-    <script type="text/javascript">
-        $("#button1").click(function() {
-            window.location.replace('login?lang=ua');
-        });
-        $("#button2").click(function() {
-            window.location.replace('login?lang=en');
-        });
-    </script>
+    <languages th:insert="fragments/language_buttons.html :: languages"></languages>
+    <th:block th:include="fragments/assets :: assets"></th:block>
 </div>
 </html>

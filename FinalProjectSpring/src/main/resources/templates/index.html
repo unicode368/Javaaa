@@ -8,10 +8,7 @@
     <div class="header__bg"></div>
     <h1 class="header__title" th:text="#{home.greeting}"></h1>
     <div class="header__log" >
-        <div class="languages">
-            <button id="button1" th:utext="#{login.language.ua}"></button>
-            <button id="button2" th:utext="#{login.language.en}"></button>
-        </div>
+        <languages th:insert="fragments/language_buttons.html :: languages"></languages>
         <svg class="header__log--icon" width="24" height="24" viewBox="0 0 24 24">
             <path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"></path>
         </svg>
@@ -31,15 +28,6 @@
         </form>
     </div>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
-</script>
-<script type="text/javascript">
-    $("#button1").click(function() {
-        window.location.replace('?lang=ua');
-    });
-    $("#button2").click(function() {
-        window.location.replace('?lang=en');
-    });
-</script>
+<th:block th:include="fragments/assets :: assets"></th:block>
 </body>
 </html>
