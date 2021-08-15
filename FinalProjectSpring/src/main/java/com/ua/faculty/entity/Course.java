@@ -33,7 +33,7 @@ public class Course {
     @Column(name = "start_date")
     @NotEmpty
     private Boolean startDate;
-    @Column(name = "start_date")
+    @Column(name = "end_date")
     @NotEmpty
-    private Boolean blocked;
+    private Boolean endDate;
 }
