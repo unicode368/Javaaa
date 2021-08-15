@@ -18,7 +18,11 @@ import javax.validation.constraints.NotEmpty;
 public class User {
 
     @Id
+    @Column(name = "id")
+    private Long id;
     @Column(name = "login")
+    @Length(min = 5, message = "*Your login must have at least 5 characters")
+    @NotEmpty(message = "*Please provide your login")
     private String login;
     @Column(name = "password")
     @Length(min = 5, message = "*Your password must have at least 5 characters")

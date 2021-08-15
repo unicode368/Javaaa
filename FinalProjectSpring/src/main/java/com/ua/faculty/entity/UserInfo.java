@@ -28,11 +28,14 @@ public class UserInfo {
     @Column(name = "name")
     @NotEmpty(message = "*Please provide your name")
     private String name;
+    @Column(name = "patronimic")
+    @NotEmpty(message = "*Please provide your name")
+    private String patronimic;
+    @Column(name = "phone_number")
+    @NotEmpty(message = "*Please provide your last name")
+    private String phoneNumber;
     @Column(name = "email")
     @Email(message = "*Please provide a valid Email")
     @NotEmpty(message = "*Please provide an email")
     private String email;
-    @Column(name = "last_name")
-    @NotEmpty(message = "*Please provide your last name")
-    private String phoneNumber;
 }
