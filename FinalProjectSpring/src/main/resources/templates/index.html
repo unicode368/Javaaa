@@ -28,6 +28,15 @@
         </form>
     </div>
 </div>
+<div class="courses">
+    <div th:each="course : ${courses}">
+        <h2 th:text="${course.name}"></h2>
+        <h3 th:text="${course.theme}"></h3>
+        <p th:text="${course.info}"></p>
+        <h3 th:text="${course.startDate}"></h3>
+        <h3 th:text="${course.endDate}"></h3>
+    </div>
+</div>
 <th:block th:include="fragments/assets :: assets"></th:block>
 </body>
 </html>
