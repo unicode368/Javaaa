@@ -29,12 +29,17 @@ public class User implements UserDetails {
     @Column(name = "login")
     @Length(min = 5, message = "*Your login must have at least 5 characters")
     @NotEmpty(message = "*Please provide your login")
+    @Setter
     private String login;
     @Column(name = "password")
     @Length(min = 5, message = "*Your password must have at least 5 characters")
     @NotEmpty(message = "*Please provide your password")
+    @Getter
+    @Setter
     private String password;
     @Column(name = "blocked")
+    @Getter
+    @Setter
     private Boolean blocked;
 
    @ManyToMany
@@ -49,16 +54,15 @@ public class User implements UserDetails {
        return roles.stream()
                 .map( role -> new SimpleGrantedAuthority(role.getRole()))
                 .collect(Collectors.toList());
-    }
-
+   }
     @Override
     public String getUsername() {
-        return null;
+        return login;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
@@ -68,7 +72,7 @@ public class User implements UserDetails {
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
