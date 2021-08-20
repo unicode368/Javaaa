@@ -1,5 +1,7 @@
 package com.ua.faculty.controller;
 
+import com.ua.faculty.dto.UserDTO;
+import com.ua.faculty.service.RegistrationService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,7 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 public class RegistrationController {
 
-    public String register(@RequestBody RegistrationRequest request) {
+    private RegistrationService registrationService;
+
+    public String register(@RequestBody UserDTO request) {
         return registrationService.register(request);
     }
 }
