@@ -3,13 +3,15 @@ package com.ua.faculty.entity;
 import lombok.*;
 import org.hibernate.annotations.ManyToAny;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Data
 @Builder
@@ -19,7 +21,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Table(name = "users")
-public class User {
+public class User implements UserDetails {
 
     @Id
     @Column(name = "id")
@@ -35,11 +37,42 @@ public class User {
     @Column(name = "blocked")
     private Boolean blocked;
 
-    @ManyToMany
-    @JoinTable(
+   @ManyToMany
+   @JoinTable(
             name = "users_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
+            joinColumns = @JoinColumn(name = "user_id")
     )
     private Collection<Role> roles;
+
+   @Override
+   public Collection<? extends GrantedAuthority> getAuthorities() {
+       return roles.stream()
+                .map( role -> new SimpleGrantedAuthority(role.getRole()))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public String getUsername() {
+        return null;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return !blocked;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
+    }
 }
