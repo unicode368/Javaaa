@@ -27,4 +27,9 @@ public class Role {
     @ManyToMany(mappedBy = "roles")
     private Collection<User> users;
 
+    @Override
+    public String toString() {
+        return role;
+    }
+
 }

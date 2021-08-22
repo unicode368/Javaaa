@@ -42,12 +42,11 @@ public class User implements UserDetails {
     @Setter
     private Boolean blocked;
 
-   @ManyToMany
-   @JoinTable(
-            name = "users_roles",
-            joinColumns = @JoinColumn(name = "user_id")
-    )
-    private Collection<Role> roles;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
 
    @Override
    public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -77,6 +76,13 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
+    }
+
+    @Override
+    public String toString() {
+       return "id: " + id + "," +
+               "login: " + login + "," +
+               "password: " + password;
     }
 }

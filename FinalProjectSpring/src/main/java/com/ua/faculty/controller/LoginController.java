@@ -2,18 +2,23 @@ package com.ua.faculty.controller;
 
 import com.ua.faculty.dto.UserDTO;
 import com.ua.faculty.service.LoginService;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import com.ua.faculty.service.UserService;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 
-@Controller
+@RestController
+@RequestMapping(path = "/api/v1/login")
+@AllArgsConstructor
 public class LoginController {
 
+    private final UserService userService;
+
+    @PostMapping
+    public String login(@RequestBody UserDTO request) {
+   //     return userService.login(request);
+        return "";
+    }
     //private final LoginService loginService;
 
     /*@Autowired

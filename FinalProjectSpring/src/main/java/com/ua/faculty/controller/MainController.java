@@ -10,33 +10,36 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-@RestController
+@Controller
 public class MainController {
 
     @Autowired
     private CourseRepository courseRepository;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView index(Model model) {
+    public String index(Model model) {
         Iterable<Course> courses = courseRepository.findAll();
         model.addAttribute("courses", courses);
-        ModelAndView modelAndView = new ModelAndView();
+        /*ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("index");
-        return modelAndView;
+        return modelAndView;*/
+        return "index";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public ModelAndView login() {
-        ModelAndView modelAndView = new ModelAndView();
+    public String login() {
+        /*ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("login");
-        return modelAndView;
+        return modelAndView;*/
+        return "login";
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
-    public ModelAndView registration() {
-        ModelAndView modelAndView = new ModelAndView();
+    public String registration() {
+       /* ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("registration");
-        return modelAndView;
+        return modelAndView;*/
+        return "registration";
     }
 
 }
