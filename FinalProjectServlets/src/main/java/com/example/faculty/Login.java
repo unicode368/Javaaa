@@ -1,6 +1,5 @@
-package com.example.FinalProjectServlets;
+package com.example.faculty;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -27,7 +26,7 @@ public class Login extends HttpServlet {
 
     public void doGet(HttpServletRequest request,  HttpServletResponse response) {
         try{
-            response.sendRedirect("login.html");
+            response.sendRedirect("login.jsp");
         } catch (Exception exp){
             System.out.println(exp);
         }
