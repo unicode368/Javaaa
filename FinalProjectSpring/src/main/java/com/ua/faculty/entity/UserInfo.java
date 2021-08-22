@@ -19,12 +19,16 @@ import javax.validation.constraints.NotEmpty;
 public class UserInfo {
 
     @Id
+    @Column(name = "user_id")
+    private Long id;
     @Column(name = "login")
-    private String login;
-    @Column(name = "surname")
     @Length(min = 5, message = "*Your user name must have at least 5 characters")
     @NotEmpty(message = "*Please provide a user name")
-    private String userName;
+    private String login;
+    @Column(name = "surname")
+    @Length(min = 5, message = "*Your surname must have at least 5 characters")
+    @NotEmpty(message = "*Please provide a surname")
+    private String surname;
     @Column(name = "name")
     @NotEmpty(message = "*Please provide your name")
     private String name;
@@ -38,4 +42,9 @@ public class UserInfo {
     @Email(message = "*Please provide a valid Email")
     @NotEmpty(message = "*Please provide an email")
     private String email;
+
+    @Override
+    public String toString() {
+        return "gejhjegjhe";
+    }
 }

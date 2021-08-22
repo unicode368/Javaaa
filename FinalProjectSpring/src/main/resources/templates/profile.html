@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>CSS User Profile Card</title>
@@ -11,8 +11,9 @@
     <div class="left">
         <img src="https://i.imgur.com/cMy8V5j.png"
              alt="user" width="100">
-        <h4>Alex William</h4>
-        <p>UI Developer</p>
+        <h4 th:text="${info.surname}"></h4> <h4 th:text=" ${info.name}"></h4>
+        <h4 th:text="${info.patronimic}"></h4>
+        <p th:text="${info.login}"></p>
     </div>
     <div class="right">
         <div class="info">
@@ -20,23 +21,11 @@
             <div class="info_data">
                 <div class="data">
                     <h4>Email</h4>
-                    <p>alex@gmail.com</p>
+                    <p th:text="${info.email}"></p>
                 </div>
                 <div class="data">
                     <h4>Phone</h4>
-                    <p>0001-213-998761</p>
-                </div>
-            </div>
-        </div>
-        <div class="info">
-            <div class="info_data">
-                <div class="data">
-                    <h4>Email</h4>
-                    <p>alex@gmail.com</p>
-                </div>
-                <div class="data">
-                    <h4>Phone</h4>
-                    <p>0001-213-998761</p>
+                    <p th:text="${info.phoneNumber}"></p>
                 </div>
             </div>
         </div>
@@ -56,7 +45,6 @@
     </div>
 
     </div>
-</div>
 
 </body>
 </html>

@@ -25,6 +25,7 @@ public class User implements UserDetails {
 
     @Id
     @Column(name = "id")
+    @Getter
     private Long id;
     @Column(name = "login")
     @Length(min = 5, message = "*Your login must have at least 5 characters")

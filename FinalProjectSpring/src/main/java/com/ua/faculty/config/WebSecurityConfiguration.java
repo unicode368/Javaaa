@@ -34,7 +34,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").permitAll()
                 .antMatchers(loginPage).permitAll()
                 .antMatchers("/registration").permitAll()
-                .antMatchers("/admin/**").hasAuthority("ADMIN")
+                .antMatchers("/admin/**").hasAuthority("admin")
+                .antMatchers("/journal").hasAuthority("teacher")
                 .anyRequest()
                 .authenticated()
                 .and().csrf().disable()
@@ -47,7 +48,10 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .passwordParameter("Password")
                 .and().logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher(logoutPage))
-                .logoutSuccessUrl(loginPage).and().exceptionHandling();
+                .logoutUrl(loginPage)
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID")
+                .and().exceptionHandling();
     }
 
     @Override
