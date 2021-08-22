@@ -1,7 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <link rel="stylesheet" type="text/css" href="/css/home.css" />
+    <title>Welcome</title>
+    <link rel="stylesheet" href="/css/home.css" />
+    <link rel="stylesheet" href="/css/lang-buttons.css" />
+    <link rel="stylesheet" href="/css/auth-buttons.css" />
 </head>
 <body>
 <div class="header">
@@ -19,7 +22,7 @@
     <div class="about__title">
         <h2 class="about__title--text" th:utext="#{home.options}"></h2>
     </div>
-    <div class="about__text">
+    <div class="auth-buttons about__text">
         <form action="/login">
             <button th:utext="#{home.option1}"></button>
         </form>
