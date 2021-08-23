@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import java.time.LocalDate;
 
 @Data
 @Builder
@@ -32,8 +33,8 @@ public class Course {
     private String info;
     @Column(name = "start_date")
     @NotEmpty
-    private Boolean startDate;
+    private LocalDate startDate;
     @Column(name = "end_date")
     @NotEmpty
-    private Boolean endDate;
+    private LocalDate endDate;
 }

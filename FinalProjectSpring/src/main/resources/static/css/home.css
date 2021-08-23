@@ -99,4 +99,12 @@ a {
     text-align: center;
     border: 1px solid;
 }
+.courses-list {
+    margin-top: 100px;
+}
+
+.courses-list h2 {
+    height: 50px;
+    text-align: center;
+}
 

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <title>Welcome</title>
     <link rel="stylesheet" href="/css/home.css" />
@@ -18,7 +19,7 @@
     </div>
 </div>
 
-<div class="about">
+<div class="about" sec:authorize="isAnonymous()">
     <div class="about__title">
         <h2 class="about__title--text" th:utext="#{home.options}"></h2>
     </div>
@@ -30,15 +31,16 @@
             <button th:utext="#{home.option2}"></button>
         </form>
     </div>
-</div>
-<div class="courses-list">
-    <div th:each="course : ${courses}">
-        <h2 th:text="${course.name}"></h2>
-        <h3 th:text="${course.theme}"></h3>
-        <p th:text="${course.info}"></p>
-        <h3 th:text="${course.startDate}"></h3>
-        <h3 th:text="${course.endDate}"></h3>
-        <a th:href="'/courses/' + ${courses.id}"></a>
+    <div class="courses-list">
+        <h2>Доступні курси:</h2>
+        <div th:each="course : ${courses}">
+            <h2 th:text="${course.name}"></h2>
+            <h3 th:text="${course.theme}"></h3>
+            <p th:text="${course.info}"></p>
+            <h3 th:text="${course.startDate}"></h3>
+            <h3 th:text="${course.endDate}"></h3>
+            <a th:href="'/courses/' + ${courses.id}"></a>
+        </div>
     </div>
 </div>
 <th:block th:include="fragments/assets :: assets"></th:block>
