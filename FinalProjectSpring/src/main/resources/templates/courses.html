@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <title>Courses</title>
+    <link rel="stylesheet" href="/css/courses.css" />
+</head>
+<body>
+<div class="courses-list">
+    <div th:each="course, iterStat : ${courses}"
+         th:if="${course.endDate.isAfter(localDate)}">
+        <h2 th:text="${course.name}"></h2>
+        <h3 th:text="${course.theme}"></h3>
+        <p th:text="${course.info}"></p>
+        <h3 th:text="${course.startDate}"></h3>
+        <h3 th:text="${course.endDate}"></h3>
+        <a sec:authorize="isAuthenticated()"
+           th:href="'/courses/' + ${course.id}">Переглянути</a>
+        <div class="whitespace"></div>
+    </div>
+</div>
+</body>
+</html>

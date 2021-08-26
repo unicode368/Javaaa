@@ -19,28 +19,29 @@
     </div>
 </div>
 
-<div class="about" sec:authorize="isAnonymous()">
+<div class="about">
     <div class="about__title">
-        <h2 class="about__title--text" th:utext="#{home.options}"></h2>
+        <h2 class="about__title--text"
+            sec:authorize="isAnonymous()" th:utext="#{home.options}"></h2>
     </div>
     <div class="auth-buttons about__text">
-        <form action="/login">
-            <button th:utext="#{home.option1}"></button>
-        </form>
-        <form action="/registration">
-            <button th:utext="#{home.option2}"></button>
-        </form>
+        <input type="button" onclick="location.href='/login';" th:value="#{home.option1}" />
+        <input type="button" onclick="location.href='/registration';" th:value="#{home.option2}" />
     </div>
     <div class="courses-list">
         <h2>Доступні курси:</h2>
-        <div th:each="course : ${courses}">
+        <div th:each="course, iterStat : ${courses}"
+             th:if="${course.endDate.isAfter(localDate) && iterStat.index < 2}">
             <h2 th:text="${course.name}"></h2>
             <h3 th:text="${course.theme}"></h3>
             <p th:text="${course.info}"></p>
             <h3 th:text="${course.startDate}"></h3>
             <h3 th:text="${course.endDate}"></h3>
-            <a th:href="'/courses/' + ${courses.id}"></a>
+            <a sec:authorize="isAuthenticated()"
+               th:href="'/courses/' + ${course.id}">Переглянути</a>
+            <div class="whitespace"></div>
         </div>
+        <a th:href="'/courses'">Більше курсів</a>
     </div>
 </div>
 <th:block th:include="fragments/assets :: assets"></th:block>

@@ -12,6 +12,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 @Controller
 public class MainController {
@@ -23,6 +26,7 @@ public class MainController {
     public String index(Model model) {
         Iterable<Course> courses = courseRepository.findAll();
         model.addAttribute("courses", courses);
+        model.addAttribute("localDate", LocalDate.now());
         /*ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("index");
         return modelAndView;*/

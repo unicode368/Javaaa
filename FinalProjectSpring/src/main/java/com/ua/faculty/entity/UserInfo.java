@@ -43,6 +43,17 @@ public class UserInfo {
     @NotEmpty(message = "*Please provide an email")
     private String email;
 
+    public UserInfo(String login, String surname,
+                    String name, String patronimic,
+                    String phoneNumber, String email) {
+        this.login = login;
+        this.surname = surname;
+        this.name = name;
+        this.patronimic = patronimic;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+    }
+
     @Override
     public String toString() {
         return "gejhjegjhe";

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 @Service
 public class LoginService {
     public String login(UserDTO request) {
+        //TODO: validation
         return "done";
     }
 }

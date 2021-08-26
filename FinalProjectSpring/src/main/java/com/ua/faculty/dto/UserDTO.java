@@ -11,7 +11,6 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @Builder
 @ToString
-
 public class UserDTO {
 
     @NotNull

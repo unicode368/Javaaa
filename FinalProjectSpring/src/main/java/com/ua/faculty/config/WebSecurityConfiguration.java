@@ -1,10 +1,7 @@
 package com.ua.faculty.config;
 
-import com.ua.faculty.entity.User;
-import com.ua.faculty.entity.UserInfo;
 import com.ua.faculty.service.UserService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -29,11 +26,12 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         String loginPage = "/login";
         String logoutPage = "/logout";
 
-        http.
-                authorizeRequests()
+        http
+                .authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers(loginPage).permitAll()
                 .antMatchers("/registration").permitAll()
+                .antMatchers("/courses").permitAll()
                 .antMatchers("/admin/**").hasAuthority("admin")
                 .antMatchers("/journal").hasAuthority("teacher")
                 .anyRequest()
@@ -43,7 +41,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .loginPage(loginPage)
                 .loginPage("/login")
                 .failureUrl("/login?error=true")
-                .defaultSuccessUrl("/profile")
+                .defaultSuccessUrl("/profile", true)
                 .usernameParameter("Username")
                 .passwordParameter("Password")
                 .and().logout()
@@ -65,39 +63,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         provider.setUserDetailsService(userService);
         return provider;
     }
-
-    /*@Autowired
-    private User userDetailsService;
-*/
-
-
-
-   /* @Override
-    protected void configure(HttpSecurity http) throws Exception {
-
-        String loginPage = "/login";
-        String logoutPage = "/logout";
-
-        http.
-                authorizeRequests()
-                .antMatchers("/").permitAll()
-                .antMatchers(loginPage).permitAll()
-                .antMatchers("/registration").permitAll()
-                .antMatchers("/admin/**").hasAuthority("ADMIN")
-                .anyRequest()
-                .authenticated()
-                .and().csrf().disable()
-                .formLogin()
-                .loginPage(loginPage)
-                .loginPage("/")
-                .failureUrl("/login?error=true")
-                .defaultSuccessUrl("/admin/home")
-                .usernameParameter("user_name")
-                .passwordParameter("password")
-                .and().logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher(logoutPage))
-                .logoutSuccessUrl(loginPage).and().exceptionHandling();
-    }*/
 
     @Override
     public void configure(WebSecurity web) {

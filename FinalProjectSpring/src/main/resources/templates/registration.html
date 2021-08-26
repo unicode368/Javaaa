@@ -14,8 +14,16 @@
 <div class="container">
     <div class="title" th:text="#{registration.title}"></div>
     <div class="content">
-        <form action="#">
+        <form th:action="@{/register}" method="POST">
             <div class="user-details">
+                <div class="input-box">
+                    <span class="details" th:text="#{registration.full.name}"></span>
+                    <input type="text" th:placeholder="#{registration.full.name.data}" required>
+                </div>
+                <div class="input-box">
+                    <span class="details" th:text="#{registration.full.name}"></span>
+                    <input type="text" th:placeholder="#{registration.full.name.data}" required>
+                </div>
                 <div class="input-box">
                     <span class="details" th:text="#{registration.full.name}"></span>
                     <input type="text" th:placeholder="#{registration.full.name.data}" required>

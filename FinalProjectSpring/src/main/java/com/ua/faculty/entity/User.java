@@ -43,6 +43,12 @@ public class User implements UserDetails {
     @Setter
     private Boolean blocked;
 
+    public User(String login, String password) {
+        this.login = login;
+        this.password = password;
+        this.blocked = false;
+    }
+
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
