@@ -3,18 +3,15 @@ package com.ua.faculty.controller;
 import com.ua.faculty.entity.Course;
 import com.ua.faculty.repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpServletRequest;
-import java.security.Principal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
+
 
 @Controller
 public class MainController {
@@ -27,26 +24,32 @@ public class MainController {
         Iterable<Course> courses = courseRepository.findAll();
         model.addAttribute("courses", courses);
         model.addAttribute("localDate", LocalDate.now());
-        /*ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("index");
-        return modelAndView;*/
         return "index";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login() {
-        /*ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("login");
-        return modelAndView;*/
+        if (isAuthenticated()) {
+            return "redirect:";
+        }
         return "login";
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration() {
-       /* ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("registration");
-        return modelAndView;*/
+        if (isAuthenticated()) {
+            return "redirect:";
+        }
         return "registration";
+    }
+
+    private boolean isAuthenticated() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || AnonymousAuthenticationToken.class.
+                isAssignableFrom(authentication.getClass())) {
+            return false;
+        }
+        return authentication.isAuthenticated();
     }
 
 }
