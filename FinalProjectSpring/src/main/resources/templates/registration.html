@@ -14,39 +14,39 @@
 <div class="container">
     <div class="title" th:text="#{registration.title}"></div>
     <div class="content">
-        <form th:action="@{/register}" method="POST">
+        <form action="/registration" th:object="${userDTO}" method="POST" enctype="utf8">
             <div class="user-details">
                 <div class="input-box">
                     <span class="details" th:text="#{registration.full.name}"></span>
-                    <input type="text" th:placeholder="#{registration.full.name.data}" required>
+                    <input type="text" th:field="*{lastName}" th:placeholder="#{registration.full.name.data}" required>
                 </div>
                 <div class="input-box">
                     <span class="details" th:text="#{registration.full.name}"></span>
-                    <input type="text" th:placeholder="#{registration.full.name.data}" required>
+                    <input type="text" th:field="*{firstName}" th:placeholder="#{registration.full.name.data}" required>
                 </div>
                 <div class="input-box">
                     <span class="details" th:text="#{registration.full.name}"></span>
-                    <input type="text" th:placeholder="#{registration.full.name.data}" required>
+                    <input type="text" th:field="*{patronimic}" th:placeholder="#{registration.full.name.data}" required>
                 </div>
                 <div class="input-box">
                     <span class="details" th:text="#{registration.username}"></span>
-                    <input type="text" th:placeholder="#{registration.username.data}" required>
+                    <input type="text" th:field="*{login}" th:placeholder="#{registration.username.data}" required>
                 </div>
                 <div class="input-box">
                     <span class="details" th:text="#{registration.email}"></span>
-                    <input type="text" th:placeholder="#{registration.email.data}" required>
+                    <input type="text" th:field="*{email}" th:placeholder="#{registration.email.data}" required>
                 </div>
                 <div class="input-box">
                     <span class="details" th:text="#{registration.phone.number}"></span>
-                    <input type="text" th:placeholder="#{registration.phone.number.data}" required>
+                    <input type="text" th:field="*{phoneNumber}" th:placeholder="#{registration.phone.number.data}" required>
                 </div>
                 <div class="input-box">
                     <span class="details" th:text="#{registration.password}"></span>
-                    <input type="text" th:placeholder="#{registration.password.data}" required>
+                    <input type="text" th:field="*{password}" th:placeholder="#{registration.password.data}" required>
                 </div>
                 <div class="input-box">
                     <span class="details" th:text="#{registration.confirm.password}"></span>
-                    <input type="text" th:placeholder="#{registration.confirm.password.data}"required>
+                    <input type="text" th:field="*{matchingPassword}" th:placeholder="#{registration.confirm.password.data}"required>
                 </div>
             </div>
             <div class="button">

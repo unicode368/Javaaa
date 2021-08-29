@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
+import java.util.Set;
 
 @Data
 @Builder
@@ -26,6 +27,10 @@ public class Role {
 
     @ManyToMany(mappedBy = "roles")
     private Collection<User> users;
+
+    public Collection<User> getUsers() {
+        return users;
+    }
 
     @Override
     public String toString() {

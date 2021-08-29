@@ -1,7 +1,6 @@
 package com.ua.faculty.controller;
 
 import com.ua.faculty.dto.UserDTO;
-import com.ua.faculty.service.LoginService;
 import com.ua.faculty.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;

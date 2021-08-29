@@ -5,4 +5,10 @@ body {
 
 .courses-list {
     background: #e4e9ed;
+    text-align: center;
+    display: inline-flex;
+}
+
+.field {
+    display: inline-flex;
 }

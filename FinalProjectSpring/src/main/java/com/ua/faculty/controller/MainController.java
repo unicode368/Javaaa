@@ -1,5 +1,6 @@
 package com.ua.faculty.controller;
 
+import com.ua.faculty.dto.UserDTO;
 import com.ua.faculty.entity.Course;
 import com.ua.faculty.repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,10 +37,8 @@ public class MainController {
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
-    public String registration() {
-        if (isAuthenticated()) {
-            return "redirect:";
-        }
+    public String registration(Model model) {
+        model.addAttribute("userDTO", new UserDTO());
         return "registration";
     }
 

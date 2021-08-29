@@ -7,14 +7,40 @@
     <link rel="stylesheet" href="/css/courses.css" />
 </head>
 <body>
+<select name="sort" id="sort">
+    <option value="volvo">назва</option>
+    <option value="saab">тривалість</option>
+    <option value="mercedes">к-сть студентів</option>
+</select>
+<select name="search-by" id="search-by" style="float: right">
+    <option value="volvo">тема</option>
+    <option value="saab">викладач</option>
+</select>
 <div class="courses-list">
     <div th:each="course, iterStat : ${courses}"
          th:if="${course.endDate.isAfter(localDate)}">
         <h2 th:text="${course.name}"></h2>
-        <h3 th:text="${course.theme}"></h3>
-        <p th:text="${course.info}"></p>
-        <h3 th:text="${course.startDate}"></h3>
-        <h3 th:text="${course.endDate}"></h3>
+        <div class="field">
+            <span style="margin-right:10px;
+            margin-top:10px;float:left">Тема: </span>
+            <h2 style="margin:0;float:right"
+                th:text="${course.theme}"></h2>
+        </div>
+        <div class="field">
+            <span style="margin-right:10px;
+            margin-top:10px;float:left">Інформація про курс: </span>
+            <p style="margin:0;float:right" th:text="${course.info}"></p>
+        </div>
+        <div class="field">
+            <span style="margin-right:10px;
+            margin-top:10px;float:left">Початок: </span>
+            <h3 style="margin:0;float:right" th:text="${course.startDate}"></h3>
+        </div>
+        <div class="field">
+            <span style="margin-right:10px;
+            margin-top:10px;float:left">Кінець: </span>
+            <h3 style="margin:0;float:right" th:text="${course.endDate}"></h3>
+        </div>
         <a sec:authorize="isAuthenticated()"
            th:href="'/courses/' + ${course.id}">Переглянути</a>
         <div class="whitespace"></div>

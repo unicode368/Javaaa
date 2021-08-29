@@ -1,14 +1,12 @@
 package com.ua.faculty.entity;
 
 import lombok.*;
-import org.hibernate.annotations.ManyToAny;
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -24,6 +22,8 @@ import java.util.stream.Collectors;
 public class User implements UserDetails {
 
     @Id
+    @GenericGenerator(name="kaugen" , strategy="increment")
+    @GeneratedValue(generator="kaugen")
     @Column(name = "id")
     @Getter
     private Long id;
@@ -53,20 +53,22 @@ public class User implements UserDetails {
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @Setter
     private Set<Role> roles;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "user_courses",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "course_id"))
-    private Set<Course> courses;
+    private Collection<Course> courses;
 
-   @Override
-   public Collection<? extends GrantedAuthority> getAuthorities() {
-       return roles.stream()
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return roles.stream()
                 .map( role -> new SimpleGrantedAuthority(role.getRole()))
                 .collect(Collectors.toList());
-   }
+    }
+
     @Override
     public String getUsername() {
         return login;
