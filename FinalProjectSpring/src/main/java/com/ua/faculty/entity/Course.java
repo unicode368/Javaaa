@@ -40,11 +40,19 @@ public class Course {
     @JoinTable(name = "teacher_courses",
             joinColumns = @JoinColumn(name = "teacher_id"),
             inverseJoinColumns = @JoinColumn(name = "course_id"))
-    private Set<Course> teachers;
+    private Set<User> teachers;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "user_courses",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "course_id"))
-    private Set<Course> users;
+    private Set<User> users;
+    
+    public Set<User> getTeachers() {
+        return teachers;
+    }
+
+    public Set<User> getUsers() {
+        return users;
+    }
 }
