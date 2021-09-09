@@ -38,6 +38,9 @@ public class MainController {
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
+        if (isAuthenticated()) {
+            return "redirect:";
+        }
         model.addAttribute("userDTO", new UserDTO());
         return "registration";
     }
