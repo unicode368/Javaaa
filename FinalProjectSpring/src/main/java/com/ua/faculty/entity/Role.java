@@ -5,7 +5,6 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
-import java.util.Set;
 
 @Data
 @Builder
@@ -19,11 +18,11 @@ public class Role {
     @Column(name = "id")
     @Getter
     private Long id;
-    @Column(name = "role")
+    @Column(name = "role", unique = true)
     @NotNull
     @Getter
     @Setter
-    private String role;
+    private String name;
 
     @ManyToMany(mappedBy = "roles")
     private Collection<User> users;
@@ -34,7 +33,7 @@ public class Role {
 
     @Override
     public String toString() {
-        return role;
+        return name;
     }
 
 }
