@@ -28,8 +28,7 @@ public class RegistrationController {
     protected AuthenticationManager authenticationManager;
 
     @PostMapping(value = "/registration")
-    public String register(@ModelAttribute("userDTO") UserDTO user,
-                           HttpServletRequest request) {
+    public String register(@ModelAttribute("userDTO") UserDTO user) {
         registrationService.register(user);
         return "redirect:profile";
     }
