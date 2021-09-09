@@ -21,7 +21,7 @@ public class RegistrationService {
         return userService.signUpUser(new User(
                 request.getLogin(),
                         bCryptPasswordEncoder.encode(request.getPassword())),
-                new UserInfo(request.getLogin(), request.getLastName(),
+                new UserInfo(request.getLastName(),
                         request.getFirstName(), request.getPatronimic(),
                         request.getPhoneNumber(), request.getEmail()));
     }
