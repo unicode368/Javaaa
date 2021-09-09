@@ -33,9 +33,13 @@ public class UserService implements UserDetailsService {
     }
 
     public User signUpUser(User user, UserInfo userInfo) {
-        user.setRoles(Collections.singleton(roleRepository.findByRole("user")
+        user.setRoles(Collections.singleton(roleRepository.findByName("user")
                 .orElseThrow(() -> new UsernameNotFoundException(""))));
+        user.setUserInfo(userInfo);
+        userInfo.setUser(user);
         userRepository.save(user);
+       // userInfo.setId(userRepository.findByLogin(user.getLogin())
+       //         .orElseThrow(() -> new UsernameNotFoundException("")).getId());
         userInfoRepository.save(userInfo);
         return user;
     }
