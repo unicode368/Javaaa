@@ -1,10 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8">
     <title>Students</title>
+    <link rel="stylesheet" href="/css/students.css" />
 </head>
 <body>
-
+<div class="courses-list">
+    <div class="one_student" th:each="user : ${users}">
+        <h2 th:text="${user.getUserInfo().surname + ' ' +
+             user.getUserInfo().name + ' ' + user.getUserInfo().patronimic}"></h2>
+        <div class="field">
+            <span>Логін: </span>
+            <h2 th:text="${user.login}"></h2>
+        </div>
+        <form th:action="@{/admin/user/} + ${user.id}"
+                method="POST">
+            <button th:if="${!user.blocked}">
+                <a>Блокувати</a>
+            </button>
+            <button th:unless="${!user.blocked}">
+                <a>Розблокувати</a>
+            </button>
+            <div class="whitespace"></div>
+        </form>
+    </div>
+</div>
 </body>
 </html>

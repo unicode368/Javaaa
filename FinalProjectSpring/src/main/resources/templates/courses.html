@@ -1,50 +1,155 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" xmlns:option="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Courses</title>
     <link rel="stylesheet" href="/css/courses.css" />
 </head>
+<style>
+
+    /* styling navlist anchor element */
+    #navlist a {
+        float:left;
+        display: block;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 12px;
+        text-decoration: none;
+        font-size: 15px;
+    }
+
+    .navlist-right{
+        float:right;
+    }
+
+    /* hover effect of navlist anchor element */
+    #navlist a:hover {
+        background-color: #ddd;
+        color: black;
+    }
+
+    /* styling search bar */
+    .search input[type=text]{
+        width:300px;
+        height:25px;
+        border-radius:25px;
+        border: none;
+    }
+
+    .search{
+        float:right;
+        margin:7px;
+    }
+
+    .search button{
+        background-color: #0074D9;
+        color: #f2f2f2;
+        float: right;
+        padding: 5px 10px;
+        margin-right: 16px;
+        font-size: 12px;
+        border: none;
+        cursor: pointer;
+    }
+</style>
 <body>
 <select name="sort" id="sort">
-    <option value="volvo">назва</option>
-    <option value="saab">тривалість</option>
-    <option value="mercedes">к-сть студентів</option>
+    <option value="nameASC">назва (A-Z)</option>
+    <option value="nameDESC">назва (Z-A)</option>
+    <option value="duration">тривалість</option>
+    <option value="studentAmount">к-сть студентів</option>
 </select>
 <select name="search-by" id="search-by" style="float: right">
-    <option value="volvo">тема</option>
-    <option value="saab">викладач</option>
+    <option value="topic">тема</option>
+    <option value="teacher">викладач</option>
 </select>
+<div class="search">
+        <input type="text"
+               placeholder=" Search Courses"
+               name="search" id="search">
+        <button onclick="setGetParameter('search-by', $('#search-by option:selected').val())">
+            <i class="fa fa-search"
+               style="font-size: 18px;">
+            </i>
+        </button>
+</div>
+</div>
 <div class="courses-list">
-    <div th:each="course, iterStat : ${courses}"
+    <div class="one_course"
+            th:each="course : ${courses}"
          th:if="${course.endDate.isAfter(localDate)}">
-        <h2 th:text="${course.name}"></h2>
+        <h2 style="align-content: center;
+            margin: 10px; display: grid" th:text="${course.name}"></h2>
         <div class="field">
-            <span style="margin-right:10px;
-            margin-top:10px;float:left">Тема: </span>
-            <h2 style="margin:0;float:right"
+            <span >Тема: </span>
+            <h2
                 th:text="${course.theme}"></h2>
         </div>
         <div class="field">
-            <span style="margin-right:10px;
-            margin-top:10px;float:left">Інформація про курс: </span>
-            <p style="margin:0;float:right" th:text="${course.info}"></p>
+            <span>Інформація про курс: </span>
+            <p th:text="${course.info}"></p>
         </div>
         <div class="field">
-            <span style="margin-right:10px;
-            margin-top:10px;float:left">Початок: </span>
-            <h3 style="margin:0;float:right" th:text="${course.startDate}"></h3>
+            <span >Початок: </span>
+            <h3  th:text="${course.startDate}"></h3>
         </div>
         <div class="field">
-            <span style="margin-right:10px;
-            margin-top:10px;float:left">Кінець: </span>
-            <h3 style="margin:0;float:right" th:text="${course.endDate}"></h3>
+            <span>Кінець: </span>
+            <h3 th:text="${course.endDate}"></h3>
         </div>
-        <a sec:authorize="isAuthenticated()"
+        <div class="field">
+            <span >Викладач: </span>
+            <h3
+                th:text="${course.teachers.iterator()
+                .next().getUserInfo().toString()}"></h3>
+        </div>
+        <div class="field">
+            <span >К-сть студентів: </span>
+            <h3 th:text="${course.students.size()}"></h3>
+        </div>
+        <a sec:authorize="hasAuthority('user')"
            th:href="'/courses/' + ${course.id}">Переглянути</a>
+        <a sec:authorize="hasAuthority('admin')"
+           th:href="'/admin/courses/' + ${course.id} + '/edit'">Редагувати</a>
         <div class="whitespace"></div>
     </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#sort").change(function () {
+            var selectedOption = $('#sort').val();
+            if (selectedOption != ''){
+                window.location.replace('courses?sort=' + selectedOption);
+            }
+        });
+    });
+</script>
+<script>
+    function setGetParameter(paramName, paramValue)
+    {
+        var url = window.location.href;
+        var hash = location.hash;
+        url = url.replace(hash, '');
+        if (url.indexOf(paramName + "=") >= 0)
+        {
+            var prefix = url.substring(0, url.indexOf(paramName + "="));
+            var suffix = url.substring(url.indexOf(paramName + "="));
+            suffix = suffix.substring(suffix.indexOf("=") + 1);
+            suffix = (suffix.indexOf("&") >= 0) ? suffix.substring(suffix.indexOf("&")) : "";
+            url = prefix + paramName + "=" + paramValue + suffix;
+        }
+        else
+        {
+            if (url.indexOf("?") < 0)
+                url += "?" + paramName + "=" + paramValue;
+            else
+                url += "&" + paramName + "=" + paramValue;
+        }
+        window.location.href = url + hash;
+    }
+</script>
 </body>
 </html>

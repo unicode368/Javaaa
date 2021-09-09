@@ -39,7 +39,7 @@
             <p th:text="${course.info}"></p>
             <h3 th:text="${course.startDate}"></h3>
             <h3 th:text="${course.endDate}"></h3>
-            <a sec:authorize="isAuthenticated()"
+            <a sec:authorize="hasAuthority('user')"
                th:href="'/courses/' + ${course.id}">Переглянути</a>
             <div class="whitespace"></div>
         </div>

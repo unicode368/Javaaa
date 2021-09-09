@@ -1,23 +1,18 @@
-body {
-    background-color: #7ee8fa;
-    background-image: linear-gradient(315deg, #7ee8fa 0%, #80ff72 74%);
-}
-
 .courses-list {
     display: block;
     width: 100%;
 }
 
 .field {
-    margin: 10px;
     display: block;
 }
 
-.one_course {
+
+.one_student {
     background: #e4e9ed;
     text-align: center;
     width: 98%;
     margin: 10px;
-    display: inline-flex;
+    display: block;
     justify-content: space-between;
 }
