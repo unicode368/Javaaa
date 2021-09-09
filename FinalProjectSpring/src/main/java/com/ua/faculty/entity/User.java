@@ -11,7 +11,6 @@ import javax.validation.constraints.NotEmpty;
 import java.util.*;
 import java.util.stream.Collectors;
 
-@Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -62,12 +61,21 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "course_id"))
     private Collection<Course> courses;
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private UserInfo userInfo;
+
+    public UserInfo getUserInfo() {
+        return userInfo;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles.stream()
-                .map( role -> new SimpleGrantedAuthority(role.getRole()))
+                .map(role -> new SimpleGrantedAuthority(role.getName()))
                 .collect(Collectors.toList());
     }
+
 
     @Override
     public String getUsername() {

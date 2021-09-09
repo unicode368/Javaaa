@@ -1,9 +1,6 @@
 package com.ua.faculty.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.Length;
 
@@ -11,7 +8,8 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
-@Data
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,14 +18,8 @@ import javax.validation.constraints.NotEmpty;
 public class UserInfo {
 
     @Id
-    @GenericGenerator(name="kaugen" , strategy="increment")
-    @GeneratedValue(generator="kaugen")
     @Column(name = "user_id")
     private Long id;
-    @Column(name = "login")
-    @Length(min = 5, message = "*Your user name must have at least 5 characters")
-    @NotEmpty(message = "*Please provide a user name")
-    private String login;
     @Column(name = "surname")
     @Length(min = 5, message = "*Your surname must have at least 5 characters")
     @NotEmpty(message = "*Please provide a surname")
@@ -46,10 +38,14 @@ public class UserInfo {
     @NotEmpty(message = "*Please provide an email")
     private String email;
 
-    public UserInfo(String login, String surname,
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    public UserInfo(String surname,
                     String name, String patronimic,
                     String phoneNumber, String email) {
-        this.login = login;
         this.surname = surname;
         this.name = name;
         this.patronimic = patronimic;
@@ -57,8 +53,14 @@ public class UserInfo {
         this.email = email;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
-        return "gejhjegjhe";
+        return surname + " "
+                + name.charAt(0) + ". " +
+                patronimic.charAt(0) + ".";
     }
 }
