@@ -44,15 +44,15 @@ public class Course {
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "user_courses",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "course_id"))
-    private Set<User> users;
-    
+            joinColumns = @JoinColumn(name = "course_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private Set<User> students;
+
     public Set<User> getTeachers() {
         return teachers;
     }
 
-    public Set<User> getUsers() {
-        return users;
+    public Set<User> getStudents() {
+        return students;
     }
 }
