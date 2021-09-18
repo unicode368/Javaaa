@@ -4,18 +4,18 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.regex.Pattern;
 
-public class EmailValidator
-        implements ConstraintValidator<ValidEmail, String> {
+public class MobilePhoneValidator
+        implements ConstraintValidator<ValidMobilePhone, String> {
 
-    String EMAIL_REGEX = "^[a-zA-Z0-9_.-]{2,20}@[a-z]{1,5}\\.[a-z]{1,3}$";
+    String MOBILE_PHONE_REGEX = "^[0-9]{10}$";
 
     @Override
-    public void initialize(ValidEmail constraintAnnotation) {
+    public void initialize(ValidMobilePhone constraintAnnotation) {
     }
 
     @Override
     public boolean isValid(String email,
                            ConstraintValidatorContext constraintValidatorContext) {
-        return Pattern.matches(EMAIL_REGEX, email);
+        return Pattern.matches(MOBILE_PHONE_REGEX, email);
     }
 }

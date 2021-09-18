@@ -1,5 +1,7 @@
 package com.ua.faculty.entity;
 
+import com.ua.faculty.validation.ValidEmail;
+import com.ua.faculty.validation.ValidMobilePhone;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.Length;

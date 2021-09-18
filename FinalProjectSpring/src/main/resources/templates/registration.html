@@ -31,18 +31,26 @@
                 <div class="input-box">
                     <span class="details" th:text="#{registration.username}"></span>
                     <input type="text" th:field="*{login}" th:placeholder="#{registration.username.data}" required>
+                    <p th:each="error: ${#fields.errors('login')}"
+                       th:text="${error}"></p>
                 </div>
                 <div class="input-box">
                     <span class="details" th:text="#{registration.email}"></span>
                     <input type="text" th:field="*{email}" th:placeholder="#{registration.email.data}" required>
+                    <p th:each="error: ${#fields.errors('email')}"
+                       th:text="${error}"></p>
                 </div>
                 <div class="input-box">
                     <span class="details" th:text="#{registration.phone.number}"></span>
                     <input type="text" th:field="*{phoneNumber}" th:placeholder="#{registration.phone.number.data}" required>
+                    <p th:each="error: ${#fields.errors('phoneNumber')}"
+                       th:text="${error}"></p>
                 </div>
                 <div class="input-box">
                     <span class="details" th:text="#{registration.password}"></span>
                     <input type="text" th:field="*{password}" th:placeholder="#{registration.password.data}" required>
+                    <p th:each="error: ${#fields.errors('password')}"
+                       th:text="${error}"></p>
                 </div>
                 <div class="input-box">
                     <span class="details" th:text="#{registration.confirm.password}"></span>

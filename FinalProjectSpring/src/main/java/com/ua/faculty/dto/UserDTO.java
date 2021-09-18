@@ -1,5 +1,9 @@
 package com.ua.faculty.dto;
 
+import com.ua.faculty.validation.PasswordMatches;
+import com.ua.faculty.validation.ValidEmail;
+import com.ua.faculty.validation.ValidLogin;
+import com.ua.faculty.validation.ValidMobilePhone;
 import lombok.*;
 
 import javax.validation.constraints.NotEmpty;
@@ -11,10 +15,12 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @Builder
 @ToString
+@PasswordMatches
 public class UserDTO {
 
     @NotNull
     @NotEmpty
+    @ValidLogin
     private String login;
 
     @NotNull
@@ -36,9 +42,11 @@ public class UserDTO {
 
     @NotNull
     @NotEmpty
+    @ValidEmail
     private String email;
 
     @NotNull
     @NotEmpty
+    @ValidMobilePhone
     private String phoneNumber;
 }

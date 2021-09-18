@@ -1,5 +1,6 @@
 package com.ua.faculty.validation;
 
+import javax.validation.Payload;
 import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -12,10 +13,10 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @Target({TYPE, FIELD, ANNOTATION_TYPE})
 @Retention(RUNTIME)
-@Constraint(validatedBy = EmailValidator.class)
+@Constraint(validatedBy = LoginValidator.class)
 @Documented
-public @interface ValidEmail {
-    String message() default "email.invalid";
+public @interface ValidLogin {
+    String message() default "login.invalid";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }
