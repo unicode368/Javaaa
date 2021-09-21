@@ -21,12 +21,13 @@ public class RegistrationService {
     private final UserService userService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public User register(@RequestBody UserDTO request) throws UserAlreadyExistsException {
+    public User register(@RequestBody UserDTO request,
+                         String roleName) throws UserAlreadyExistsException {
         return userService.signUpUser(new User(
                 request.getLogin(),
                         bCryptPasswordEncoder.encode(request.getPassword())),
                 new UserInfo(request.getLastName(),
                         request.getFirstName(), request.getPatronimic(),
-                        request.getPhoneNumber(), request.getEmail()));
+                        request.getPhoneNumber(), request.getEmail()), roleName);
     }
 }

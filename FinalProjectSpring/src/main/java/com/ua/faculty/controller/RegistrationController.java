@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -31,12 +32,13 @@ public class RegistrationController {
 
     @PostMapping(value = "/registration")
     public String register(@ModelAttribute("userDTO") @Valid UserDTO user,
-                           BindingResult bindingResult, Model model) {
+                           BindingResult bindingResult, Model model,
+                           @RequestParam String role) {
         if (bindingResult.hasErrors()) {
             return "registration";
         }
         try {
-            registrationService.register(user);
+            registrationService.register(user, role);
         } catch (UserAlreadyExistsException error) {
             model.addAttribute("userExists", "");
             return "registration";

@@ -58,12 +58,15 @@
                 </div>
             </div>
             <div class="button">
-                <input type="submit" th:value="#{registration.submit}">
+                <input type="submit"
+                       th:text="#{registration.submit}">
+                <input type="hidden"
+                       th:name="role"
+                       th:value="user">
             </div>
             <div th:text="${userExists != null} ? #{user.exists}"></div>
         </form>
     </div>
 </div>
-
 </body>
 </html>
