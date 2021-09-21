@@ -38,7 +38,7 @@ public class RegistrationController {
         try {
             registrationService.register(user);
         } catch (UserAlreadyExistsException error) {
-            model.addAttribute("userExists", "user.exists");
+            model.addAttribute("userExists", "");
             return "registration";
         }
         return "redirect:profile";
