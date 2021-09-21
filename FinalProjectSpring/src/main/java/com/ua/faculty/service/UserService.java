@@ -33,11 +33,12 @@ public class UserService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException(""));
     }
 
-    public User signUpUser(User user, UserInfo userInfo) throws UserAlreadyExistsException {
+    public User signUpUser(User user, UserInfo userInfo,
+                           String roleName) throws UserAlreadyExistsException {
         if (emailOrLoginExists(userInfo.getEmail(), user.getLogin())) {
             throw new UserAlreadyExistsException("");
         }
-        user.setRoles(Collections.singleton(roleRepository.findByName("user")
+        user.setRoles(Collections.singleton(roleRepository.findByName(roleName)
                 .orElseThrow(() -> new UsernameNotFoundException(""))));
         user.setUserInfo(userInfo);
         userInfo.setUser(user);
@@ -49,6 +50,14 @@ public class UserService implements UserDetailsService {
     private boolean emailOrLoginExists(String email, String login) {
         return userInfoRepository.findByEmail(email).isPresent()
                 || userRepository.findByLogin(login).isPresent();
+    }
+
+    public User changeBlockStatus(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new UsernameNotFoundException(""));
+        user.setBlocked(!user.getBlocked());
+        userRepository.save(user);
+        return user;
     }
 
 

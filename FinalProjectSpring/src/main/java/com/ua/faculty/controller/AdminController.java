@@ -3,14 +3,12 @@ package com.ua.faculty.controller;
 import com.ua.faculty.entity.Role;
 import com.ua.faculty.repository.RoleRepository;
 import com.ua.faculty.repository.UserRepository;
+import com.ua.faculty.service.AdminService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
 import java.util.Collections;
@@ -21,6 +19,7 @@ public class AdminController {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final AdminService adminService;
 
     @RequestMapping(value = "/admin/create-teacher",
             method = RequestMethod.GET)
@@ -47,10 +46,11 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/admin/user/{id}", method = RequestMethod.POST)
-    public String changeBlockStatus(@PathParam(value = "id") final Integer id,
+    public String changeBlockStatus(@PathVariable final String id,
                                     Model model) {
+        adminService.changeUserBlockStatus(Long.parseLong(id));
         model.addAttribute("message",
-                "Teacher created successfully");
+                "User blocked status changed successfully.");
         return "redirect:success";
     }
 
