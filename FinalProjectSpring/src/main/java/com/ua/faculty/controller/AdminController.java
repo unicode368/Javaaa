@@ -45,13 +45,10 @@ public class AdminController {
         return "students";
     }
 
-    @RequestMapping(value = "/admin/user/{id}", method = RequestMethod.POST)
-    public String changeBlockStatus(@PathVariable final String id,
-                                    Model model) {
+    @PostMapping(value = "/admin/user/{id}")
+    public String changeBlockStatus(@PathVariable final String id) {
         adminService.changeUserBlockStatus(Long.parseLong(id));
-        model.addAttribute("message",
-                "User blocked status changed successfully.");
-        return "redirect:success";
+        return "redirect:/admin/users";
     }
 
 }
