@@ -60,6 +60,7 @@
             <div class="button">
                 <input type="submit" th:value="#{registration.submit}">
             </div>
+            <div th:text="${userExists != null} ? #{user.exists}"></div>
         </form>
     </div>
 </div>

@@ -42,11 +42,11 @@ public class UserDTO {
 
     @NotNull
     @NotEmpty
-    @ValidEmail
-    private String email;
+    @ValidMobilePhone
+    private String phoneNumber;
 
     @NotNull
     @NotEmpty
-    @ValidMobilePhone
-    private String phoneNumber;
+    @ValidEmail
+    private String email;
 }

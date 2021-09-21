@@ -1,13 +1,8 @@
 package com.ua.faculty.entity;
 
-import com.ua.faculty.validation.ValidEmail;
-import com.ua.faculty.validation.ValidMobilePhone;
-import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.validator.constraints.Length;
 
+import lombok.*;
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
 @Getter
@@ -23,7 +18,6 @@ public class UserInfo {
     @Column(name = "user_id")
     private Long id;
     @Column(name = "surname")
-    @Length(min = 5, message = "*Your surname must have at least 5 characters")
     @NotEmpty(message = "*Please provide a surname")
     private String surname;
     @Column(name = "name")
@@ -36,7 +30,6 @@ public class UserInfo {
     @NotEmpty(message = "*Please provide your last name")
     private String phoneNumber;
     @Column(name = "email")
-    @Email(message = "*Please provide a valid Email")
     @NotEmpty(message = "*Please provide an email")
     private String email;
 

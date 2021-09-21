@@ -2,6 +2,7 @@ package com.ua.faculty.controller;
 
 import com.ua.faculty.dto.UserDTO;
 import com.ua.faculty.entity.User;
+import com.ua.faculty.exceptions.UserAlreadyExistsException;
 import com.ua.faculty.service.RegistrationService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,11 +31,16 @@ public class RegistrationController {
 
     @PostMapping(value = "/registration")
     public String register(@ModelAttribute("userDTO") @Valid UserDTO user,
-                           BindingResult bindingResult) {
+                           BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "registration";
         }
-        registrationService.register(user);
+        try {
+            registrationService.register(user);
+        } catch (UserAlreadyExistsException error) {
+            model.addAttribute("userExists", "user.exists");
+            return "registration";
+        }
         return "redirect:profile";
     }
 

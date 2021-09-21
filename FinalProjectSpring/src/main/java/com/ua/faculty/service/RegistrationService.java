@@ -3,6 +3,7 @@ package com.ua.faculty.service;
 import com.ua.faculty.dto.UserDTO;
 import com.ua.faculty.entity.User;
 import com.ua.faculty.entity.UserInfo;
+import com.ua.faculty.exceptions.UserAlreadyExistsException;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class RegistrationService {
     private final UserService userService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public User register(@RequestBody UserDTO request) {
+    public User register(@RequestBody UserDTO request) throws UserAlreadyExistsException {
         return userService.signUpUser(new User(
                 request.getLogin(),
                         bCryptPasswordEncoder.encode(request.getPassword())),

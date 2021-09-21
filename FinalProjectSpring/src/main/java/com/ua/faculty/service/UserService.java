@@ -3,6 +3,7 @@ package com.ua.faculty.service;
 import com.ua.faculty.entity.Role;
 import com.ua.faculty.entity.User;
 import com.ua.faculty.entity.UserInfo;
+import com.ua.faculty.exceptions.UserAlreadyExistsException;
 import com.ua.faculty.repository.RoleRepository;
 import com.ua.faculty.repository.UserInfoRepository;
 import com.ua.faculty.repository.UserRepository;
@@ -32,16 +33,22 @@ public class UserService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException(""));
     }
 
-    public User signUpUser(User user, UserInfo userInfo) {
+    public User signUpUser(User user, UserInfo userInfo) throws UserAlreadyExistsException {
+        if (emailOrLoginExists(userInfo.getEmail(), user.getLogin())) {
+            throw new UserAlreadyExistsException("");
+        }
         user.setRoles(Collections.singleton(roleRepository.findByName("user")
                 .orElseThrow(() -> new UsernameNotFoundException(""))));
         user.setUserInfo(userInfo);
         userInfo.setUser(user);
         userRepository.save(user);
-       // userInfo.setId(userRepository.findByLogin(user.getLogin())
-       //         .orElseThrow(() -> new UsernameNotFoundException("")).getId());
         userInfoRepository.save(userInfo);
         return user;
+    }
+
+    private boolean emailOrLoginExists(String email, String login) {
+        return userInfoRepository.findByEmail(email).isPresent()
+                || userRepository.findByLogin(login).isPresent();
     }
 
 
