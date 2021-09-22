@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import java.time.LocalDate;
 
 
@@ -29,9 +31,13 @@ public class MainController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login() {
+    public String login(Model model,
+                        @RequestParam(required = false) String error) {
         if (isAuthenticated()) {
             return "redirect:";
+        }
+        if (error.equals("true")) {
+            model.addAttribute("error", "");
         }
         return "login";
     }

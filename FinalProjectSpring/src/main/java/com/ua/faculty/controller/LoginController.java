@@ -15,22 +15,8 @@ public class LoginController {
 
     @PostMapping
     public String login(@RequestBody UserDTO request) {
-   //     return userService.login(request);
         return "";
     }
-    //private final LoginService loginService;
-
-    /*@Autowired
-    public LoginController(LoginService loginService) {
-        this.loginService = loginService;
-    }*/
-/*
-    @ResponseStatus(HttpStatus.CREATED)
-    @RequestMapping(value = "login", method = RequestMethod.POST)
-    public void loginFormController(UserDTO user){
-        //TODO: parse request body
-        //log.info("{}", user);
-    }*/
 
 }
 

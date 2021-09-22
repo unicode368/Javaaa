@@ -54,29 +54,30 @@
     }
 </style>
 <body>
-<select name="sort" id="sort" onchange="setGetParameter('sort', this.value)">
-    <option value="nameASC"
-            onclick="setGetParameter('sort', 'nameASC')">назва (A-Z)</option>
-    <option value="nameDESC"
-            onclick="setGetParameter('sort', 'nameDESC')">назва (Z-A)</option>
-    <option value="duration"
-            onclick="setGetParameter('sort', 'duration')">тривалість</option>
-    <option value="studentAmount"
-            onclick="setGetParameter('sort', 'studentAmount')">к-сть студентів</option>
-</select>
-<select name="search-by" id="search-by" style="float: right">
-    <option value="topic">тема</option>
-    <option value="teacher">викладач</option>
-</select>
 <div class="search">
+    <form th:action="@{/courses}" method="get"
+          onsubmit="setGetParameter('search-by', $('#search-by option:selected').val())">
+        <select name="sort" id="sort" onchange="setGetParameter('sort', this.value)">
+            <option selected disabled>Choose here</option>
+            <option value="nameASC">назва (A-Z)</option>
+            <option value="nameDESC">назва (Z-A)</option>
+            <option value="duration">тривалість</option>
+            <option value="studentAmount">к-сть студентів</option>
+        </select>
+        <select name="search-by" id="search-by" style="float: right">
+            <option selected disabled>Choose here</option>
+            <option value="theme">тема</option>
+            <option value="teacher">викладач</option>
+        </select>
         <input type="text"
                placeholder=" Search Courses"
-               th:name="searchName" id="search">
-        <button onclick="setGetParameter('search-by', $('#search-by option:selected').val())">
+               name="searchName" id="searchName">
+        <button type="submit">
             <i class="fa fa-search"
                style="font-size: 18px;">
             </i>
         </button>
+    </form>
 </div>
 </div>
 <div class="courses-list">
@@ -121,16 +122,6 @@
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
 </script>
-<!--<script type="text/javascript">
-    $(document).ready(function() {
-        $("#sort").change(function () {
-            var selectedOption = $('#sort').val();
-            if (selectedOption != ''){
-                window.location.replace('courses?sort=' + selectedOption);
-            }
-        });
-    });
-</script>-->
 <script>
     function setGetParameter(paramName, paramValue)
     {
@@ -139,10 +130,10 @@
         url = url.replace(hash, '');
         if (url.indexOf(paramName + "=") >= 0)
         {
-            var prefix = url.substring(0, url.indexOf(paramName + "="));
-            var suffix = url.substring(url.indexOf(paramName + "="));
-            suffix = suffix.substring(suffix.indexOf("=") + 1);
-            suffix = (suffix.indexOf("&") >= 0) ? suffix.substring(suffix.indexOf("&")) : "";
+            var prefix = url.substring(0, url.lastIndexOf(paramName + "="));
+            var suffix = url.substring(url.lastIndexOf(paramName + "="));
+            suffix = suffix.substring(suffix.lastIndexOf("=") + 1);
+            suffix = (suffix.indexOf("&") >= 0) ? suffix.substring(suffix.lastIndexOf("&")) : "";
             url = prefix + paramName + "=" + paramValue + suffix;
         }
         else
@@ -153,6 +144,11 @@
                 url += "&" + paramName + "=" + paramValue;
         }
         window.location.href = url + hash;
+    }
+    function setSearchParams(paramName1, paramName2,
+                             paramValue1, paramValue2) {
+        setGetParameter(paramName1, paramValue1);
+        setGetParameter(paramName2, paramValue2);
     }
 </script>
 </body>
