@@ -48,7 +48,7 @@ public class Course {
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private Set<User> students;
 
-    public Set<User> getTeachers() {
+    public Set<User> getTeacher() {
         return teachers;
     }
 

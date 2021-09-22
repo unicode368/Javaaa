@@ -1,5 +1,6 @@
 package com.ua.faculty.controller;
 
+import com.ua.faculty.dto.UserDTO;
 import com.ua.faculty.entity.Role;
 import com.ua.faculty.repository.RoleRepository;
 import com.ua.faculty.repository.UserRepository;
@@ -24,11 +25,11 @@ public class AdminController {
     @RequestMapping(value = "/admin/create-teacher",
             method = RequestMethod.GET)
     public String showCreateTeacherForm(Model model) {
+        model.addAttribute("userDTO", new UserDTO());
         return "create_teacher";
     }
 
-    @RequestMapping(value = "/admin/create-teacher",
-            method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/create-teacher", method = RequestMethod.POST)
     public String createTeacher(Model model) {
         model.addAttribute("message",
                 "Teacher created successfully");

@@ -1,10 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Create teacher</title>
+    <link rel="stylesheet" href="/css/create-teacher.css" />
 </head>
 <body>
+<form th:object="${userDTO}" action="/registration" method="POST">
+    <div class="container">
+        <h1>Register techer</h1>
+        <p>Please fill in this form to create new teacher.</p>
+        <hr>
 
+        <label><b>Surname</b></label>
+        <input type="text" th:field="*{lastName}" th:placeholder="#{registration.full.name.data}" required>
+
+        <label><b>Name</b></label>
+        <input type="text" th:field="*{firstName}" th:placeholder="#{registration.full.name.data}" required>
+
+        <label><b>Patronimic</b></label>
+        <input type="text" th:field="*{patronimic}" th:placeholder="#{registration.full.name.data}" required>
+
+        <label><b>Username</b></label>
+        <input type="text" th:field="*{login}" th:placeholder="#{registration.username.data}" required>
+        <p th:each="error: ${#fields.errors('login')}"
+           th:text="#{login.invalid}"></p>
+
+        <label><b>Email</b></label>
+        <input type="text" th:field="*{email}" th:placeholder="#{registration.email.data}" required>
+        <p th:each="error: ${#fields.errors('email')}"
+           th:text="#{email.invalid}"></p>
+
+        <label><b>Phone number</b></label>
+        <input type="text" th:field="*{phoneNumber}" th:placeholder="#{registration.phone.number.data}" required>
+        <p th:each="error: ${#fields.errors('phoneNumber')}"
+           th:text="#{mobile.phone.invalid}"></p>
+
+        <label><b>Password</b></label>
+        <input type="password" th:field="*{password}" th:placeholder="#{registration.password.data}" required>
+        <p th:each="error: ${#fields.errors('global')}"
+           th:text="#{password.invalid}"></p>
+
+        <label><b>Repeat Password</b></label>
+        <input type="password" th:field="*{matchingPassword}" th:placeholder="#{registration.confirm.password.data}" required>
+        <hr>
+
+        <button type="submit" class="registerbtn">
+            <input type="hidden"
+                   th:name="role"
+                   th:value="teacher">
+        </button>
+    </div>
+</form>
 </body>
 </html>

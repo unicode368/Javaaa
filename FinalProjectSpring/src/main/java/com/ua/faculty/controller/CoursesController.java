@@ -27,18 +27,27 @@ public class CoursesController {
     private final CourseService courseService;
 
     @RequestMapping(value = "courses", method = RequestMethod.GET)
-    public String index(@RequestParam(value = "sort", required = false)
-                            final String sortField, Model model) {
-        Iterable<Course> sortedCourses;
-        if (sortField != null) {
+    public String loadCourses(@RequestParam(value = "sort", required = false)
+                            final String sortField,
+                        @RequestParam(value = "search-by", required = false)
+                        final String searchField,
+                              @RequestParam(required = false)
+                                  final String searchName, Model model) {
+        Iterable<Course> coursesByParameters;
+        if (searchField != null) {
             List<Course> courses = new ArrayList<>();
             courseRepository.findAll().forEach(courses::add);
-            sortedCourses = courseService.sort(
-                    courses, sortField);
+            coursesByParameters = courseService.searchBy(searchField, searchName);
         } else {
-            sortedCourses = courseRepository.findAll();
+            coursesByParameters = courseRepository.findAll();
         }
-        model.addAttribute("courses", sortedCourses);
+        if (sortField != null) {
+            List<Course> courses = new ArrayList<>();
+            coursesByParameters.forEach(courses::add);
+            coursesByParameters = courseService.sort(
+                    courses, sortField);
+        }
+        model.addAttribute("courses", coursesByParameters);
         model.addAttribute("localDate", LocalDate.now());
         return "courses";
     }

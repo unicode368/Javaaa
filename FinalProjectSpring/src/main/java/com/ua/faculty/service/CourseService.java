@@ -3,14 +3,11 @@ package com.ua.faculty.service;
 import com.ua.faculty.entity.Course;
 import com.ua.faculty.repository.CourseRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Sort;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
@@ -19,6 +16,7 @@ import static java.time.temporal.ChronoUnit.DAYS;
 public class CourseService {
 
     private final CourseRepository courseRepository;
+    private final UserService userService;
 
     public List<Course> sort(List<Course> courses, String sortType) {
         switch (sortType) {
@@ -51,6 +49,22 @@ public class CourseService {
                 .orElseThrow(() -> new UsernameNotFoundException(""));
         return DAYS.between(course.getEndDate(),
                 course.getStartDate());
+    }
+
+    public List<Course> searchBy(String sortType,
+                                        String userInput) {
+        if (sortType.equals("theme")) {
+            return courseRepository.findByTheme(userInput)
+                    .orElseThrow(() -> new UsernameNotFoundException(""));
+        } else {
+            return courseRepository
+                    .findByTeachers(userService.getTeachers()
+                    .stream()
+                    .filter(teacher -> teacher
+                            .getUserInfo().toString().equals(userInput))
+                    .collect(Collectors.toSet()))
+                    .orElseThrow(() -> new UsernameNotFoundException(""));
+        }
     }
 
 

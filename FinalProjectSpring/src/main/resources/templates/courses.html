@@ -54,11 +54,15 @@
     }
 </style>
 <body>
-<select name="sort" id="sort">
-    <option value="nameASC">назва (A-Z)</option>
-    <option value="nameDESC">назва (Z-A)</option>
-    <option value="duration">тривалість</option>
-    <option value="studentAmount">к-сть студентів</option>
+<select name="sort" id="sort" onchange="setGetParameter('sort', this.value)">
+    <option value="nameASC"
+            onclick="setGetParameter('sort', 'nameASC')">назва (A-Z)</option>
+    <option value="nameDESC"
+            onclick="setGetParameter('sort', 'nameDESC')">назва (Z-A)</option>
+    <option value="duration"
+            onclick="setGetParameter('sort', 'duration')">тривалість</option>
+    <option value="studentAmount"
+            onclick="setGetParameter('sort', 'studentAmount')">к-сть студентів</option>
 </select>
 <select name="search-by" id="search-by" style="float: right">
     <option value="topic">тема</option>
@@ -67,7 +71,7 @@
 <div class="search">
         <input type="text"
                placeholder=" Search Courses"
-               name="search" id="search">
+               th:name="searchName" id="search">
         <button onclick="setGetParameter('search-by', $('#search-by option:selected').val())">
             <i class="fa fa-search"
                style="font-size: 18px;">
@@ -117,7 +121,7 @@
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
 </script>
-<script type="text/javascript">
+<!--<script type="text/javascript">
     $(document).ready(function() {
         $("#sort").change(function () {
             var selectedOption = $('#sort').val();
@@ -126,7 +130,7 @@
             }
         });
     });
-</script>
+</script>-->
 <script>
     function setGetParameter(paramName, paramValue)
     {

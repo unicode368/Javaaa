@@ -1,6 +1,5 @@
 package com.ua.faculty.service;
 
-import com.ua.faculty.entity.Role;
 import com.ua.faculty.entity.User;
 import com.ua.faculty.entity.UserInfo;
 import com.ua.faculty.exceptions.UserAlreadyExistsException;
@@ -8,15 +7,15 @@ import com.ua.faculty.repository.RoleRepository;
 import com.ua.faculty.repository.UserInfoRepository;
 import com.ua.faculty.repository.UserRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpRequest;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -60,5 +59,11 @@ public class UserService implements UserDetailsService {
         return user;
     }
 
+    public Set<User> getTeachers() {
+        return userRepository.findAllByRoles(roleRepository
+                .findByName("teacher")
+                        .orElseThrow(() -> new UsernameNotFoundException("")))
+                .orElseThrow(() -> new UsernameNotFoundException(""));
+    }
 
 }

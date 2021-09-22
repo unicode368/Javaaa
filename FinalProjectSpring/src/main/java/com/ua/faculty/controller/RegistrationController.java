@@ -12,6 +12,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Controller
@@ -28,7 +30,11 @@ public class RegistrationController {
                            BindingResult bindingResult, Model model,
                            @RequestParam String role) {
         if (bindingResult.hasErrors()) {
-            return "registration";
+            if (role.equals("user")) {
+                return "registration";
+            } else {
+                return "create_teacher";
+            }
         }
         try {
             registrationService.register(user, role);
