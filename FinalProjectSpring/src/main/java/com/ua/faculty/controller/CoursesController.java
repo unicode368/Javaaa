@@ -5,7 +5,6 @@ import com.ua.faculty.entity.Course;
 import com.ua.faculty.repository.CourseRepository;
 import com.ua.faculty.service.CourseService;
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +15,6 @@ import java.util.List;
 @Controller
 @AllArgsConstructor
 public class CoursesController {
-
-    private final CourseRepository courseRepository;
 
     private final CourseService courseService;
 
@@ -30,10 +27,10 @@ public class CoursesController {
         Iterable<Course> coursesByParameters;
         if (searchField != null) {
             List<Course> courses = new ArrayList<>();
-            courseRepository.findAll().forEach(courses::add);
+            courseService.getAllCourses().forEach(courses::add);
             coursesByParameters = courseService.searchBy(searchField, searchName);
         } else {
-            coursesByParameters = courseRepository.findAll();
+            coursesByParameters = courseService.getAllCourses();
         }
         if (sortField != null) {
             List<Course> courses = new ArrayList<>();
@@ -48,7 +45,7 @@ public class CoursesController {
 
     @RequestMapping(value = "/create-course",
             method = RequestMethod.POST)
-    public String createNewCourse(Model model, @ModelAttribute("courseDTO") CourseDTO course) {
+    public String createNewCourse(@ModelAttribute("courseDTO") CourseDTO course) {
         courseService.createCourse(course);
         return "redirect:/courses";
     }

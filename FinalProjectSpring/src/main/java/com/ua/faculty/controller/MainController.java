@@ -1,8 +1,7 @@
 package com.ua.faculty.controller;
 
 import com.ua.faculty.dto.UserDTO;
-import com.ua.faculty.entity.Course;
-import com.ua.faculty.repository.CourseRepository;
+import com.ua.faculty.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -20,12 +19,11 @@ import java.time.LocalDate;
 public class MainController {
 
     @Autowired
-    private CourseRepository courseRepository;
+    private CourseService courseService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(Model model) {
-        Iterable<Course> courses = courseRepository.findAll();
-        model.addAttribute("courses", courses);
+        model.addAttribute("courses", courseService.getAllCourses());
         model.addAttribute("localDate", LocalDate.now());
         return "index";
     }

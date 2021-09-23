@@ -77,4 +77,16 @@ public class UserService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException(""));
     }
 
+    public User getUserByLogin(String login) {
+        return userRepository
+                .findByLogin(login).get();
+    }
+
+    public Set<User> getUsersByRoleName(String roleName) {
+        return userRepository.findAllByRoles(
+                roleRepository.findByName(roleName)
+                        .orElseThrow(() -> new UsernameNotFoundException(""))
+        ).get();
+    }
+
 }

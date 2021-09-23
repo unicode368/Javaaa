@@ -4,6 +4,7 @@ import com.ua.faculty.entity.Course;
 import com.ua.faculty.repository.CourseRepository;
 import com.ua.faculty.repository.UserInfoRepository;
 import com.ua.faculty.repository.UserRepository;
+import com.ua.faculty.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,19 +20,15 @@ import java.util.Arrays;
 public class ProfileController {
 
     @Autowired
-    private CourseRepository courseRepository;
-
-    @Autowired
-    private UserRepository userRepository;
-
+    private UserService userService;
 
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public String profile(HttpServletRequest request, Model model) {
         Principal principal = request.getUserPrincipal();
-        model.addAttribute("info", userRepository
-                .findByLogin(principal.getName()).get().getUserInfo());
-        model.addAttribute("login", userRepository
-                .findByLogin(principal.getName()).get().getLogin());
+        model.addAttribute("info", userService
+                .getUserByLogin(principal.getName()).getUserInfo());
+        model.addAttribute("login", userService
+                .getUserByLogin(principal.getName()).getLogin());
         return "profile";
     }
 }

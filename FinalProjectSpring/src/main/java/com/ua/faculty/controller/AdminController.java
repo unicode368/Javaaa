@@ -7,6 +7,8 @@ import com.ua.faculty.repository.CourseRepository;
 import com.ua.faculty.repository.RoleRepository;
 import com.ua.faculty.repository.UserRepository;
 import com.ua.faculty.service.AdminService;
+import com.ua.faculty.service.CourseService;
+import com.ua.faculty.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
@@ -20,9 +22,8 @@ import java.util.Collections;
 @AllArgsConstructor
 public class AdminController {
 
-    private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
-    private final CourseRepository courseRepository;
+    private final UserService userService;
+    private final CourseService courseService;
     private final AdminService adminService;
 
     @RequestMapping(value = "/admin/create-teacher",
@@ -37,10 +38,7 @@ public class AdminController {
     public String showCreateCourseForm(Model model) {
         model.addAttribute("courseDTO", new CourseDTO());
         model.addAttribute("teachers",
-                userRepository.findAllByRoles(
-                        roleRepository.findByName("teacher")
-                                .orElseThrow(() -> new UsernameNotFoundException(""))
-                ).get());
+                userService.getUsersByRoleName("teacher"));
         return "create-course";
     }
 
@@ -49,23 +47,17 @@ public class AdminController {
     public String showEditCourseForm(Model model, @PathVariable final String id,
                                      @ModelAttribute("courseDTO") CourseDTO course) {
         model.addAttribute("courseDTO", new CourseDTO());
-        model.addAttribute("courses", courseRepository.findById(Long.parseLong(id))
-                .orElseThrow(() -> new UsernameNotFoundException("")));
+        model.addAttribute("courses", courseService
+                    .getCourseById(Long.parseLong(id)));
         model.addAttribute("teachers",
-                userRepository.findAllByRoles(
-                        roleRepository.findByName("teacher")
-                                .orElseThrow(() -> new UsernameNotFoundException(""))
-                ).get());
+                userService.getUsersByRoleName("teacher"));
         return "edit-course";
     }
 
     @RequestMapping("/admin/users")
     public String showStudents(Model model) {
         model.addAttribute("users",
-                userRepository.findAllByRoles(
-                        roleRepository.findByName("user")
-                                .orElseThrow(() -> new UsernameNotFoundException(""))
-                ).get());
+                userService.getUsersByRoleName("user"));
         return "students";
     }
 
