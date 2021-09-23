@@ -58,11 +58,7 @@ public class CourseService {
                     .orElseThrow(() -> new UsernameNotFoundException(""));
         } else {
             return courseRepository
-                    .findByTeachers(userService.getTeachers()
-                    .stream()
-                    .filter(teacher -> teacher
-                            .getUserInfo().toString().equals(userInput))
-                    .collect(Collectors.toSet()))
+                    .findByTeacher(userService.getTeacher(userInput))
                     .orElseThrow(() -> new UsernameNotFoundException(""));
         }
     }
