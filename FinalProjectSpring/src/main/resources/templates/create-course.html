@@ -17,18 +17,19 @@
         <label><b>Theme</b></label>
         <input type="text" th:field="*{theme}" th:placeholder="#{registration.full.name.data}" required>
 
-        <label><b>Info</b></label>
+        <label><b>Start date</b></label>
         <input type="text" th:field="*{startDate}" th:placeholder="#{registration.full.name.data}" required>
 
-        <label><b></b></label>
+        <label><b>End date</b></label>
         <input type="text" th:field="*{endDate}" th:placeholder="#{registration.username.data}" required>
-        <p th:each="error: ${#fields.errors('login')}"
-           th:text="#{login.invalid}"></p>
 
-        <label><b>Email</b></label>
-        <input type="text" th:field="*{teacher}" th:placeholder="#{registration.email.data}" required>
-        <p th:each="error: ${#fields.errors('email')}"
-           th:text="#{email.invalid}"></p>
+        <label><b>Select teacher</b></label>
+        <select th:field="*{teacher}">
+            <option selected disabled value="0">choose one</option>
+            <option th:each="teacher : ${teachers}"
+                    th:value="${teacher.id}"
+                    th:text="${teacher.getUserInfo().toString()}"></option>
+        </select>
         <hr>
 
         <button type="submit" class="registerbtn">
