@@ -48,7 +48,8 @@ public class Course {
         this.endDate = LocalDate.parse(endDate);
     }
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST,
+            CascadeType.MERGE})
     @JoinTable(name = "teacher_courses",
             joinColumns = @JoinColumn(name = "teacher_id"),
             inverseJoinColumns = @JoinColumn(name = "course_id"))
@@ -66,5 +67,13 @@ public class Course {
 
     public Set<User> getStudents() {
         return students;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = LocalDate.parse(startDate);
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = LocalDate.parse(endDate);
     }
 }

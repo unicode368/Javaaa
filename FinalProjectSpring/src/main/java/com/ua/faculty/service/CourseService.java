@@ -8,7 +8,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import java.util.Comparator;
 import java.util.List;
-
 import static java.time.temporal.ChronoUnit.DAYS;
 
 @Service
@@ -76,6 +75,20 @@ public class CourseService {
     public boolean deleteCourse(Long id) {
         courseRepository.deleteById(id);
         return true;
+    }
+
+    public Course editCourse(CourseDTO courseDTO, Long id) {
+        Course courseToEdit = courseRepository.findById(id)
+                .orElseThrow(() -> new UsernameNotFoundException(""));
+        courseToEdit.setName(courseDTO.getName());
+        courseToEdit.setTheme(courseDTO.getTheme());
+        courseToEdit.setInfo(courseDTO.getInfo());
+        courseToEdit.setStartDate(courseDTO.getStartDate());
+        courseToEdit.setEndDate(courseDTO.getEndDate());
+        courseToEdit.setTeacher(userService.getUserById(Long
+                .parseLong(courseDTO.getTeacher())));
+        courseRepository.save(courseToEdit);
+        return courseToEdit;
     }
 
 }

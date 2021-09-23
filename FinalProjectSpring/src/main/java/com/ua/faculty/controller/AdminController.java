@@ -3,6 +3,7 @@ package com.ua.faculty.controller;
 import com.ua.faculty.dto.CourseDTO;
 import com.ua.faculty.dto.UserDTO;
 import com.ua.faculty.entity.Role;
+import com.ua.faculty.repository.CourseRepository;
 import com.ua.faculty.repository.RoleRepository;
 import com.ua.faculty.repository.UserRepository;
 import com.ua.faculty.service.AdminService;
@@ -21,6 +22,7 @@ public class AdminController {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final CourseRepository courseRepository;
     private final AdminService adminService;
 
     @RequestMapping(value = "/admin/create-teacher",
@@ -42,11 +44,19 @@ public class AdminController {
         return "create-course";
     }
 
-    @RequestMapping(value = "/admin/create-teacher", method = RequestMethod.POST)
-    public String createTeacher(Model model) {
-        model.addAttribute("message",
-                "Teacher created successfully");
-        return "redirect:success";
+    @RequestMapping(value = "/admin/courses/{id}/edit",
+            method = RequestMethod.GET)
+    public String showEditCourseForm(Model model, @PathVariable final String id,
+                                     @ModelAttribute("courseDTO") CourseDTO course) {
+        model.addAttribute("courseDTO", new CourseDTO());
+        model.addAttribute("courses", courseRepository.findById(Long.parseLong(id))
+                .orElseThrow(() -> new UsernameNotFoundException("")));
+        model.addAttribute("teachers",
+                userRepository.findAllByRoles(
+                        roleRepository.findByName("teacher")
+                                .orElseThrow(() -> new UsernameNotFoundException(""))
+                ).get());
+        return "edit-course";
     }
 
     @RequestMapping("/admin/users")
