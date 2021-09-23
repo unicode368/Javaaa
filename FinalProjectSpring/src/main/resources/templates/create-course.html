@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Create course</title>
+</head>
+<body>
+<form th:object="${courseDTO}" action="/create-course" method="POST">
+    <div class="container">
+        <h1>Register techer</h1>
+        <p>Please fill in this form to create new teacher.</p>
+        <hr>
+
+        <label><b>Course name</b></label>
+        <input type="text" th:field="*{name}" th:placeholder="#{registration.full.name.data}" required>
+
+        <label><b>Theme</b></label>
+        <input type="text" th:field="*{theme}" th:placeholder="#{registration.full.name.data}" required>
+
+        <label><b>Info</b></label>
+        <input type="text" th:field="*{startDate}" th:placeholder="#{registration.full.name.data}" required>
+
+        <label><b></b></label>
+        <input type="text" th:field="*{endDate}" th:placeholder="#{registration.username.data}" required>
+        <p th:each="error: ${#fields.errors('login')}"
+           th:text="#{login.invalid}"></p>
+
+        <label><b>Email</b></label>
+        <input type="text" th:field="*{teacher}" th:placeholder="#{registration.email.data}" required>
+        <p th:each="error: ${#fields.errors('email')}"
+           th:text="#{email.invalid}"></p>
+        <hr>
+
+        <button type="submit" class="registerbtn">
+        </button>
+        <div th:text="${courseExists != null} ? #{course.exists}"></div>
+    </div>
+</form>
+</body>
+</html>
