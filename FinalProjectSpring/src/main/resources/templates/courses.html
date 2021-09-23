@@ -106,8 +106,7 @@
         <div class="field">
             <span >Викладач: </span>
             <h3
-                th:text="${course.teachers.iterator()
-                .next().getUserInfo().toString()}"></h3>
+                th:text="${course.teacher.getUserInfo().toString()}"></h3>
         </div>
         <div class="field">
             <span >К-сть студентів: </span>
