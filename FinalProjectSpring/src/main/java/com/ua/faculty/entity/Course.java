@@ -1,6 +1,7 @@
 package com.ua.faculty.entity;
 
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
@@ -17,6 +18,8 @@ import java.util.Set;
 public class Course {
 
     @Id
+    @GenericGenerator(name="kaugen" , strategy="increment")
+    @GeneratedValue(generator="kaugen")
     @Column(name = "id")
     private Long id;
     @Column(name = "course_name")
@@ -35,6 +38,15 @@ public class Course {
     @Column(name = "end_date")
     @NotEmpty
     private LocalDate endDate;
+
+    public Course(String name, String theme,
+            String info, String startDate, String endDate) {
+        this.name = name;
+        this.theme = theme;
+        this.info = info;
+        this.startDate = LocalDate.parse(startDate);
+        this.endDate = LocalDate.parse(endDate);
+    }
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "teacher_courses",

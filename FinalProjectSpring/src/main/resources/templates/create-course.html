@@ -16,11 +16,14 @@
         <label><b>Theme</b></label>
         <input type="text" th:field="*{theme}" th:placeholder="#{registration.full.name.data}" required>
 
+        <label><b>Info</b></label>
+        <input type="text" th:field="*{info}" th:placeholder="#{registration.full.name.data}" required>
+
         <label><b>Start date</b></label>
-        <input type="text" th:field="*{startDate}" th:placeholder="#{registration.full.name.data}" required>
+        <input type="date" th:field="*{startDate}" th:placeholder="#{registration.full.name.data}" required>
 
         <label><b>End date</b></label>
-        <input type="text" th:field="*{endDate}" th:placeholder="#{registration.username.data}" required>
+        <input type="date" th:field="*{endDate}" th:placeholder="#{registration.username.data}" required>
 
         <label><b>Select teacher</b></label>
         <select th:field="*{teacher}">
@@ -32,6 +35,7 @@
         <hr>
 
         <button type="submit" class="registerbtn">
+            Створити
         </button>
         <div th:text="${courseExists != null} ? #{course.exists}"></div>
     </div>

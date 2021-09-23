@@ -45,5 +45,4 @@ public class RegistrationController {
         return "redirect:profile";
     }
 
-
 }

@@ -1,14 +1,18 @@
 package com.ua.faculty.controller;
 
+import com.ua.faculty.dto.CourseDTO;
+import com.ua.faculty.dto.UserDTO;
 import com.ua.faculty.entity.Course;
 import com.ua.faculty.repository.CourseRepository;
 import com.ua.faculty.service.CourseService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import javax.websocket.server.PathParam;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,5 +48,19 @@ public class CoursesController {
         model.addAttribute("courses", coursesByParameters);
         model.addAttribute("localDate", LocalDate.now());
         return "courses";
+    }
+
+    @RequestMapping(value = "/create-course",
+            method = RequestMethod.POST)
+    public String createNewCourse(Model model, @ModelAttribute("courseDTO") CourseDTO course) {
+        courseService.createCourse(course);
+        return "redirect:/courses";
+    }
+
+    @RequestMapping(value = "/admin/courses/{id}/delete",
+            method = RequestMethod.POST)
+    public String deleteCourse(@PathVariable final String id) {
+        courseService.deleteCourse(Long.parseLong(id));
+        return "redirect:/courses";
     }
 }

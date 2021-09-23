@@ -116,8 +116,11 @@
            th:href="'/courses/' + ${course.id}">Переглянути</a>
         <a sec:authorize="hasAuthority('admin')"
            th:href="'/admin/courses/' + ${course.id} + '/edit'">Редагувати</a>
-        <a sec:authorize="hasAuthority('admin')"
-           th:href="'/admin/courses/' + ${course.id} + '/delete'">Видалити</a>
+        <form th:action="@{/admin/courses/} + ${course.id} + @{/delete}"
+                method="POST">
+            <button sec:authorize="hasAuthority('admin')"
+                    type="submit">Видалити</button>
+        </form>
         <div class="whitespace"></div>
     </div>
     <a sec:authorize="hasAuthority('admin')"

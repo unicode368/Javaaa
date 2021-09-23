@@ -59,12 +59,17 @@ public class UserService implements UserDetailsService {
         return user;
     }
 
-    public User getTeacher(String fullName) {
+    public User getTeacherByFullName(String fullName) {
         Set<User> teachers = getAllTeachers();
         return teachers.stream()
                 .filter(teacher -> teacher.getUserInfo()
                         .toString().equals(fullName))
                 .findFirst()
+                .orElseThrow(() -> new UsernameNotFoundException(""));
+    }
+
+    public User getUserById(Long id) {
+        return userRepository.findById(id)
                 .orElseThrow(() -> new UsernameNotFoundException(""));
     }
 

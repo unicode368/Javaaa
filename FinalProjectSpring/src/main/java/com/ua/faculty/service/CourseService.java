@@ -1,5 +1,6 @@
 package com.ua.faculty.service;
 
+import com.ua.faculty.dto.CourseDTO;
 import com.ua.faculty.entity.Course;
 import com.ua.faculty.repository.CourseRepository;
 import lombok.AllArgsConstructor;
@@ -7,7 +8,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
@@ -58,11 +58,24 @@ public class CourseService {
                     .orElseThrow(() -> new UsernameNotFoundException(""));
         } else {
             return courseRepository
-                    .findByTeacher(userService.getTeacher(userInput))
+                    .findByTeacher(userService.getTeacherByFullName(userInput))
                     .orElseThrow(() -> new UsernameNotFoundException(""));
         }
     }
 
+    public Course createCourse(CourseDTO courseDTO) {
+        Course course = new Course(courseDTO.getName(),
+                courseDTO.getTheme(), courseDTO.getInfo(),
+                courseDTO.getStartDate(), courseDTO.getEndDate());
+        course.setTeacher(userService.getUserById(Long
+                .parseLong(courseDTO.getTeacher())));
+        courseRepository.save(course);
+        return course;
+    }
 
+    public boolean deleteCourse(Long id) {
+        courseRepository.deleteById(id);
+        return true;
+    }
 
 }
