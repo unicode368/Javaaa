@@ -1,5 +1,6 @@
 package com.ua.faculty.controller;
 
+import com.ua.faculty.dto.CourseDTO;
 import com.ua.faculty.dto.UserDTO;
 import com.ua.faculty.entity.Role;
 import com.ua.faculty.repository.RoleRepository;
@@ -27,6 +28,18 @@ public class AdminController {
     public String showCreateTeacherForm(Model model) {
         model.addAttribute("userDTO", new UserDTO());
         return "create_teacher";
+    }
+
+    @RequestMapping(value = "/admin/create-course",
+            method = RequestMethod.GET)
+    public String showCreateCourseForm(Model model) {
+        model.addAttribute("courseDTO", new CourseDTO());
+        model.addAttribute("teachers",
+                userRepository.findAllByRoles(
+                        roleRepository.findByName("teacher")
+                                .orElseThrow(() -> new UsernameNotFoundException(""))
+                ).get());
+        return "create-course";
     }
 
     @RequestMapping(value = "/admin/create-teacher", method = RequestMethod.POST)
