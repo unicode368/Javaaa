@@ -36,11 +36,11 @@ public class Course {
     @NotEmpty
     private LocalDate endDate;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "teacher_courses",
             joinColumns = @JoinColumn(name = "teacher_id"),
             inverseJoinColumns = @JoinColumn(name = "course_id"))
-    private Set<User> teachers;
+    private User teacher;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "user_courses",
@@ -48,8 +48,8 @@ public class Course {
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private Set<User> students;
 
-    public Set<User> getTeacher() {
-        return teachers;
+    public User getTeacher() {
+        return teacher;
     }
 
     public Set<User> getStudents() {
