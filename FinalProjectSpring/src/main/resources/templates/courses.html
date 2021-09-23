@@ -116,8 +116,12 @@
            th:href="'/courses/' + ${course.id}">Переглянути</a>
         <a sec:authorize="hasAuthority('admin')"
            th:href="'/admin/courses/' + ${course.id} + '/edit'">Редагувати</a>
+        <a sec:authorize="hasAuthority('admin')"
+           th:href="'/admin/courses/' + ${course.id} + '/delete'">Видалити</a>
         <div class="whitespace"></div>
     </div>
+    <a sec:authorize="hasAuthority('admin')"
+       th:href="'/admin/create-course'">Додати</a>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
 </script>
