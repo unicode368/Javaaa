@@ -50,6 +50,7 @@
                    th:name="role"
                    th:value="teacher">
         </button>
+        <div th:text="${userExists != null} ? #{user.exists}"></div>
     </div>
 </form>
 </body>

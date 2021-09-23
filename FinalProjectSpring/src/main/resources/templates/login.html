@@ -17,7 +17,10 @@
             <i class="spinner"></i>
             <span th:utext="#{login.form.title}" class="state"></span>
         </button>
+        <div th:text="${error != null} ? #{wrong.credentials}"></div>
     </form>
+    <p th:each="error: ${#fields.errors('global')}"
+       th:text="#{wrong.credentials}"></p>
     <languages th:insert="fragments/language_buttons.html :: languages"></languages>
     <th:block th:include="fragments/assets :: assets"></th:block>
 </div>
