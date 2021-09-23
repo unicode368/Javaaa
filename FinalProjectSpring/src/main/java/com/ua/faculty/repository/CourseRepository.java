@@ -10,5 +10,5 @@ import java.util.Set;
 
 public interface CourseRepository extends CrudRepository<Course, Long> {
     Optional<List<Course>> findByTheme(String theme);
-    Optional<List<Course>> findByTeachers(Set<User> teachers);
+    Optional<List<Course>> findByTeacher(User teacher);
 }
