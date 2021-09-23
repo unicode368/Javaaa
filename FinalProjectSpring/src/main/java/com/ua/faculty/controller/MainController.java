@@ -36,7 +36,7 @@ public class MainController {
         if (isAuthenticated()) {
             return "redirect:";
         }
-        if (error.equals("true")) {
+        if (error != null) {
             model.addAttribute("error", "");
         }
         return "login";
