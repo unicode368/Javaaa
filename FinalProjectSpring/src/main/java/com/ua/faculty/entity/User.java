@@ -1,10 +1,7 @@
 package com.ua.faculty.entity;
 
-import com.ua.faculty.validation.PasswordMatches;
-import com.ua.faculty.validation.ValidLogin;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.validator.constraints.Length;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -29,13 +26,11 @@ public class User implements UserDetails {
     @Getter
     private Long id;
     @Column(name = "login")
-    @Length(min = 5, message = "*Your login must have at least 5 characters")
-    @NotEmpty(message = "*Please provide your login")
+    @NotEmpty
     @Setter
     private String login;
     @Column(name = "password")
-    @Length(min = 5, message = "*Your password must have at least 5 characters")
-    @NotEmpty(message = "*Please provide your password")
+    @NotEmpty
     @Getter
     @Setter
     private String password;
@@ -57,11 +52,14 @@ public class User implements UserDetails {
     @Setter
     private Set<Role> roles;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "user_courses",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "course_id"))
-    private Collection<Course> courses;
+    private Course course;
+
+    @OneToMany(mappedBy = "user")
+    Set<CourseRating> grades;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn

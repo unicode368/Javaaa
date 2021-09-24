@@ -23,12 +23,10 @@ public class Course {
     @Column(name = "id")
     private Long id;
     @Column(name = "course_name")
-    @Length(min = 5, message = "*Your login must have at least 5 characters")
-    @NotEmpty(message = "*Please provide your login")
+    @NotEmpty
     private String name;
     @Column(name = "theme")
-    @Length(min = 5, message = "*Your password must have at least 5 characters")
-    @NotEmpty(message = "*Please provide your password")
+    @NotEmpty
     private String theme;
     @Column(name = "info")
     private String info;
@@ -38,6 +36,9 @@ public class Course {
     @Column(name = "end_date")
     @NotEmpty
     private LocalDate endDate;
+
+    @OneToMany(mappedBy = "course")
+    Set<CourseRating> ratings;
 
     public Course(String name, String theme,
             String info, String startDate, String endDate) {
@@ -55,7 +56,7 @@ public class Course {
             inverseJoinColumns = @JoinColumn(name = "course_id"))
     private User teacher;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinTable(name = "user_courses",
             joinColumns = @JoinColumn(name = "course_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))

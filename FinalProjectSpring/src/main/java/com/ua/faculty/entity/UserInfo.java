@@ -18,19 +18,19 @@ public class UserInfo {
     @Column(name = "user_id")
     private Long id;
     @Column(name = "surname")
-    @NotEmpty(message = "*Please provide a surname")
+    @NotEmpty
     private String surname;
     @Column(name = "name")
-    @NotEmpty(message = "*Please provide your name")
+    @NotEmpty
     private String name;
     @Column(name = "patronimic")
-    @NotEmpty(message = "*Please provide your name")
+    @NotEmpty
     private String patronimic;
     @Column(name = "phone_number")
-    @NotEmpty(message = "*Please provide your last name")
+    @NotEmpty
     private String phoneNumber;
     @Column(name = "email")
-    @NotEmpty(message = "*Please provide an email")
+    @NotEmpty
     private String email;
 
     @OneToOne
