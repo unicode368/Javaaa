@@ -1,15 +1,20 @@
 package com.example.faculty;
 
 import java.io.*;
+import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 
 @WebServlet(name = "homeServlet", value = "/")
-public class HomeServlet extends HttpServlet {
+public class MainServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
-        response.sendRedirect("index.jsp");
+        try {
+            request.getRequestDispatcher("/index.jsp").forward(request, response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        }
     }
 
     public void destroy() {

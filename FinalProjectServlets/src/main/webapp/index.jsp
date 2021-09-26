@@ -4,8 +4,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css"
-          href="${pageContext.request.contextPath}/styles/" />
+    <style>
+        <%@include file="/css/home.css"%>
+    </style>
 </head>
 <body>
 <div class="header">
