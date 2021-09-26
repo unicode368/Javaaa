@@ -80,7 +80,7 @@
     </form>
 </div>
 </div>
-<div class="courses-list">
+<div sec:authorize="!hasAuthority('admin')" class="courses-list">
     <div class="one_course"
             th:each="course : ${courses}"
          th:if="${course.endDate.isAfter(localDate)}">
@@ -112,19 +112,48 @@
             <span >К-сть студентів: </span>
             <h3 th:text="${course.students.size()}"></h3>
         </div>
-        <a sec:authorize="hasAuthority('user')"
-           th:href="'/courses/' + ${course.id}">Переглянути</a>
-        <a sec:authorize="hasAuthority('admin')"
-           th:href="'/admin/courses/' + ${course.id} + '/edit'">Редагувати</a>
+        <a th:href="'/courses/' + ${course.id}">Переглянути</a>
+    </div>
+</div>
+<div sec:authorize="hasAuthority('admin')" class="courses-list">
+    <div class="one_course"
+         th:each="course : ${courses}">
+        <h2 style="align-content: center;
+            margin: 10px; display: grid" th:text="${course.name}"></h2>
+        <div class="field">
+            <span >Тема: </span>
+            <h2
+                    th:text="${course.theme}"></h2>
+        </div>
+        <div class="field">
+            <span>Інформація про курс: </span>
+            <p th:text="${course.info}"></p>
+        </div>
+        <div class="field">
+            <span >Початок: </span>
+            <h3  th:text="${course.startDate}"></h3>
+        </div>
+        <div class="field">
+            <span>Кінець: </span>
+            <h3 th:text="${course.endDate}"></h3>
+        </div>
+        <div class="field">
+            <span >Викладач: </span>
+            <h3
+                    th:text="${course.teacher.getUserInfo().toString()}"></h3>
+        </div>
+        <div class="field">
+            <span >К-сть студентів: </span>
+            <h3 th:text="${course.students.size()}"></h3>
+        </div>
+        <a th:href="'/admin/courses/' + ${course.id} + '/edit'">Редагувати</a>
         <form th:action="@{/admin/courses/} + ${course.id} + @{/delete}"
-                method="POST">
-            <button sec:authorize="hasAuthority('admin')"
-                    type="submit">Видалити</button>
+              method="POST">
+            <button type="submit">Видалити</button>
         </form>
         <div class="whitespace"></div>
     </div>
-    <a sec:authorize="hasAuthority('admin')"
-       th:href="'/admin/create-course'">Додати</a>
+    <a th:href="'/admin/create-course'">Додати</a>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
 </script>

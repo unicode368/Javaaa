@@ -1,10 +1,15 @@
 package com.ua.faculty.entity;
 
 import com.ua.faculty.entity.ids.CourseRatingKey;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "user_courses")
 public class CourseRating {
 
@@ -22,5 +27,6 @@ public class CourseRating {
     Course course;
 
     @Column(name = "grade")
-    int rating;
+    @Nullable
+    Integer rating;
 }

@@ -53,6 +53,49 @@
        onclick="location.href='/admin/users'"
        rel="nofollow noopener noreferrer"
        draggable="false">Блокування/розблокування користувачів</a></div>
+<div sec:authorize="hasAuthority('user')">
+    <div class="courses">Pending courses:</div>
+    <div class="courses-list">
+        <div th:each="course, iterStat : ${courses}"
+             th:if="${course.startDate.isAfter(localDate)
+                            && course.endDate.isAfter(localDate)}">
+            <h2 th:text="${course.name}"></h2>
+            <h3 th:text="${course.theme}"></h3>
+            <p th:text="${course.info}"></p>
+            <h3 th:text="${course.startDate}"></h3>
+            <h3 th:text="${course.endDate}"></h3>
+            <div class="whitespace"></div>
+        </div>
+    </div>
+    <div class="courses">Ongoing courses:</div>
+    <div class="courses-list">
+        <div th:each="course, iterStat : ${courses}"
+             th:if="${course.startDate.isBefore(localDate)
+                            && course.endDate.isAfter(localDate)}">
+            <h2 th:text="${course.name}"></h2>
+            <h3 th:text="${course.theme}"></h3>
+            <p th:text="${course.info}"></p>
+            <h3 th:text="${course.startDate}"></h3>
+            <h3 th:text="${course.endDate}"></h3>
+            <div class="whitespace"></div>
+        </div>
+    </div>
+    <div class="courses">Finished courses</div>
+    <div class="courses-list">
+        <div th:each="course, iterStat : ${courses}"
+             th:if="${course.startDate.isBefore(localDate)
+                                && course.endDate.isBefore(localDate)}">
+            <h2 th:text="${course.name}"></h2>
+            <h3 th:text="${course.theme}"></h3>
+            <p th:text="${course.info}"></p>
+            <h3 th:text="${course.startDate}"></h3>
+            <h3 th:text="${course.endDate}"></h3>
+            <h2>Оцінка</h2>
+            <h2 th:text="${rates[iterStat.index]}"></h2>
+            <div class="whitespace"></div>
+        </div>
+    </div>
+</div>
 <!--<a sec:authorize="hasAuthority('admin')"
    th:href="'/courses/' + ${course.id}">Переглянути</a>
 <div sec:authorize="hasAuthority('teacher')" class="courses">My courses:</div>

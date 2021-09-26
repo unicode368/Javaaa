@@ -2,13 +2,17 @@ package com.ua.faculty.service;
 
 import com.ua.faculty.dto.CourseDTO;
 import com.ua.faculty.entity.Course;
+import com.ua.faculty.entity.CourseRating;
+import com.ua.faculty.entity.User;
+import com.ua.faculty.repository.CourseRatingRepository;
 import com.ua.faculty.repository.CourseRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Set;
+
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
@@ -17,6 +21,7 @@ import static java.time.temporal.ChronoUnit.DAYS;
 public class CourseService {
 
     private final CourseRepository courseRepository;
+    private final CourseRatingRepository courseRatingRepository;
     private final UserService userService;
 
     public List<Course> sort(List<Course> courses, String sortType) {
@@ -100,6 +105,30 @@ public class CourseService {
     public Course getCourseById(Long id) {
         return courseRepository.findById(id)
                 .orElseThrow(() -> new UsernameNotFoundException(""));
+    }
+
+    public Set<Course> getAllStudentCourses(String login) {
+        Iterable<Course> allCourses = courseRepository.findAll();
+        return StreamSupport.stream(
+                allCourses.spliterator(), false)
+                .filter(course -> course.getStudents()
+                        .contains(userService.getUserByLogin(login)))
+                .collect(Collectors.toSet());
+    }
+
+    public Collection<Integer> getAllStudentGrades(String login) {
+        Set<Course> studentCourses = getAllStudentCourses(login);
+        Collection<CourseRating> courseRates = studentCourses
+                .stream()
+                .map(course -> courseRatingRepository
+                        .findByUserAndCourse(
+                                userService.getUserByLogin(login), course)
+                        .orElseThrow(() -> new UsernameNotFoundException("")))
+                .collect(Collectors.toList());
+        return courseRates
+                .stream()
+                .map(CourseRating::getRating)
+                .collect(Collectors.toList());
     }
 
 }
