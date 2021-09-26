@@ -91,7 +91,12 @@
             <h3 th:text="${course.startDate}"></h3>
             <h3 th:text="${course.endDate}"></h3>
             <h2>Оцінка</h2>
-            <h2 th:text="${rates[iterStat.index]}"></h2>
+            <div th:if="${rates[iterStat.index] != null}">
+                <h2 th:text="${rates[iterStat.index]}"></h2>
+            </div>
+            <div th:unless="${rates[iterStat.index] != null}">
+                <h2 th:text="#{no.grade}"></h2>
+            </div>
             <div class="whitespace"></div>
         </div>
     </div>
