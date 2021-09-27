@@ -24,5 +24,6 @@
             <span class="state">Log in</span>
         </button>
     </form>
+    <%@ include file="fragments/language_buttons.jsp" %>
 </div>
 </html>
