@@ -11,6 +11,7 @@ public class PageFactory {
             case "/":
                 return new HomePage();
             case "/login":
+                return new LoginPage();
             default:
                 throw new PageNotFoundException("Request " +
                         "you are looking for not found");
