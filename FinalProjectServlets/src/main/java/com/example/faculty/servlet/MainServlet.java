@@ -1,6 +1,6 @@
 package com.example.faculty.servlet;
 
-import com.example.faculty.model.PageNotFoundException;
+import com.example.faculty.model.exceptions.PageNotFoundException;
 import com.example.faculty.servlet.pages.PageFactory;
 
 import java.io.*;

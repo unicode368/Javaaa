@@ -1,6 +1,6 @@
 package com.example.faculty.servlet.pages;
 
-import com.example.faculty.model.PageNotFoundException;
+import com.example.faculty.model.exceptions.PageNotFoundException;
 
 import java.sql.SQLException;
 
