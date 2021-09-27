@@ -1,6 +1,7 @@
 package com.example.faculty.servlet;
 
 import com.example.faculty.model.exceptions.PageNotFoundException;
+import com.example.faculty.model.service.ServiceFactory;
 import com.example.faculty.servlet.pages.PageFactory;
 
 import java.io.*;
@@ -25,6 +26,8 @@ public class MainServlet extends HttpServlet {
                             HttpServletResponse response)
                                 throws ServletException, IOException {
         String uri = request.getRequestURI();
+        int i = uri.lastIndexOf("/");
+        uri = uri.substring(i);
         try {
             pageFactory.getPage(uri).execute(request, response);
         } catch (SQLException throwables) {

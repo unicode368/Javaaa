@@ -4,7 +4,7 @@
               auth="Container"
               type="javax.sql.DataSource"
               username="postgres"
-              password="postgres"
+              password="Sobak@234"
               driverClassName="org.postgresql.Driver"
               url="jdbc:postgresql://localhost:5432/new_faculty_db"
               validationQuery="select 1"

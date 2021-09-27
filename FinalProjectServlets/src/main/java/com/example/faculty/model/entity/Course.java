@@ -17,13 +17,43 @@ public class Course {
     private LocalDate endDate;
 
 
-    public Course(String name, String theme,
+    public Course(Long id, String name, String theme,
             String info, String startDate, String endDate) {
+        this.id = id;
         this.name = name;
         this.theme = theme;
         this.info = info;
         this.startDate = LocalDate.parse(startDate);
         this.endDate = LocalDate.parse(endDate);
+    }
+
+    public Course(String name, String theme,
+                  String info, String startDate, String endDate) {
+        this.name = name;
+        this.theme = theme;
+        this.info = info;
+        this.startDate = LocalDate.parse(startDate);
+        this.endDate = LocalDate.parse(endDate);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getTheme() {
+        return theme;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public String getStartDate() {
+        return startDate.toString();
+    }
+
+    public String getEndDate() {
+        return endDate.toString();
     }
 
     public void setStartDate(String startDate) {

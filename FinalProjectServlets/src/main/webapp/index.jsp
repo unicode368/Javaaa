@@ -1,3 +1,6 @@
+<%@ page import="com.example.faculty.model.entity.Course" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.example.faculty.model.entity.User" %>
 <%@ page pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -45,6 +48,21 @@
             </a>
         </c:if>
     </div>
+    <%
+        ArrayList<Course> courseList = (ArrayList<Course>) request.getAttribute("courses");
+        User user = (User) request.getSession(false).getAttribute("user");
+        if(courseList != null && courseList.size() > 0) {
+            for (int i = 0; i < courseList.size(); i++) {
+    %>
+    <div class="Column" style="text-align: center; padding: 70px" >
+            <div>Назва: <%=courseList.get(i).getName()%></div>
+            <div>Автор: <%=courseList.get(i).getTheme()%></div>
+            <div>Видання: <%=courseList.get(i).getInfo()%></div>
+            <div>Рік видання: <%=courseList.get(i).getStartDate()%></div>
+
+            <% } %>
+        </div>
+        <%        } %>
 </div>
 </body>
 </html>
