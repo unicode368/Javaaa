@@ -33,6 +33,20 @@ public class UserInfo {
         this.email = "";
     }
 
+    public UserInfo(Long id, String surname,
+                    String name, String patronimic) {
+        this.id = id;
+        this.surname = surname;
+        this.name = name;
+        this.patronimic = patronimic;
+        this.phoneNumber = "";
+        this.email = "";
+    }
+
+    public Long getId() {
+        return id;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }

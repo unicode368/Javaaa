@@ -108,4 +108,26 @@ public class CourseDAOImpl implements CourseDAO {
         close();
         return courses;
     }
+
+    @Override
+    public List<Course> findByTeacherId(Long id) {
+        List<Course> courses = new ArrayList<>();
+        try (PreparedStatement statement = connection
+                .prepareStatement(FIND_BY_TEACHER_ID)) {
+            statement.setLong(1, id);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                courses.add(new Course(rs.getLong("id"),
+                        rs.getString("course_name"),
+                        rs.getString("theme"),
+                        rs.getString("info"),
+                        rs.getString("start_date"),
+                        rs.getString("end_date")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        close();
+        return courses;
+    }
 }

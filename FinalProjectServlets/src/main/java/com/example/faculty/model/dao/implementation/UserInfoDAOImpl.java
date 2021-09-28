@@ -68,6 +68,27 @@ public class UserInfoDAOImpl implements UserInfoDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        close();
+        return teacher;
+    }
+
+    @Override
+    public UserInfo findTeacherByFullName(String fullName) {
+        UserInfo teacher = null;
+        try (PreparedStatement statement = connection
+                .prepareStatement(FIND_TEACHER_BY_FULL_NAME)) {
+            statement.setString(1, fullName);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                teacher = new UserInfo(rs.getLong("user_id"),
+                        rs.getString("surname"),
+                        rs.getString("name"),
+                        rs.getString("patronimic"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        close();
         return teacher;
     }
 }
