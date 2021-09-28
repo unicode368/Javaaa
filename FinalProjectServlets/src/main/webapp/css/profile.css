@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    background: linear-gradient(#e66465, #9198e5);
+    height: 100%;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.wrapper{
+    height: 80%;
+    margin: 4%;
+    display: flex;
+    box-shadow: 0 1px 20px 0 rgba(69,90,100,.08);
+}
+
+.wrapper .left{
+    width: 35%;
+    background: linear-gradient(to right,#01a9ac,#01dbdf);
+    padding: 30px 25px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    text-align: center;
+    color: #fff;
+}
+
+.wrapper .left img{
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.wrapper .left h4{
+    margin-bottom: 10px;
+}
+
+.wrapper .left p{
+    font-size: 12px;
+}
+
+.wrapper .right{
+    width: 65%;
+    background: #fff;
+    padding: 30px 25px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.wrapper .right .info,
+.wrapper .right .projects{
+    margin-bottom: 25px;
+}
+
+.wrapper .right .info h3 {
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #e0e0e0;
+    color: #353c4e;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+}
+
+.wrapper .right .info_data {
+    display: flex;
+    justify-content: space-between;
+}
+
+.wrapper .right .info_data .data {
+    width: 45%;
+}
+
+.wrapper .right .info_data .data h4 {
+    color: #353c4e;
+    margin-bottom: 5px;
+}
+
+.wrapper .right .info_data .data p {
+    font-size: 13px;
+    margin-bottom: 10px;
+    color: #919aa3;
+}
+
+.example_b {
+    color: #fff !important;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: #60a3bc;
+    padding: 20px;
+    border-radius: 50px;
+    display: inline-block;
+    border: none;
+    transition: all 0.4s ease 0s;
+    margin-bottom: 20px;
+}
+
+.example_b2 {
+    color: #fff !important;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: #c38272;
+    padding: 20px;
+    border-radius: 50px;
+    display: inline-block;
+    border: none;
+    transition: all 0.4s ease 0s;
+    margin-bottom: 20px;
+}
+
+.example_b3 {
+    color: #fff !important;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: #e0cd7e;
+    padding: 20px;
+    border-radius: 50px;
+    display: inline-block;
+    border: none;
+    transition: all 0.4s ease 0s;
+    margin-bottom: 20px;
+}
+
+.courses-list {
+    text-align: center;
+    margin-top: 100px;
+}
+
+.whitespace {
+    height: 30px;
+}
+
+.courses-list h2 {
+    height: 50px;
+}

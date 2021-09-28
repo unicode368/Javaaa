@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Create course</title>
+</head>
+<body>
+<form th:object="${courseDTO}" action="/create-course" method="POST">
+    <div class="container">
+        <h1>Create course</h1>
+        <hr>
+
+        <label><b>Course name</b></label>
+        <input type="text" name="name" id="name" th:placeholder="#{registration.full.name.data}" required>
+
+        <label><b>Theme</b></label>
+        <input type="text" name="theme" id="name" th:placeholder="#{registration.full.name.data}" required>
+
+        <label><b>Info</b></label>
+        <input type="text" th:field="*{info}" th:placeholder="#{registration.full.name.data}" required>
+
+        <label><b>Start date</b></label>
+        <input type="date" th:field="*{startDate}" th:placeholder="#{registration.full.name.data}" required>
+
+        <label><b>End date</b></label>
+        <input type="date" th:field="*{endDate}" th:placeholder="#{registration.username.data}" required>
+
+        <label><b>Select teacher</b></label>
+        <select th:field="*{teacher}">
+            <option selected disabled value="0">choose one</option>
+            <option th:each="teacher : ${teachers}"
+                    th:value="${teacher.id}"
+                    th:text="${teacher.getUserInfo().toString()}"></option>
+        </select>
+        <hr>
+
+        <button type="submit" class="registerbtn">
+            Створити
+        </button>
+        <div th:text="${courseExists != null} ? #{course.exists}"></div>
+    </div>
+</form>
+</body>
+</html>

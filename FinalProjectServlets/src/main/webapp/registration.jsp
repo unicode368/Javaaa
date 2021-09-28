@@ -87,7 +87,7 @@
             <div class="button">
                 <fmt:message key="registration.submit" var="submit"/>
                 <input type="submit" value="${submit}">
-                <input type="hidden" name="role" id="role"
+                <input type="hidden" name="userRegisterRole"
                        value="user">
             </div>
         </form>
