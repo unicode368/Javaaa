@@ -1,6 +1,7 @@
 package com.example.faculty.model.dao;
 
 import com.example.faculty.model.entity.Course;
+import com.example.faculty.model.entity.CourseRating;
 
 import java.util.List;
 
@@ -14,7 +15,8 @@ public interface CourseDAO extends GeneralDAO<Course> {
             "JOIN teacher_courses ON courses.id=teacher_courses.course_id\n" +
             "WHERE teacher_courses.teacher_id=?";
     String FIND_BY_USER_ID = "SELECT courses.id, courses.course_name,\n" +
-            "courses.theme, courses.info, courses.start_date, courses.end_date\n" +
+            "courses.theme, courses.info, courses.start_date, courses.end_date," +
+            "user_courses.grade\n" +
             "FROM courses\n" +
             "JOIN user_courses ON courses.id=user_courses.course_id\n" +
             "WHERE user_courses.user_id=?";

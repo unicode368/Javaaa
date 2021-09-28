@@ -3,6 +3,7 @@
 <%@ page import="com.example.faculty.model.entity.User" %>
 <%@ page import="com.example.faculty.model.entity.UserInfo" %>
 <%@ page import="java.time.LocalDate" %>
+<%@ page import="com.example.faculty.model.entity.CourseRating" %>
 <%@ page pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -27,9 +28,11 @@
     UserInfo userInfo =
             (UserInfo) request.getAttribute("userInfo");
     ArrayList<Course> courseList = new ArrayList<>();
+    ArrayList<CourseRating> rates = new ArrayList<>();
     if (user.getRole().toString().equals("user")) {
         request.setAttribute("role", user.getRole().toString());
         courseList = (ArrayList<Course>) request.getAttribute("userCourses");
+        rates = (ArrayList<CourseRating>) request.getAttribute("rates");
     }
 %>
 <div class="logout-button">
@@ -79,6 +82,9 @@
        rel="nofollow noopener noreferrer"
        draggable="false">Блокування/розблокування користувачів</a></div>
 <% } %>
+<% if (user.getRole().toString().equals("user")) { %>
+<div class="courses">Pending courses:</div>
+<% } %>
 <% if(courseList.size() > 0) {
     for (int i = 0; i < courseList.size(); i++) {
         if (LocalDate.parse(courseList.get(i)
@@ -86,7 +92,6 @@
         LocalDate.parse(courseList.get(i)
                 .getEndDate()).isAfter(LocalDate.now())) { %>
 <div>
-    <div class="courses">Pending courses:</div>
     <div class="courses-list">
         <div>
             <h2><%=courseList.get(i).getName()%></h2>
@@ -99,6 +104,9 @@
     </div>
     <% } %>
     <% } %>
+    <% } %>
+    <% if (user.getRole().toString().equals("user")) { %>
+    <div class="courses">Ongoing courses:</div>
     <% } %>
     <% if(courseList.size() > 0) {
         for (int i = 0; i < courseList.size(); i++) {
@@ -106,7 +114,6 @@
                     .getStartDate()).isBefore(LocalDate.now()) &&
                     LocalDate.parse(courseList.get(i)
                             .getEndDate()).isAfter(LocalDate.now())) { %>
-    <div class="courses">Ongoing courses:</div>
     <div class="courses-list">
         <div>
             <h2><%=courseList.get(i).getName()%></h2>
@@ -120,29 +127,37 @@
     <% } %>
     <% } %>
     <% } %>
- <!--   <div class="courses">Finished courses</div>
+    <% if (user.getRole().toString().equals("user")) { %>
+    <div class="courses">Finished courses</div>
+    <% } %>
+    <% if(courseList.size() > 0) {
+        for (int i = 0; i < courseList.size(); i++) {
+            if (LocalDate.parse(courseList.get(i)
+                    .getStartDate()).isBefore(LocalDate.now()) &&
+                    LocalDate.parse(courseList.get(i)
+                            .getEndDate()).isBefore(LocalDate.now())) { %>
     <div class="courses-list">
-        <div th:each="course, iterStat : ${courses}"
-             th:if="${course.startDate.isBefore(localDate)
-                                && course.endDate.isBefore(localDate)}">
-            <h2 th:text="${course.name}"></h2>
-            <h3 th:text="${course.theme}"></h3>
-            <p th:text="${course.info}"></p>
-            <h3 th:text="${course.startDate}"></h3>
-            <h3 th:text="${course.endDate}"></h3>
+        <div>
+            <h2><%=courseList.get(i).getName()%></h2>
+            <h3><%=courseList.get(i).getTheme()%></h3>
+            <p><%=courseList.get(i).getInfo()%></p>
+            <h3><%=courseList.get(i).getStartDate()%></h3>
+            <h3><%=courseList.get(i).getEndDate()%></h3>
             <h2>Оцінка</h2>
-            <div th:if="${rates[iterStat.index] != null}">
-                <h2 th:text="${rates[iterStat.index]}"></h2>
-            </div>
-            <div th:unless="${rates[iterStat.index] != null}">
-                <h2 th:text="${no.grade}"></h2>
-            </div>
+            <% if(rates.get(i).getRating() != null
+                    && rates.get(i).getRating() != 0) { %>
+                <h2><%=rates.get(i).getRating()%></h2>
+            <% } else { %>
+                <h2><fmt:message key="no.grade" /></h2>
+            <% } %>
             <div class="whitespace"></div>
         </div>
-    </div>-->
+    </div>
+    <% } %>
+    <% } %>
+    <% } %>
 </div>
-<!--<a sec:authorize="hasAuthority('admin')"
-   th:href="'/courses/' + ${course.id}">Переглянути</a>
+<!--
 <div sec:authorize="hasAuthority('teacher')" class="courses">My courses:</div>
 -->
 </html>

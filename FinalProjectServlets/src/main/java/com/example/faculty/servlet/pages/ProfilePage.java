@@ -29,6 +29,8 @@ public class ProfilePage implements Page{
         if (user.getRole().toString().equals("user")) {
             request.setAttribute("userCourses", courseService
                     .getAllStudentCourses(user.getId()));
+            request.setAttribute("rates", courseService
+                    .getCourseRatingsByUserId(user.getId()));
         }
         request.getRequestDispatcher("/profile.jsp")
                 .forward(request, response);

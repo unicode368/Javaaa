@@ -13,7 +13,7 @@ public class DAOFactoryImpl extends DAOFactory {
 
     @Override
     public CourseRatingDAO createCourseRatingDao() {
-        return null;
+        return new CourseRatingDAOImpl(connectionPool.getConnection());
     }
 
     @Override
