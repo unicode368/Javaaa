@@ -1,6 +1,7 @@
 package com.example.faculty.model.dao.implementation;
 
 import com.example.faculty.model.dao.UserDAO;
+import com.example.faculty.model.entity.Role;
 import com.example.faculty.model.entity.User;
 
 import java.sql.Connection;
@@ -49,8 +50,9 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public User findUserByCredentials(String login, String password) {
         User user = null;
-        try (PreparedStatement statement = connection
-                .prepareStatement(FIND_BY_CREDENTIALS)) {
+        try {
+            PreparedStatement statement = connection
+                    .prepareStatement(FIND_BY_CREDENTIALS);
             statement.setString(1, login);
             statement.setString(2, password);
             ResultSet rs = statement.executeQuery();
@@ -61,16 +63,16 @@ public class UserDAOImpl implements UserDAO {
                                 rs.getBoolean("blocked"));
             }
             if (user != null) {
-                PreparedStatement role = connection
+                Role role = null;
+                PreparedStatement roleSt = connection
                         .prepareStatement(FIND_ROLE_BY_USER_ID);
-                role.setLong(1, user.getId());
-                ResultSet rsRole = statement.executeQuery();
-                while (rs.next()) {
-                    user = new User(rs.getLong("id"),
-                            rs.getString("login"),
-                            rs.getString("password"),
-                            rs.getBoolean("blocked"));
+                roleSt.setLong(1, user.getId());
+                ResultSet rsRole = roleSt.executeQuery();
+                while (rsRole.next()) {
+                    role = new Role(rsRole.getLong("id"),
+                                    rsRole.getString("role"));
                 }
+                user.setRole(role);
             }
         } catch (SQLException e) {
             e.printStackTrace();

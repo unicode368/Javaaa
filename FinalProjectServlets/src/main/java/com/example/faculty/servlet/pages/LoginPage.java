@@ -40,7 +40,6 @@ public class LoginPage implements Page {
         request.getSession().setAttribute("user", userService
                 .getUserByCredentials(request.getParameter("login"),
                         request.getParameter("password")));
-        request.getRequestDispatcher("/profile.jsp")
-                .forward(request, response);
+        response.sendRedirect(request.getContextPath() + "/profile");
     }
 }

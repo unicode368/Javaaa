@@ -19,4 +19,10 @@ public class UserInfoService {
             return userInfoDao.findTeacherByCourseId(id);
         }
     }
+
+    public UserInfo getUserInfoById(Long id) {
+        try (UserInfoDAO userInfoDao = daoFactory.createUserInfoDao()) {
+            return userInfoDao.findById(id);
+        }
+    }
 }

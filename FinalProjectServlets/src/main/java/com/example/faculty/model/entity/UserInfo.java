@@ -14,6 +14,17 @@ public class UserInfo {
 
     private String email;
 
+    public UserInfo(Long id, String surname,
+                    String name, String patronimic,
+                    String phoneNumber, String email) {
+        this.id = id;
+        this.surname = surname;
+        this.name = name;
+        this.patronimic = patronimic;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+    }
+
     public UserInfo(String surname,
                     String name, String patronimic,
                     String phoneNumber, String email) {
@@ -45,6 +56,26 @@ public class UserInfo {
 
     public Long getId() {
         return id;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPatronimic() {
+        return patronimic;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public void setId(Long id) {

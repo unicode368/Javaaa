@@ -9,6 +9,8 @@ public class PageFactory {
         switch (path) {
             case "/home":
                 return new HomePage();
+            case "/profile":
+                return new ProfilePage();
             case "/courses":
                 return new CoursePage();
             case "/login":

@@ -91,4 +91,26 @@ public class UserInfoDAOImpl implements UserInfoDAO {
         close();
         return teacher;
     }
+
+    @Override
+    public UserInfo findById(Long id) {
+        UserInfo userInfo = null;
+        try (PreparedStatement statement = connection
+                .prepareStatement(FIND_BY_ID)) {
+            statement.setLong(1, id);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                userInfo = new UserInfo(rs.getLong("user_id"),
+                        rs.getString("surname"),
+                        rs.getString("name"),
+                        rs.getString("patronimic"),
+                        rs.getString("phone_number"),
+                        rs.getString("email"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        close();
+        return userInfo;
+    }
 }

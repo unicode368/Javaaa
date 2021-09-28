@@ -19,6 +19,8 @@ public interface UserInfoDAO extends GeneralDAO<UserInfo>{
             "AS full_name FROM user_info\n" +
             "JOIN teacher_courses ON user_info.user_id=teacher_courses.teacher_id) teachers\n" +
             "WHERE full_name=?";
+    String FIND_BY_ID = "SELECT * FROM user_info WHERE user_id=?";
     UserInfo findTeacherByCourseId(Long id);
     UserInfo findTeacherByFullName(String fullName);
+    UserInfo findById(Long id);
 }
