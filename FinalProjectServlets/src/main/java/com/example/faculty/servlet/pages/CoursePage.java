@@ -26,6 +26,10 @@ public class CoursePage implements Page {
         userService = serviceFactory.createUserService();
         userInfoService = serviceFactory.createUserInfoService();
         List<Course> courses = courseService.getAllCourses();
+        if (request.getParameter("search-by") != null) {
+            courses = courseService.searchBy(request.getParameter("search-by"),
+                                                request.getParameter("searchName"));
+        }
         if (request.getParameter("sort") != null) {
             courseService.sort(courses, request.getParameter("sort"));
         }

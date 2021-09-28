@@ -86,4 +86,26 @@ public class CourseDAOImpl implements CourseDAO {
         close();
         return course;
     }
+
+    @Override
+    public List<Course> findByTheme(String theme) {
+        List<Course> courses = new ArrayList<>();
+        try (PreparedStatement statement = connection
+                .prepareStatement(FIND_BY_THEME)) {
+            statement.setString(1, theme);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                courses.add(new Course(rs.getLong("id"),
+                        rs.getString("course_name"),
+                        rs.getString("theme"),
+                        rs.getString("info"),
+                        rs.getString("start_date"),
+                        rs.getString("end_date")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        close();
+        return courses;
+    }
 }
