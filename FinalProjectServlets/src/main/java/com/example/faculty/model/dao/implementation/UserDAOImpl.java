@@ -30,7 +30,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public List<User> findByCourseId(Long id) {
+    public List<User> findAllStudentsByCourseId(Long id) {
         List<User> users = new ArrayList<>();
         try (PreparedStatement statement = connection
                         .prepareStatement(FIND_ALL_STUDENTS_BY_COURSE_ID)) {
@@ -42,8 +42,10 @@ public class UserDAOImpl implements UserDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        close();
         return users;
     }
+
 
     @Override
     public List<User> findAll() {
@@ -62,6 +64,10 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public void close() {
-
+        try {
+            connection.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 }

@@ -17,4 +17,8 @@ public abstract class ServiceFactory {
 
     public abstract CourseService createCourseService();
 
+    public abstract UserService createUserService();
+
+    public abstract UserInfoService createUserInfoService();
+
 }

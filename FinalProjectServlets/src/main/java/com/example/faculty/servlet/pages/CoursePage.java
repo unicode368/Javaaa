@@ -13,8 +13,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class HomePage implements Page {
-
+public class CoursePage implements Page {
     public CourseService courseService;
     public UserService userService;
     public UserInfoService userInfoService;
@@ -29,16 +28,16 @@ public class HomePage implements Page {
         List<Course> courses = courseService.getAllCourses();
         request.setAttribute("courses", courses);
         request.setAttribute("users", courses
-                                            .stream()
-                                            .map(course -> userService
-                                                    .getStudentsByCourseId(course.getId()))
-                                            .collect(Collectors.toList()));
+                .stream()
+                .map(course -> userService
+                        .getStudentsByCourseId(course.getId()))
+                .collect(Collectors.toList()));
         request.setAttribute("teachers", courses
                 .stream()
                 .map(course -> userInfoService
                         .getTeacherByCourseId(course.getId()))
                 .collect(Collectors.toList()));
-        request.getRequestDispatcher("/index.jsp")
+        request.getRequestDispatcher("/courses.jsp")
                 .forward(request, response);
     }
 }

@@ -24,6 +24,15 @@ public class UserInfo {
         this.email = email;
     }
 
+    public UserInfo(String surname,
+                    String name, String patronimic) {
+        this.surname = surname;
+        this.name = name;
+        this.patronimic = patronimic;
+        this.phoneNumber = "";
+        this.email = "";
+    }
+
     public void setId(Long id) {
         this.id = id;
     }

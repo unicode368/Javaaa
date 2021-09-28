@@ -23,11 +23,11 @@ public class DAOFactoryImpl extends DAOFactory {
 
     @Override
     public UserDAO createUserDao() {
-        return null;
+        return new UserDAOImpl(connectionPool.getConnection());
     }
 
     @Override
     public UserInfoDAO createUserInfoDao() {
-        return null;
+        return new UserInfoDAOImpl(connectionPool.getConnection());
     }
 }

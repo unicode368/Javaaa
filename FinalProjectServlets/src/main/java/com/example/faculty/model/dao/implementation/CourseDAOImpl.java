@@ -42,6 +42,7 @@ public class CourseDAOImpl implements CourseDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        close();
         return courses;
     }
 
@@ -57,6 +58,10 @@ public class CourseDAOImpl implements CourseDAO {
 
     @Override
     public void close() {
-
+        try {
+            connection.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 }
