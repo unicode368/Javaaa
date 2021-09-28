@@ -63,20 +63,22 @@
         </div>
     </div>
 </div>
-<!--<div sec:authorize="hasAuthority('admin')" class="button_cont" align="center">
+<% if (user.getRole().toString().equals("admin")) { %>
+<div class="button_cont" align="center">
     <a class="example_b" onclick="location.href='/admin/create-teacher'"
        target="_blank" rel="nofollow noopener noreferrer"
        draggable="false">Створення викладача</a></div>
-<div sec:authorize="hasAuthority('admin')" class="button_cont" align="center">
+<div class="button_cont" align="center">
     <a class="example_b2" href="#" onclick="location.href='/courses'"
        target="_blank"
        rel="nofollow noopener noreferrer"
        draggable="false">Редагування курсів</a></div>
-<div sec:authorize="hasAuthority('admin')" class="button_cont" align="center">
+<div class="button_cont" align="center">
     <a class="example_b3" target="_blank"
        onclick="location.href='/admin/users'"
        rel="nofollow noopener noreferrer"
-       draggable="false">Блокування/розблокування користувачів</a></div>-->
+       draggable="false">Блокування/розблокування користувачів</a></div>
+<% } %>
 <% if(courseList.size() > 0) {
     for (int i = 0; i < courseList.size(); i++) {
         if (LocalDate.parse(courseList.get(i)
