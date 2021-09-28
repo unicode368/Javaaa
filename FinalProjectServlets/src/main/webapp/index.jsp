@@ -1,6 +1,8 @@
 <%@ page import="com.example.faculty.model.entity.Course" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.example.faculty.model.entity.User" %>
+<%@ page import="com.example.faculty.model.entity.UserInfo" %>
+<%@ page import="java.time.LocalDate" %>
 <%@ page pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -50,19 +52,58 @@
     </div>
     <%
         ArrayList<Course> courseList = (ArrayList<Course>) request.getAttribute("courses");
+        ArrayList<ArrayList<User>> users =
+                (ArrayList<ArrayList<User>>) request.getAttribute("users");
+        ArrayList<UserInfo> teachers =
+                (ArrayList<UserInfo>) request.getAttribute("teachers");
         User user = (User) request.getSession(false).getAttribute("user");
         if(courseList != null && courseList.size() > 0) {
-            for (int i = 0; i < courseList.size(); i++) {
+            for (int i = 0; i < 2; i++) {
+                if (LocalDate.parse(courseList.get(i).getEndDate())
+                        .isAfter(LocalDate.now())) {
     %>
-    <div class="Column" style="text-align: center; padding: 70px" >
-            <div>Назва: <%=courseList.get(i).getName()%></div>
-            <div>Автор: <%=courseList.get(i).getTheme()%></div>
-            <div>Видання: <%=courseList.get(i).getInfo()%></div>
-            <div>Рік видання: <%=courseList.get(i).getStartDate()%></div>
-
-            <% } %>
+    <div class="courses-list">
+        <div class="one_course">
+            <h2 style="align-content: center; margin: 10px; display: grid">
+                <%=courseList.get(i).getName()%>
+            </h2>
+            <div class="field">
+                <span ><fmt:message key="course.theme" /></span>
+                <h2>
+                    <%=courseList.get(i).getTheme()%>
+                </h2>
+            </div>
+            <div class="field">
+                <span><fmt:message key="course.info" /> </span>
+                <p><%=courseList.get(i).getInfo()%></p>
+            </div>
+            <div class="field">
+                <span ><fmt:message key="course.start" /> </span>
+                <h3><%=courseList.get(i).getStartDate()%></h3>
+            </div>
+            <div class="field">
+                <span><fmt:message key="course.end" /></span>
+                <h3><%=courseList.get(i).getEndDate()%></h3>
+            </div>
+            <div class="field">
+                <span ><fmt:message key="course.teacher" /></span>
+                <h3>
+                    <%=teachers.get(i).toString()%>
+                </h3>
+            </div>
+            <div class="field">
+                <span ><fmt:message key="course.student.number" /></span>
+                <h3>
+                    <%=users.get(i).size()%>
+                </h3>
+            </div>
+            <!--<a href="'/courses/' + ${course.id}">Переглянути</a>-->
         </div>
-        <%        } %>
+        <%          } %>
+        <%      } %>
+        <% } %>
+        <a href="courses">Більше курсів</a>
+    </div>
 </div>
 </body>
 </html>

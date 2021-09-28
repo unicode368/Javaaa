@@ -10,6 +10,7 @@
     <servlet-mapping>
         <servlet-name>mainServlet</servlet-name>
         <url-pattern>/home</url-pattern>
+        <url-pattern>/courses</url-pattern>
         <url-pattern>/login</url-pattern>
         <url-pattern>/registration</url-pattern>
     </servlet-mapping>

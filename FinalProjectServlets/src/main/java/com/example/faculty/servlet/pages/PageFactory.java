@@ -7,8 +7,10 @@ import java.sql.SQLException;
 public class PageFactory {
     public Page getPage(String path) throws SQLException, PageNotFoundException {
         switch (path) {
-            case "/":
+            case "/home":
                 return new HomePage();
+            case "/courses":
+                return new CoursePage();
             case "/login":
                 return new LoginPage();
             case "/registration":

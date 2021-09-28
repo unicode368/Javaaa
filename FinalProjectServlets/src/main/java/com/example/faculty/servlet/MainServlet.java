@@ -11,7 +11,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 
-@WebServlet(name = "mainServlet", value = "/")
 public class MainServlet extends HttpServlet {
 
     private PageFactory pageFactory;
