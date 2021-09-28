@@ -2,6 +2,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.example.faculty.model.entity.User" %>
 <%@ page import="com.example.faculty.model.entity.UserInfo" %>
+<%@ page import="java.time.LocalDate" %>
 <%@ page pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -25,15 +26,11 @@
     request.setAttribute("role", user.getRole().toString());
     UserInfo userInfo =
             (UserInfo) request.getAttribute("userInfo");
-    ArrayList<Course> courseList;
+    ArrayList<Course> courseList = new ArrayList<>();
     if (user.getRole().toString().equals("user")) {
         request.setAttribute("role", user.getRole().toString());
         courseList = (ArrayList<Course>) request.getAttribute("userCourses");
     }
-    /*if(courseList != null && courseList.size() > 0) {
-        for (int i = 0; i < 2; i++) {
-            if (LocalDate.parse(courseList.get(i).getEndDate())
-                    .isAfter(LocalDate.now())) {*/
 %>
 <div class="logout-button">
 <div class="navigation">
@@ -80,21 +77,28 @@
        onclick="location.href='/admin/users'"
        rel="nofollow noopener noreferrer"
        draggable="false">Блокування/розблокування користувачів</a></div>-->
-<!--<div sec:authorize="hasAuthority('user')">
+<% if(courseList.size() > 0) {
+    for (int i = 0; i < courseList.size(); i++) {
+        if (LocalDate.parse(courseList.get(i)
+                .getStartDate()).isAfter(LocalDate.now()) &&
+        LocalDate.parse(courseList.get(i)
+                .getEndDate()).isAfter(LocalDate.now())) { %>
+<div>
     <div class="courses">Pending courses:</div>
     <div class="courses-list">
-        <div th:each="course, iterStat : ${courses}"
-             th:if="${course.startDate.isAfter(localDate)
-                            && course.endDate.isAfter(localDate)}">
-            <h2 th:text="${course.name}"></h2>
-            <h3 th:text="${course.theme}"></h3>
-            <p th:text="${course.info}"></p>
-            <h3 th:text="${course.startDate}"></h3>
-            <h3 th:text="${course.endDate}"></h3>
+        <div>
+            <h2><%=courseList.get(i).getName()%></h2>
+            <h3><%=courseList.get(i).getTheme()%></h3>
+            <p><%=courseList.get(i).getInfo()%></p>
+            <h3><%=courseList.get(i).getStartDate()%></h3>
+            <h3><%=courseList.get(i).getEndDate()%></h3>
             <div class="whitespace"></div>
         </div>
     </div>
-    <div class="courses">Ongoing courses:</div>
+    <% } %>
+    <% } %>
+    <% } %>
+<!--    <div class="courses">Ongoing courses:</div>
     <div class="courses-list">
         <div th:each="course, iterStat : ${courses}"
              th:if="${course.startDate.isBefore(localDate)
@@ -127,7 +131,7 @@
             <div class="whitespace"></div>
         </div>
     </div>-->
-<!--</div>-->
+</div>
 <!--<a sec:authorize="hasAuthority('admin')"
    th:href="'/courses/' + ${course.id}">Переглянути</a>
 <div sec:authorize="hasAuthority('teacher')" class="courses">My courses:</div>
