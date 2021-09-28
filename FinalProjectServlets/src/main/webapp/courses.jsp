@@ -96,6 +96,9 @@
     ArrayList<UserInfo> teachers =
             (ArrayList<UserInfo>) request.getAttribute("teachers");
     User user = (User) request.getSession(false).getAttribute("user");
+    if (user == null) {
+        request.setAttribute("role", "unauthorized");
+    }
     if(courseList != null && courseList.size() > 0) {
         for (int i = 0; i < courseList.size(); i++) {
             if (LocalDate.parse(courseList.get(i).getEndDate())

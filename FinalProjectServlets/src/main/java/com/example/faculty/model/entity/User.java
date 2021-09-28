@@ -13,10 +13,20 @@ public class User {
 
     private Boolean blocked;
 
+    private Role role;
+
     public User(String login, String password) {
         this.login = login;
         this.password = password;
         this.blocked = false;
+    }
+
+    public User(Long id, String login,
+                String password, boolean blocked) {
+        this.id = id;
+        this.login = login;
+        this.password = password;
+        this.blocked = blocked;
     }
 
     public User() {
@@ -25,9 +35,20 @@ public class User {
         this.blocked = false;
     }
 
+    public Long getId() {
+        return id;
+    }
 
     public String getUsername() {
         return login;
+    }
+
+    public boolean getBlocked() {
+        return blocked;
+    }
+
+    public Role getRole() {
+        return role;
     }
 
     public boolean isAccountNonLocked() {
@@ -39,5 +60,9 @@ public class User {
        return "id: " + id + "," +
                "login: " + login + "," +
                "password: " + password;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

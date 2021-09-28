@@ -46,6 +46,39 @@ public class UserDAOImpl implements UserDAO {
         return users;
     }
 
+    @Override
+    public User findUserByCredentials(String login, String password) {
+        User user = null;
+        try (PreparedStatement statement = connection
+                .prepareStatement(FIND_BY_CREDENTIALS)) {
+            statement.setString(1, login);
+            statement.setString(2, password);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                user = new User(rs.getLong("id"),
+                                rs.getString("login"),
+                                rs.getString("password"),
+                                rs.getBoolean("blocked"));
+            }
+            if (user != null) {
+                PreparedStatement role = connection
+                        .prepareStatement(FIND_ROLE_BY_USER_ID);
+                role.setLong(1, user.getId());
+                ResultSet rsRole = statement.executeQuery();
+                while (rs.next()) {
+                    user = new User(rs.getLong("id"),
+                            rs.getString("login"),
+                            rs.getString("password"),
+                            rs.getBoolean("blocked"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        close();
+        return user;
+    }
+
 
     @Override
     public List<User> findAll() {
