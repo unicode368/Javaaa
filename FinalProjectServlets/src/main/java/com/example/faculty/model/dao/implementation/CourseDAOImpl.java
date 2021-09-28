@@ -2,6 +2,7 @@ package com.example.faculty.model.dao.implementation;
 
 import com.example.faculty.model.dao.CourseDAO;
 import com.example.faculty.model.entity.Course;
+import com.example.faculty.model.entity.User;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -63,5 +64,26 @@ public class CourseDAOImpl implements CourseDAO {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+    }
+
+    @Override
+    public Course findById(Long id) {
+        Course course = null;
+        try (PreparedStatement statement = connection
+                .prepareStatement(FIND_BY_ID)) {
+            statement.setLong(1, id);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                course = new Course(rs.getString("course_name"),
+                        rs.getString("theme"),
+                        rs.getString("info"),
+                        rs.getString("start_date"),
+                        rs.getString("end_date"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        close();
+        return course;
     }
 }
