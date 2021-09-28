@@ -98,19 +98,26 @@
     <% } %>
     <% } %>
     <% } %>
-<!--    <div class="courses">Ongoing courses:</div>
+    <% if(courseList.size() > 0) {
+        for (int i = 0; i < courseList.size(); i++) {
+            if (LocalDate.parse(courseList.get(i)
+                    .getStartDate()).isBefore(LocalDate.now()) &&
+                    LocalDate.parse(courseList.get(i)
+                            .getEndDate()).isAfter(LocalDate.now())) { %>
+    <div class="courses">Ongoing courses:</div>
     <div class="courses-list">
-        <div th:each="course, iterStat : ${courses}"
-             th:if="${course.startDate.isBefore(localDate)
-                            && course.endDate.isAfter(localDate)}">
-            <h2 th:text="${course.name}"></h2>
-            <h3 th:text="${course.theme}"></h3>
-            <p th:text="${course.info}"></p>
-            <h3 th:text="${course.startDate}"></h3>
-            <h3 th:text="${course.endDate}"></h3>
+        <div>
+            <h2><%=courseList.get(i).getName()%></h2>
+            <h3><%=courseList.get(i).getTheme()%></h3>
+            <p><%=courseList.get(i).getInfo()%></p>
+            <h3><%=courseList.get(i).getStartDate()%></h3>
+            <h3><%=courseList.get(i).getEndDate()%></h3>
             <div class="whitespace"></div>
         </div>
-    </div>-->
+    </div>
+    <% } %>
+    <% } %>
+    <% } %>
  <!--   <div class="courses">Finished courses</div>
     <div class="courses-list">
         <div th:each="course, iterStat : ${courses}"
