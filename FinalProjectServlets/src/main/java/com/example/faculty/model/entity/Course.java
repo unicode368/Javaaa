@@ -36,6 +36,10 @@ public class Course {
         this.endDate = LocalDate.parse(endDate);
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public String getName() {
         return name;
     }

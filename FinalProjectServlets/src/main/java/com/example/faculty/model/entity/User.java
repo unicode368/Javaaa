@@ -19,6 +19,12 @@ public class User {
         this.blocked = false;
     }
 
+    public User() {
+        this.login = "";
+        this.password = "";
+        this.blocked = false;
+    }
+
 
     public String getUsername() {
         return login;
