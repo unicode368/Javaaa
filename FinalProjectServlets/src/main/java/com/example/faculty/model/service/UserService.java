@@ -44,8 +44,15 @@ public class UserService {
     public User registerUser(UserDTO userDTO) {
         try (UserDAO userDao = daoFactory.createUserDao()) {
             UserInfoDAO userInfoDAO = daoFactory.createUserInfoDao();
-            userDao.create(new User());
+            userDao.create(new User(userDTO.getLogin(),
+                    userDTO.getPassword()));
+            userInfoDAO.create(new UserInfo(userDTO.getSurname(),
+                    userDTO.getName(), userDTO.getPatronimic(),
+                    userDTO.getPhoneNumber(),
+                    userDTO.getEmail()));
         }
+        return new User(userDTO.getLogin(),
+                userDTO.getPassword());
     }
 
 }

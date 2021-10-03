@@ -131,4 +131,14 @@ public class CourseService {
                 .collect(Collectors.toList());
     }
 
+    public Course enrollForCourse(CourseRating rating,
+                                  Long courseId) {
+        Course courseForEnroll = courseRepository
+                .findById(courseId)
+                .orElseThrow(() -> new UsernameNotFoundException(""));
+        rating.setCourse(courseForEnroll);
+        courseRatingRepository.save(rating);
+        return courseForEnroll;
+    }
+
 }

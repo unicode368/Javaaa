@@ -34,7 +34,6 @@ public class LocaleConfigurator implements WebMvcConfigurer {
     }
 
     @Bean
-    @Description("Spring Message Resolver")
     public ResourceBundleMessageSource messageSource() {
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
         messageSource.setBasename("messages");

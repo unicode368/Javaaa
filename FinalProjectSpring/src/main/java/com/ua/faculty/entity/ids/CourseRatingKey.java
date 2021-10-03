@@ -1,8 +1,6 @@
 package com.ua.faculty.entity.ids;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -11,6 +9,8 @@ import java.io.Serializable;
 @Getter
 @Setter
 @EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 @Embeddable
 public class CourseRatingKey implements Serializable {
 

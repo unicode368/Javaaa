@@ -1,7 +1,9 @@
 package com.ua.faculty.service;
 
+import com.ua.faculty.entity.CourseRating;
 import com.ua.faculty.entity.User;
 import com.ua.faculty.entity.UserInfo;
+import com.ua.faculty.exceptions.StudentAlreadyEnrolledException;
 import com.ua.faculty.exceptions.UserAlreadyExistsException;
 import com.ua.faculty.repository.RoleRepository;
 import com.ua.faculty.repository.UserInfoRepository;
@@ -21,6 +23,7 @@ public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
     private final UserInfoRepository userInfoRepository;
     private final RoleRepository roleRepository;
+    private final CourseRatingService courseRatingService;
 
     @Override
     public UserDetails loadUserByUsername(String login) throws
@@ -32,7 +35,7 @@ public class UserService implements UserDetailsService {
     public User signUpUser(User user, UserInfo userInfo,
                            String roleName) throws UserAlreadyExistsException {
         if (emailOrLoginExists(userInfo.getEmail(), user.getLogin())) {
-            throw new UserAlreadyExistsException("");
+            throw new UserAlreadyExistsException();
         }
         user.setRoles(Collections.singleton(roleRepository.findByName(roleName)
                 .orElseThrow(() -> new UsernameNotFoundException(""))));
@@ -88,5 +91,22 @@ public class UserService implements UserDetailsService {
                         .orElseThrow(() -> new UsernameNotFoundException(""))
         ).get();
     }
+
+    public void enrollForCourse(String studentLogin, Long courseId)
+            throws StudentAlreadyEnrolledException {
+        CourseRating rating = new CourseRating();
+        User student = userRepository.findByLogin(studentLogin)
+                .orElseThrow(() -> new UsernameNotFoundException(""));
+        if (courseRatingService
+                    .checkIfUserIsEnrolled(student.getId(), courseId)) {
+            throw new StudentAlreadyEnrolledException("");
+        }
+        rating.setUser(student);
+        rating.getId().setStudentId(student.getId());
+        courseRatingService.enrollForCourse(rating, courseId);
+    }
+
+
+
 
 }

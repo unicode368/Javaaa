@@ -29,4 +29,8 @@ public class CourseRating {
     @Column(name = "grade")
     @Nullable
     Integer rating;
+
+    public CourseRating() {
+        this.id = new CourseRatingKey();
+    }
 }

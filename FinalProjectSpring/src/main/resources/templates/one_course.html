@@ -1,10 +1,46 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8">
     <title th:text="${course.name}"></title>
+    <link rel="stylesheet" href="/css/courses.css" />
 </head>
 <body>
-
+<div class="one_course">
+    <h2 style="align-content: center;
+            margin: 10px; display: grid" th:text="${course.name}"></h2>
+    <div class="field">
+        <span >Тема: </span>
+        <h2
+                th:text="${course.theme}"></h2>
+    </div>
+    <div class="field">
+        <span>Інформація про курс: </span>
+        <p th:text="${course.info}"></p>
+    </div>
+    <div class="field">
+        <span >Початок: </span>
+        <h3  th:text="${course.startDate}"></h3>
+    </div>
+    <div class="field">
+        <span>Кінець: </span>
+        <h3 th:text="${course.endDate}"></h3>
+    </div>
+    <div class="field">
+        <span >Викладач: </span>
+        <h3
+                th:text="${course.teacher.getUserInfo().toString()}"></h3>
+    </div>
+    <div class="field">
+        <span >К-сть студентів: </span>
+        <h3 th:text="${course.students.size()}"></h3>
+    </div>
+</div>
+<form th:action="@{/courses/} + ${course.id}" method="POST"
+      style="align-content: center">
+    <button type="submit" sec:authorize=
+            "hasAuthority('user')">Записатися</button>
+</form>
 </body>
 </html>

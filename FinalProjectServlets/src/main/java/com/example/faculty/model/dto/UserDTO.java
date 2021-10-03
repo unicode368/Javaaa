@@ -40,4 +40,20 @@ public class UserDTO {
     public String getLogin() {
         return login;
     }
+
+    public String getPassword() {
+        return login;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getMatchingPassword() {
+        return matchingPassword;
+    }
 }
