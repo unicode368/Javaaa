@@ -3,7 +3,7 @@ package com.ua.faculty.service;
 import com.ua.faculty.dto.CourseDTO;
 import com.ua.faculty.entity.Course;
 import com.ua.faculty.entity.CourseRating;
-import com.ua.faculty.entity.User;
+import com.ua.faculty.entity.ids.CourseRatingKey;
 import com.ua.faculty.repository.CourseRatingRepository;
 import com.ua.faculty.repository.CourseRepository;
 import lombok.AllArgsConstructor;
@@ -116,6 +116,12 @@ public class CourseService {
                 .collect(Collectors.toSet());
     }
 
+    public List<Course> getAllTeacherCourses(String login) {
+        return courseRepository
+                .findByTeacher(userService.getUserByLogin(login))
+                .orElseThrow(() -> new UsernameNotFoundException(""));
+    }
+
     public Collection<Integer> getAllStudentGrades(String login) {
         Set<Course> studentCourses = getAllStudentCourses(login);
         Collection<CourseRating> courseRates = studentCourses
@@ -131,14 +137,21 @@ public class CourseService {
                 .collect(Collectors.toList());
     }
 
-    public Course enrollForCourse(CourseRating rating,
-                                  Long courseId) {
-        Course courseForEnroll = courseRepository
-                .findById(courseId)
+
+    public Set<CourseRating> getAllRatesByCourse(Long courseId) {
+        return courseRatingRepository
+                .findAllByCourse(courseRepository
+                        .findById(courseId)
+                        .orElseThrow(() -> new UsernameNotFoundException("")));
+    }
+
+    public void setCourseRating(Long courseId, Long userId,
+                                Integer grade) {
+        CourseRating courseRating = courseRatingRepository
+                .findById(new CourseRatingKey(courseId, userId))
                 .orElseThrow(() -> new UsernameNotFoundException(""));
-        rating.setCourse(courseForEnroll);
-        courseRatingRepository.save(rating);
-        return courseForEnroll;
+        courseRating.setRating(grade);
+        courseRatingRepository.save(courseRating);
     }
 
 }

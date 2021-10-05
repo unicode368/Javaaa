@@ -16,15 +16,15 @@ public class CourseRatingService {
     public CourseRatingRepository courseRatingRepository;
     public CourseRepository courseRepository;
 
-    public CourseRating enrollForCourse(CourseRating rating,
+    public void enrollForCourse(CourseRating rating,
                                         Long courseId) {
         Course courseForEnroll = courseRepository.findById(courseId)
                 .orElseThrow(() -> new UsernameNotFoundException(""));
         rating.setCourse(courseForEnroll);
         rating.getId().setCourseId(courseId);
         courseRatingRepository.save(rating);
-        return rating;
     }
+
 
     public boolean checkIfUserIsEnrolled(Long userId, Long courseId) {
         try {

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Journal</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body>
+<form th:action="@{/journal/courses/} + ${courseId}" method="POST">
+<table>
+    <tr>
+        <th></th>
+        <th>Оцінка</th>
+    </tr>
+    <tr th:each="studentRate : ${studentRates}">
+        <th th:text="${studentRate.user
+                    .getUserInfo().getFullName()}">
+        </th>
+        <input type="hidden"
+               th:name="userId"
+               th:value="${studentRate.user.id}" />
+        <td>
+            <select name="rate" id="rate">
+                <option th:text="${studentRate.rating}"
+                        selected disabled></option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </td>
+    </tr>
+</table>
+    <button type="submit">Редагувати</button>
+</form>
+</body>
+</html>

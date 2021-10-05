@@ -56,7 +56,7 @@
 <div sec:authorize="hasAuthority('user')">
     <div class="courses">Pending courses:</div>
     <div class="courses-list">
-        <div th:each="course, iterStat : ${courses}"
+        <div th:each="course: ${courses}"
              th:if="${course.startDate.isAfter(localDate)
                             && course.endDate.isAfter(localDate)}">
             <h2 th:text="${course.name}"></h2>
@@ -69,7 +69,7 @@
     </div>
     <div class="courses">Ongoing courses:</div>
     <div class="courses-list">
-        <div th:each="course, iterStat : ${courses}"
+        <div th:each="course: ${courses}"
              th:if="${course.startDate.isBefore(localDate)
                             && course.endDate.isAfter(localDate)}">
             <h2 th:text="${course.name}"></h2>
@@ -101,8 +101,18 @@
         </div>
     </div>
 </div>
-<!--<a sec:authorize="hasAuthority('admin')"
-   th:href="'/courses/' + ${course.id}">Переглянути</a>
-<div sec:authorize="hasAuthority('teacher')" class="courses">My courses:</div>
--->
+<div sec:authorize="hasAuthority('teacher')">
+    <div class="courses">My courses:</div>
+    <div class="courses-list">
+        <div th:each="course: ${teacherCourses}">
+            <h2 th:text="${course.name}"></h2>
+            <div class="field">
+                <span >К-сть студентів: </span>
+                <h3 th:text="${course.students.size()}"></h3>
+            </div>
+            <a th:href="'/journal/courses/' + ${course.id}">Журнал</a>
+            <div class="whitespace"></div>
+        </div>
+    </div>
+</div>
 </html>

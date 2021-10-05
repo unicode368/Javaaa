@@ -58,4 +58,10 @@ public class UserInfo {
                 + name.charAt(0) + ". " +
                 patronimic.charAt(0) + ".";
     }
+
+    public String getFullName() {
+        return surname + " "
+                + name + " " +
+                patronimic;
+    }
 }
